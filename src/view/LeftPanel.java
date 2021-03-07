@@ -1,13 +1,7 @@
 package view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JPanel;
-
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 
 public class LeftPanel extends JPanel {

@@ -1,5 +1,7 @@
 package model;
 
-public class Symbol {
+import javax.swing.*;
+
+public class Symbol extends JButton {
 
 }
