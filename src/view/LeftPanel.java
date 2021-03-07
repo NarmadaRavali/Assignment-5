@@ -15,7 +15,11 @@ import java.awt.BorderLayout;
 
 public class LeftPanel extends JPanel{
 	
-    public LeftPanel(JFrame mainFrame) {
+
+	private static final long serialVersionUID = 1L;
+
+	
+	public LeftPanel(JFrame mainFrame) {
         super();
         this.setName("Left Panel");
         this.setLayout(new FlowLayout());
