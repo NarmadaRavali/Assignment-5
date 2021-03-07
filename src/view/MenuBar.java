@@ -55,7 +55,6 @@ public class MenuBar implements MenuListener {
 	public void menuCanceled(MenuEvent e) {
 		// TODO Auto-generated method stub
 		JMenu myMenu = (JMenu) e.getSource();
-		myMenu.setSelected(false);
-		
+		myMenu.setSelected(false);	
 	}
 }
