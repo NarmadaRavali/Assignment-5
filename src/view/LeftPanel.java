@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
 
+
 public class LeftPanel extends JPanel{
 	
 

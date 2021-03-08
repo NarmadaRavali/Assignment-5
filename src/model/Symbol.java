@@ -1,12 +1,17 @@
 package model;
 
-import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.JComponent;
+
+import controller.DragEventListener;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
+
 
 public class Symbol extends JButton{
 	
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private int symbolWidth =  180;
 	private int symbolHeight = 80;
@@ -18,11 +23,16 @@ public class Symbol extends JButton{
 		
 		this.x = x;
 		this.y = y;
-		
 		this.setLayout(null);
 		this.setPreferredSize(new Dimension(symbolWidth,symbolHeight));
 		this.setMinimumSize(new Dimension(symbolWidth,symbolHeight));
 		this.setBounds(x, y, symbolWidth, symbolHeight);
+		panel.add(this);
+		this.setTransferHandler(new TransferHandler(text));
+		if (panel.getName().equals("Left Panel")) {
+			new DragEventListener(this);
+		}
+
 		panel.add(this);
 	}
 

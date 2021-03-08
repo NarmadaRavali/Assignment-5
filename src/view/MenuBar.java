@@ -1,11 +1,13 @@
 package view;
 
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import controller.RightSpace;
+
 
 
 public class MenuBar implements MenuListener {

@@ -1,8 +1,6 @@
 package controller;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class RightPanel extends JPanel{
 
@@ -24,6 +22,7 @@ public class RightPanel extends JPanel{
 			this.setPreferredSize(new Dimension(rightPanelWidth,rightPanelHeight));
 			this.setBackground(new Color(235, 235, 235));
 			this.setPanel(this);
+			new DropEventListener(this);
 	}
 
 
