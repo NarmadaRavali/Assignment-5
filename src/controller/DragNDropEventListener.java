@@ -10,6 +10,12 @@ import java.awt.dnd.DnDConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ *
+ * @author Ravikanth
+ * @since 03-06-2021
+ * @Description: Class for drag and drop functionality
+ */
 public class DragNDropEventListener {
     public DragNDropEventListener(Symbol symbol) {
         symbol.setTransferHandler(new ValueExportTransferHandler(symbol.getText()));
@@ -25,35 +31,34 @@ public class DragNDropEventListener {
         });
     }
 
-        public static class ValueExportTransferHandler extends TransferHandler {
+    public static class ValueExportTransferHandler extends TransferHandler {
 
-            public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
-            private final String value;
+        public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
+        private String value;
 
-            public ValueExportTransferHandler(String value) {
-                this.value = value;
-            }
-
-            public String getValue() {
-                return value;
-            }
-
-            @Override
-            public int getSourceActions(JComponent c) {
-                return DnDConstants.ACTION_COPY_OR_MOVE;
-            }
-
-            @Override
-            protected Transferable createTransferable(JComponent c) {
-                Transferable t = new StringSelection(getValue());
-                return t;
-            }
-
-            @Override
-            protected void exportDone(JComponent source, Transferable data, int action) {
-                super.exportDone(source, data, action);
-            }
-
+        public ValueExportTransferHandler(String value) {
+            this.value = value;
         }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public int getSourceActions(JComponent c) {
+            return DnDConstants.ACTION_COPY_OR_MOVE;
+        }
+
+        @Override
+        protected Transferable createTransferable(JComponent c) {
+            return new StringSelection(getValue());
+        }
+
+        @Override
+        protected void exportDone(JComponent source, Transferable data, int action) {
+            super.exportDone(source, data, action);
+        }
+
+    }
 
 }
