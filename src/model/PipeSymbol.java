@@ -9,7 +9,7 @@ public class PipeSymbol extends Symbol {
         int width = this.getPreferredSize().width;
         int height = this.getPreferredSize().height;
         
-        // new Bar(10, 10, this, true);
-        // new Bar(width - 25, 10, this, false);
+        new Pipe(10, 10, this, true);
+        new Pipe(width - 25, 10, this, false);
     }
 }

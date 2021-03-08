@@ -5,8 +5,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import model.AtTheRateSymbol;
+import model.CloseParanthesis;
 import model.GreaterthanSymbol;
 import model.LessthanSymbol;
+import model.MinusSymbol;
+import model.OpenParanthesis;
+import model.PipeSymbol;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -33,5 +37,9 @@ public class LeftPanel extends JPanel{
 		new LessthanSymbol(this, 0, 0);
 		new GreaterthanSymbol(this, 0, 0);
 		new AtTheRateSymbol(this,0,0);
+		new CloseParanthesis(this,0,0);
+		new OpenParanthesis(this,0,0);
+		new PipeSymbol(this,0,0);
+		new MinusSymbol(this,0,0);
     }
 }
