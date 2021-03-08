@@ -16,9 +16,9 @@ import java.awt.event.MouseEvent;
  * @since 03-06-2021
  * @Description: Class for drag and drop functionality
  */
-public class DragNDropEventListener {
-    public DragNDropEventListener(Symbol symbol) {
-        symbol.setTransferHandler(new ValueExportTransferHandler(symbol.getText()));
+public class DragEventListener {
+    public DragEventListener(Symbol symbol) {
+        symbol.setTransferHandler(new SymbolExportTransferHandler(symbol.getText()));
 
         symbol.addMouseMotionListener(new MouseAdapter() {
 
@@ -31,12 +31,12 @@ public class DragNDropEventListener {
         });
     }
 
-    public static class ValueExportTransferHandler extends TransferHandler {
+    public static class SymbolExportTransferHandler extends TransferHandler {
 
         public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
         private String value;
 
-        public ValueExportTransferHandler(String value) {
+        public SymbolExportTransferHandler(String value) {
             this.value = value;
         }
 
