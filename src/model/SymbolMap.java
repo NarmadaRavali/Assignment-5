@@ -9,6 +9,11 @@ public class SymbolMap {
         symbolClasses.put("@", AtTheRateSymbol.class);
         symbolClasses.put(">", GreaterthanSymbol.class);
         symbolClasses.put("<", LessthanSymbol.class);
+        symbolClasses.put("(", OpenParanthesis.class);
+        symbolClasses.put(")", CloseParanthesis.class);
+        symbolClasses.put("-", MinusSymbol.class);
+        symbolClasses.put("||", PipeSymbol.class);
+        
     }
 
 }
