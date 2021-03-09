@@ -8,9 +8,9 @@ import javax.swing.*;
  * @since 03-05-2021
  */
 
-public class CloseParanthesisSymbol extends Symbol {
+public class CloseParenthesisSymbol extends Symbol {
 
-    public CloseParanthesisSymbol(JComponent panel, int x, int y) {
+    public CloseParenthesisSymbol(JComponent panel, int x, int y) {
         super(")", panel, x, y);
 
         int width = this.getPreferredSize().width;

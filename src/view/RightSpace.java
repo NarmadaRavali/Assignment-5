@@ -28,8 +28,8 @@ public class RightSpace implements java.io.Serializable {
     }
 
     /**
-     *
-     * @param jFrame -
+     * Initializes the tabbed pane in the right panel
+     * @param jFrame - jFrame to attach the created tab pane
      */
     public void createTabbedPane(JFrame jFrame) {
         rightPanelTab = new JTabbedPane();
@@ -45,8 +45,8 @@ public class RightSpace implements java.io.Serializable {
     }
 
     /**
-     *
-     * @param name -
+     * adds a new workspace tab to the right panel
+     * @param name - Sets this value as name for the new workspace created
      */
     public void addTab(String name) {
         RightPanel panel = new RightPanel(rightSpaceWidth, rightSpaceHeight);
