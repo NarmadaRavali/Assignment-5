@@ -1,36 +1,38 @@
 package view;
 
-import model.AtTheRateSymbol;
-import model.GreaterthanSymbol;
-import model.LessthanSymbol;
+
+import controller.CommonConstants;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- *
- * @author
+ * @author Narmada Ravali
+ * @Description: Panel class for selecting a symbol to drag
  * @since 03-07-2021
- * @Description:
  */
-public class LeftPanel extends JPanel{
-	
+public class LeftPanel extends JPanel {
 
-	private static final long serialVersionUID = 1L;
 
-	
-	public LeftPanel(JFrame mainFrame) {
+    private static final long serialVersionUID = 1L;
+    CommonConstants constants = new CommonConstants();
+
+    public LeftPanel(JFrame mainFrame) {
         super();
-        this.setName("Left Panel");
+        this.setName(constants.LEFT_PANEL_NAME);
         this.setLayout(new FlowLayout());
-        int leftPanelWidth = mainFrame.getPreferredSize().width / 7;
+        int leftPanelWidth = mainFrame.getPreferredSize().width / 5;
         int leftPanelHeight = mainFrame.getPreferredSize().height;
         this.setPreferredSize(new Dimension(leftPanelWidth, leftPanelHeight));
         JScrollPane scrollPane = new JScrollPane(this);
         mainFrame.add(scrollPane, BorderLayout.LINE_START);
-   
-		new LessthanSymbol(this, 0, 0);
-		new GreaterthanSymbol(this, 0, 0);
-		new AtTheRateSymbol(this,0,0);
+        new LessThanSymbol(this, 0, 0);
+        new GreaterThanSymbol(this, 0, 0);
+        new AtTheRateSymbol(this, 0, 0);
+        new CloseParenthesisSymbol(this, 0, 0);
+        new OpenParanthesisSymbol(this, 0, 0);
+        new PipeSymbol(this, 0, 0);
+        new MinusSymbol(this, 0, 0);
     }
 }

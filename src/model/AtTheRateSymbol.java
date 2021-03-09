@@ -1,21 +1,23 @@
 package model;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /**
- *
- * @author
- * @since 03-07-2021
- * @Description:
+ * @author Mariya Varghese
+ * @Description: Class representing '@' symbol
+ * @since 03-05-2021
  */
 public class AtTheRateSymbol extends Symbol {
-	
-	private static final long serialVersionUID = 1L;
 
-	public AtTheRateSymbol(JComponent panel, int x, int y) {
-		super("@", panel, x, y);
-		
-		//int width = this.getPreferredSize().width;
-		//int height = this.getPreferredSize().height;
-	}
+    private static final long serialVersionUID = 1L;
+
+    public AtTheRateSymbol(JComponent panel, int x, int y) {
+        super("@", panel, x, y);
+        int width = this.getPreferredSize().width;
+        int height = this.getPreferredSize().height;
+        new Dot(10, 10, this);
+        new Dot(10, height - 25, this);
+        new Dot(width - 25, 10, this);
+        new Dot(width - 25, height - 25, this);
+    }
 }

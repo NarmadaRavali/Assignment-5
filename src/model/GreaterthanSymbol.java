@@ -1,19 +1,22 @@
 package model;
-import javax.swing.JComponent;
+
+import javax.swing.*;
 
 /**
- *
- * @author
+ * @author Mariya Varghese
+ * @Description: Class representing '>' symbol
  * @since 03-07-2021
- * @Description:
  */
-public class GreaterthanSymbol extends Symbol {
+public class GreaterThanSymbol extends Symbol {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public GreaterthanSymbol(JComponent panel, int x, int y) {
-		super(">", panel, x, y);
-
-		
-	}
+    public GreaterThanSymbol(JComponent panel, int x, int y) {
+        super(">", panel, x, y);
+        int width = this.getPreferredSize().width;
+        int height = this.getPreferredSize().height;
+        new Dot(10, 10, this);
+        new Dot(10, height - 25, this);
+        new Dot(width - 25, height / 2 - 7, this);
+    }
 }

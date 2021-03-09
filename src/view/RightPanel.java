@@ -1,27 +1,36 @@
-package controller;
+package view;
+
+import controller.CommonConstants;
+import controller.DropEventListener;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Nikhil Hiremath
+ * @Description: Panel class which contains work spaces in it.
+ * @since 03-07-2021
+ */
 public class RightPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
+    private CommonConstants constants;
     private boolean isOpenP;
     private boolean isCloseP;
     private RightPanel panel;
-    private final int rightPanelWidth;
-    private final int rightPanelHeight;
-
+    private int rightPanelWidth;
+    private int rightPanelHeight;
 
     public RightPanel(int width, int height) {
+        constants = new CommonConstants();
         this.setOpenP(false);
         this.setCloseP(false);
         this.rightPanelWidth = width;
         this.rightPanelHeight = height - 100;
-        this.setName("Right Panel");
+        this.setName(constants.RIGHT_PANEL_NAME);
         this.setLayout(null);
         this.setPreferredSize(new Dimension(rightPanelWidth, rightPanelHeight));
-        this.setBackground(new Color(235, 235, 235));
+        this.setBackground(constants.LIGHT_GREY);
         this.setPanel(this);
         new DropEventListener(this);
     }

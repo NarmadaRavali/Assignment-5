@@ -17,7 +17,8 @@ import java.awt.event.MouseEvent;
  */
 public class DragEventListener {
     public DragEventListener(Symbol symbol) {
-        symbol.setTransferHandler(new SymbolExportTransferHandler(symbol.getText()));
+        symbol.setTransferHandler(new SymbolExportTransferHandler(
+                symbol.getText()));
 
         symbol.addMouseMotionListener(new MouseAdapter() {
 
@@ -30,13 +31,18 @@ public class DragEventListener {
         });
     }
 
+
     /**
-     * This class stores and sends the value of the Symbol instance which is being dragged.
+     * This class stores and sends the value of the Symbol instance which
+     * is being dragged.
      */
     public static class SymbolExportTransferHandler extends TransferHandler {
 
-        public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
+        public static final DataFlavor SUPPORTED_DATE_FLAVOR =
+                DataFlavor.stringFlavor;
+        private static final long serialVersionUID = 1L;
         private final String value;
+
 
         public SymbolExportTransferHandler(String value) {
             this.value = value;
@@ -57,7 +63,8 @@ public class DragEventListener {
         }
 
         @Override
-        protected void exportDone(JComponent source, Transferable data, int action) {
+        protected void exportDone(JComponent source, Transferable data,
+                                  int action) {
             super.exportDone(source, data, action);
         }
 
