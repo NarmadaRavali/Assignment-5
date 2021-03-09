@@ -28,7 +28,7 @@ public class LeftPanel extends JPanel{
         super();
         this.setName("Left Panel");
         this.setLayout(new FlowLayout());
-        int leftPanelWidth = mainFrame.getPreferredSize().width / 7;
+        int leftPanelWidth = mainFrame.getPreferredSize().width / 5;
         int leftPanelHeight = mainFrame.getPreferredSize().height;
         this.setPreferredSize(new Dimension(leftPanelWidth, leftPanelHeight));
         JScrollPane scrollPane = new JScrollPane(this);
