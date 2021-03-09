@@ -1,6 +1,7 @@
 package controller;
 
 import model.SymbolMap;
+import view.RightPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,9 @@ public class DropEventListener {
 
     public static class SymbolImportTransferHandler extends TransferHandler {
 
-        public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
+
+		private static final long serialVersionUID = 1L;
+		public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
 
         public SymbolImportTransferHandler() {
         }

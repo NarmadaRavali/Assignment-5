@@ -1,10 +1,11 @@
-package controller;
+package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+
+import controller.CommonConstants;
 
 
 public class RightSpace implements java.io.Serializable {
@@ -14,7 +15,7 @@ public class RightSpace implements java.io.Serializable {
 	private static RightSpace rightSpaceObj;
 	private int rightSpaceWidth, rightSpaceHeight;
 	private static final long serialVersionUID = 1L;
-	
+	CommonConstants constants = new CommonConstants();
 	
 	public static RightSpace getInstance() {
 		if (rightSpaceObj == null) {
@@ -30,7 +31,7 @@ public class RightSpace implements java.io.Serializable {
 		rightSpaceHeight = jFrame.getPreferredSize().height / 8 * 7;
 		rightPanelTab.setName("Tabbed Panel");
 		rightPanelTab.setPreferredSize(new Dimension(rightSpaceWidth, rightSpaceHeight));
-		rightPanelTab.setBackground(new Color(235, 235, 235));
+		rightPanelTab.setBackground(constants.LIGHT_GREY);
 		addTab("Main");
 		JScrollPane scrollPane = new JScrollPane(rightPanelTab);
 		jFrame.add(scrollPane);

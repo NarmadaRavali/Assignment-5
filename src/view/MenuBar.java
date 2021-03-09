@@ -6,7 +6,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
-import controller.RightSpace;
+
+import controller.CommonConstants;
 
 
 
@@ -14,12 +15,14 @@ public class MenuBar implements MenuListener {
 	
 	int counter = 1;
 	String menuSelected;
+	String spaceLabel;
+	CommonConstants constants = new CommonConstants();
 	
 	public MenuBar(JFrame mainFrame) {
         JMenuBar menu = new JMenuBar(); 
-        JMenu save = new JMenu("Save");
-        JMenu load = new JMenu("Load");
-        JMenu newSpace = new JMenu("New Space");
+        JMenu save = new JMenu(constants.SAVE);
+        JMenu load = new JMenu(constants.LOAD);
+        JMenu newSpace = new JMenu(constants.SPACE);
         newSpace.addMenuListener(this);
         load.addMenuListener(this);
         save.addMenuListener(this);
@@ -34,11 +37,10 @@ public class MenuBar implements MenuListener {
 	public void menuSelected(MenuEvent e) {
 		 JMenu myMenu = (JMenu) e.getSource();
 		 String menuSelected = myMenu.getText();
-	     System.out.println("Menu Selected: "+ menuSelected);
-	     if(menuSelected.equals("New Space")) {
+	     if(menuSelected.equals(constants.SPACE)) {
 	    	 RightSpace a = RightSpace.getInstance();
-	    	 //System.out.println("Space "+String.valueOf(counter));
-	    	 a.addTab("Space "+String.valueOf(counter));
+	    	 spaceLabel = "Space "+String.valueOf(counter);
+	    	 a.addTab(spaceLabel);
 	    	 counter+=1;
 	    	 myMenu.setSelected(false);	 
 	     }
