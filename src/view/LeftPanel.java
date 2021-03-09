@@ -1,6 +1,5 @@
 package view;
 
-
 import controller.CommonConstants;
 import model.*;
 
@@ -13,7 +12,6 @@ import java.awt.*;
  * @since 03-07-2021
  */
 public class LeftPanel extends JPanel {
-
 
     private static final long serialVersionUID = 1L;
     CommonConstants constants = new CommonConstants();

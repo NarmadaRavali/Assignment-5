@@ -35,35 +35,28 @@ public class RightPanel extends JPanel {
         new DropEventListener(this);
     }
 
-
     public boolean isOpenP() {
         return isOpenP;
     }
-
 
     public void setOpenP(boolean isOpenP) {
         this.isOpenP = isOpenP;
     }
 
-
     public boolean isCloseP() {
         return isCloseP;
     }
-
 
     public void setCloseP(boolean isCloseP) {
         this.isCloseP = isCloseP;
     }
 
-
     public RightPanel getPanel() {
         return panel;
     }
-
 
     public void setPanel(RightPanel panel) {
         this.panel = panel;
     }
 
-}	
-	
+}

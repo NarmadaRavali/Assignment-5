@@ -1,6 +1,5 @@
 package view;
 
-
 import controller.CommonConstants;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import java.awt.*;
 /**
  * @author Nikhil Hiremath
  * @Description: This class is for adding shapes and interacting with added
- * shapes
+ *               shapes
  * @since 03-07-2021
  */
 public class RightSpace implements java.io.Serializable {
@@ -29,6 +28,7 @@ public class RightSpace implements java.io.Serializable {
 
     /**
      * Initializes the tabbed pane in the right panel
+     * 
      * @param jFrame - jFrame to attach the created tab pane
      */
     public void createTabbedPane(JFrame jFrame) {
@@ -46,6 +46,7 @@ public class RightSpace implements java.io.Serializable {
 
     /**
      * adds a new workspace tab to the right panel
+     * 
      * @param name - Sets this value as name for the new workspace created
      */
     public void addTab(String name) {

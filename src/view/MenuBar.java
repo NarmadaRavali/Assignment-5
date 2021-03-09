@@ -1,12 +1,10 @@
 package view;
 
-
 import controller.CommonConstants;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
-
 
 /**
  * @author Nikhil Hiremath
@@ -15,12 +13,13 @@ import javax.swing.event.MenuListener;
  */
 public class MenuBar implements MenuListener {
 
-    int counter = 1;
-    String spaceLabel;
-    CommonConstants constants = new CommonConstants();
+    private int counter = 1;
+    private String spaceLabel;
+    private CommonConstants constants;
 
     public MenuBar(JFrame mainFrame) {
         JMenuBar menu = new JMenuBar();
+        constants = new CommonConstants();
         JMenu save = new JMenu(constants.SAVE);
         JMenu load = new JMenu(constants.LOAD);
         JMenu newSpace = new JMenu(constants.SPACE);
@@ -32,7 +31,6 @@ public class MenuBar implements MenuListener {
         menu.add(newSpace);
         mainFrame.setJMenuBar(menu);
     }
-
 
     @Override
     public void menuSelected(MenuEvent e) {

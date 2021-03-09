@@ -2,10 +2,9 @@ package model;
 
 import javax.swing.*;
 
-
 /**
  * @author Narmada Ravali
- * @Description: Class  representing '-' symbols
+ * @Description: Class representing '-' symbols
  * @since 03-06-2021
  */
 public class MinusSymbol extends Symbol {

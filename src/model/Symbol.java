@@ -1,12 +1,10 @@
 package model;
 
-
 import controller.CommonConstants;
 import controller.DragEventListener;
 
 import javax.swing.*;
 import java.awt.*;
-
 
 /**
  * @author Mariya Varghese
@@ -15,12 +13,11 @@ import java.awt.*;
  */
 public class Symbol extends JButton {
 
-
     private static final long serialVersionUID = 1L;
     private int symbolWidth;
     private int symbolHeight;
     private final int x;
-	private final int y;
+    private final int y;
 
     public Symbol(String text, JComponent panel, int x, int y) {
         super(text);

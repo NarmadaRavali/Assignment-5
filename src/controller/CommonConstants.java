@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * @author Nikhil Hiremath
  * @Description: Class for storing all the constant values used throughout the
- * codebase
+ *               codebase
  * @since 03-06-2021
  */
 public class CommonConstants {
