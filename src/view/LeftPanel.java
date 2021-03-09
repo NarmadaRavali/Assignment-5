@@ -1,19 +1,18 @@
 package view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import model.AtTheRateSymbol;
 import model.GreaterthanSymbol;
 import model.LessthanSymbol;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
-
-
+/**
+ *
+ * @author
+ * @since 03-07-2021
+ * @Description:
+ */
 public class LeftPanel extends JPanel{
 	
 

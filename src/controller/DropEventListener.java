@@ -9,11 +9,11 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+
 /**
- *
  * @author Ravikanth
+ * @Description: This class handles mouse drop listeners and adds a new symbol to the right panel.
  * @since 03-07-2021
- * @Description:
  */
 public class DropEventListener {
 
@@ -21,6 +21,9 @@ public class DropEventListener {
         panel.setTransferHandler(new SymbolImportTransferHandler());
     }
 
+    /**
+     * This class adds a new Symbol instance in the Right Panel.
+     */
     public static class SymbolImportTransferHandler extends TransferHandler {
 
         public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
@@ -35,7 +38,6 @@ public class DropEventListener {
 
         @Override
         public boolean importData(TransferHandler.TransferSupport support) {
-            boolean accept = false;
             if (canImport(support)) {
                 try {
                     Transferable t = support.getTransferable();
@@ -47,19 +49,20 @@ public class DropEventListener {
                         Point panelPosition = panel.getLocationOnScreen();
                         int x = mousePosition.x - panelPosition.x;
                         int y = mousePosition.y - panelPosition.y;
-                        JButton symbol = (JButton) SymbolMap.symbolClasses.get(value.toString()).getDeclaredConstructor(JComponent.class,
+                        JButton symbol = (JButton) SymbolMap.symbolClasses.
+                                get(value.toString()).getDeclaredConstructor(JComponent.class,
                                 int.class, int.class).newInstance(panel, x, y);
                         panel.repaint();
 
-                        accept = true;
 
                     }
-                } catch (IOException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | InstantiationException | UnsupportedFlavorException e) {
+                } catch (IOException | IllegalAccessException | NoSuchMethodException | InvocationTargetException |
+                        InstantiationException | UnsupportedFlavorException e) {
                     e.printStackTrace();
                 }
             }
 
-                return accept;
+            return false;
         }
     }
 }

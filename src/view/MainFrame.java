@@ -1,15 +1,16 @@
 package view;
 
-import javax.swing.JFrame;
-
 import controller.RightSpace;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 
-
-
-
+/**
+ *
+ * @author
+ * @since 03-07-2021
+ * @Description:
+ */
 public class MainFrame extends JFrame {
     
 	

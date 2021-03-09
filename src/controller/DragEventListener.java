@@ -11,10 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- *
  * @author Ravikanth
+ * @Description: This Class handles mouse drag listener and sends the value of the dragged symbol
  * @since 03-06-2021
- * @Description: Class for drag and drop functionality
  */
 public class DragEventListener {
     public DragEventListener(Symbol symbol) {
@@ -31,10 +30,13 @@ public class DragEventListener {
         });
     }
 
+    /**
+     * This class stores and sends the value of the Symbol instance which is being dragged.
+     */
     public static class SymbolExportTransferHandler extends TransferHandler {
 
         public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
-        private String value;
+        private final String value;
 
         public SymbolExportTransferHandler(String value) {
             this.value = value;

@@ -1,15 +1,19 @@
 package view;
 
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import controller.RightSpace;
 
+import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 
+/**
+ *
+ * @author
+ * @since 03-07-2021
+ * @Description:
+ */
 public class MenuBar implements MenuListener {
 	
 	int counter = 1;
