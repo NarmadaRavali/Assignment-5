@@ -5,13 +5,13 @@ import controller.DragEventListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serial;
+
 
 
 public class Symbol extends JButton{
 	
 	
-	@Serial
+	
 	private static final long serialVersionUID = 1L;
 	private int symbolWidth =  180;
 	private int symbolHeight = 80;
