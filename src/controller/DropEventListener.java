@@ -53,8 +53,8 @@ public class DropEventListener {
                         Point panelPosition = panel.getLocationOnScreen();
                         int x = mousePosition.x - panelPosition.x;
                         int y = mousePosition.y - panelPosition.y;
-                        JButton symbol = (JButton) new SymbolMap()
-                                .getClass(value.toString())
+                        JButton symbol = (JButton) SymbolMap.symbolClasses
+                                .get(value.toString())
                                 .getDeclaredConstructor(JComponent.class,
                                         int.class, int.class)
                                 .newInstance(panel, x, y);

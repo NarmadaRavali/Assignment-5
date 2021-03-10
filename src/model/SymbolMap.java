@@ -8,9 +8,9 @@ import java.util.HashMap;
  * @since 03-06-2021
  */
 public class SymbolMap {
-    private HashMap<String, Class<?>> symbolClasses;
+    public static final HashMap<String, Class<?>> symbolClasses;
 
-    public SymbolMap() {
+    static {
         symbolClasses = new HashMap<>();
         symbolClasses.put("@", AtTheRateSymbol.class);
         symbolClasses.put(">", GreaterThanSymbol.class);
@@ -19,14 +19,6 @@ public class SymbolMap {
         symbolClasses.put(")", CloseParenthesisSymbol.class);
         symbolClasses.put("-", MinusSymbol.class);
         symbolClasses.put("||", PipeSymbol.class);
-    }
-
-    /**
-     * @param value - name of the symbol
-     * @return returns a subclass of symbol
-     */
-    public Class<?> getClass(String value) {
-        return symbolClasses.get(value);
     }
 
 }
