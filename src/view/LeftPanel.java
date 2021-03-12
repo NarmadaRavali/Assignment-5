@@ -24,16 +24,9 @@ public class LeftPanel extends JPanel {
         this.setPreferredSize(new Dimension(leftPanelWidth, leftPanelHeight));
         JScrollPane scrollPane = new JScrollPane(this);
         mainFrame.add(scrollPane, BorderLayout.LINE_START);
-        // Todo - Delete comment block. Also better to move for loop to
-        //  main class
-//        new LessThanSymbol(this, 0, 0);
-//        new GreaterThanSymbol(this, 0, 0);
-//        new AtTheRateSymbol(this, 0, 0);
-//        new CloseParenthesisSymbol(this, 0, 0);
-//        new OpenParanthesisSymbol(this, 0, 0);
-//        new PipeSymbol(this, 0, 0);
-//        new MinusSymbol(this, 0, 0);
 
+        // Todo - Better to move for loop to
+        //  main class
         for (String symbolName :
                 CommonConstants.symbolNames) {
             SymbolFactory.createSymbol(this, symbolName, 0, 0);

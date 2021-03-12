@@ -15,14 +15,12 @@ public class MenuBar implements MenuListener {
 
     private int counter = 1;
     private String spaceLabel;
-    private CommonConstants constants;
 
     public MenuBar(JFrame mainFrame) {
         JMenuBar menu = new JMenuBar();
-        constants = new CommonConstants();
-        JMenu save = new JMenu(constants.SAVE);
-        JMenu load = new JMenu(constants.LOAD);
-        JMenu newSpace = new JMenu(constants.SPACE);
+        JMenu save = new JMenu(CommonConstants.SAVE);
+        JMenu load = new JMenu(CommonConstants.LOAD);
+        JMenu newSpace = new JMenu(CommonConstants.SPACE);
         newSpace.addMenuListener(this);
         load.addMenuListener(this);
         save.addMenuListener(this);
@@ -36,9 +34,9 @@ public class MenuBar implements MenuListener {
     public void menuSelected(MenuEvent e) {
         JMenu myMenu = (JMenu) e.getSource();
         String menuSelected = myMenu.getText();
-        if (menuSelected.equals(constants.SPACE)) {
+        if (menuSelected.equals(CommonConstants.SPACE)) {
             RightSpace a = RightSpace.getInstance();
-            spaceLabel = "Space " + String.valueOf(counter);
+            spaceLabel = CommonConstants.SPACE + " " + String.valueOf(counter);
             a.addTab(spaceLabel);
             counter += 1;
             myMenu.setSelected(false);

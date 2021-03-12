@@ -29,7 +29,6 @@ public class Symbol extends JButton {
         setMinimumSize(new Dimension(symbolWidth, symbolHeight));
         setBounds(x, y, symbolWidth, symbolHeight);
         setTransferHandler(new TransferHandler(text));
-
     }
 
 }

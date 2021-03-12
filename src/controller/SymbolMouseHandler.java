@@ -8,19 +8,14 @@ import java.awt.event.MouseEvent;
 
 /**
  * @author Ravikanth
- * @Description: This class handles mouse drop listeners and adds a new symbol
- *               to the right panel.
+ * @Description:
  * @since 03-12-2021
  */
 public class SymbolMouseHandler extends MouseAdapter{
-    private int panelLeftBoundary;
-    private int panelRightBoundary;
-    private int panelBottomBoundary;
-    private int panelTopBoundary;
-    private int prevMouseXPos;
-    private int prevMouseYPos;
-    private int prevSymbolXPosition;
-    private int prevSymbolYPosition;
+    private int panelLeftBoundary, panelRightBoundary, panelBottomBoundary,
+            panelTopBoundary;
+    private int prevMouseXPos, prevMouseYPos;
+    private int prevSymbolXPos, prevSymbolYPos;
     private final Symbol symbol;
     private final JPanel panel;
 
@@ -29,7 +24,6 @@ public class SymbolMouseHandler extends MouseAdapter{
         this.panel = panel;
         symbol.addMouseListener(this);
         symbol.addMouseMotionListener(this);
-
     }
 
     /**
@@ -39,9 +33,9 @@ public class SymbolMouseHandler extends MouseAdapter{
     @Override
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);
-        int newXPosition = e.getXOnScreen() + prevSymbolXPosition - prevMouseXPos;
+        int newXPosition = e.getXOnScreen() + prevSymbolXPos - prevMouseXPos;
         int newYPosition =
-                e.getYOnScreen() + prevSymbolYPosition - prevMouseYPos;
+                e.getYOnScreen() + prevSymbolYPos - prevMouseYPos;
         newXPosition = Math.min(Math.max(newXPosition, panelLeftBoundary),
                 panelRightBoundary);
         newYPosition = Math.min(Math.max(newYPosition, panelTopBoundary),
@@ -54,8 +48,8 @@ public class SymbolMouseHandler extends MouseAdapter{
     @Override
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
-        prevSymbolXPosition = symbol.getX();
-        prevSymbolYPosition = symbol.getY();
+        prevSymbolXPos = symbol.getX();
+        prevSymbolYPos = symbol.getY();
         prevMouseXPos = e.getXOnScreen();
         prevMouseYPos = e.getYOnScreen();
         panelLeftBoundary = panel.getX() + panel.getParent().getX();

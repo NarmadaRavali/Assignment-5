@@ -13,15 +13,15 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    CommonConstants constants = new CommonConstants();
 
     public MainFrame(String title) {
         super(title);
         this.setLayout(new BorderLayout());
-        this.setMinimumSize(new Dimension(constants.FRAME_WIDTH / 2,
-                constants.FRAME_HEIGHT / 2));
+        this.setMinimumSize(new Dimension(CommonConstants.FRAME_WIDTH / 2,
+                CommonConstants.FRAME_HEIGHT / 2));
         this.setPreferredSize(
-                new Dimension(constants.FRAME_WIDTH, constants.FRAME_HEIGHT));
+                new Dimension(CommonConstants.FRAME_WIDTH,
+                        CommonConstants.FRAME_HEIGHT));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         new MenuBar(this);
         new LeftPanel(this);
