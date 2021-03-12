@@ -1,7 +1,6 @@
 package model;
 
 import controller.CommonConstants;
-import controller.DragEventListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,25 +18,18 @@ public class Symbol extends JButton {
     private final int x;
     private final int y;
 
-    public Symbol(String text, JComponent panel, int x, int y) {
+    public Symbol(String text, int x, int y) {
         super(text);
-        CommonConstants constants = new CommonConstants();
-        this.symbolWidth = constants.SYMBOL_WIDTH;
-        this.symbolHeight = constants.SYMBOL_HEIGHT;
+        this.symbolWidth = CommonConstants.SYMBOL_WIDTH;
+        this.symbolHeight = CommonConstants.SYMBOL_HEIGHT;
         this.x = x;
         this.y = y;
-        this.setLayout(null);
-        this.setPreferredSize(new Dimension(symbolWidth, symbolHeight));
-        this.setMinimumSize(new Dimension(symbolWidth, symbolHeight));
-        this.setBounds(x, y, symbolWidth, symbolHeight);
-        panel.add(this);
-        this.setTransferHandler(new TransferHandler(text));
+        setLayout(null);
+        setPreferredSize(new Dimension(symbolWidth, symbolHeight));
+        setMinimumSize(new Dimension(symbolWidth, symbolHeight));
+        setBounds(x, y, symbolWidth, symbolHeight);
+        setTransferHandler(new TransferHandler(text));
 
-        if (panel.getName().equals("Left Panel")) {
-            new DragEventListener(this);
-        }
-
-        panel.add(this);
     }
 
 }

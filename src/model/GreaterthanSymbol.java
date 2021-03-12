@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.*;
-
 /**
  * @author Mariya Varghese
  * @Description: Class representing '>' symbol
@@ -11,8 +9,8 @@ public class GreaterThanSymbol extends Symbol {
 
     private static final long serialVersionUID = 1L;
 
-    public GreaterThanSymbol(JComponent panel, int x, int y) {
-        super(">", panel, x, y);
+    public GreaterThanSymbol(int x, int y) {
+        super(">", x, y);
         int width = this.getPreferredSize().width;
         int height = this.getPreferredSize().height;
         new Dot(10, 10, this);

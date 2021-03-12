@@ -1,6 +1,10 @@
 package controller;
 
+import model.*;
+
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Nikhil Hiremath
@@ -18,4 +22,16 @@ public class CommonConstants {
     public static final String SAVE = "Save", LOAD = "Load", SPACE = "New " +
             "Space";
     public static final Color LIGHT_GREY = new Color(235, 235, 235);
+    public static final Map<String, Class<?>> symbolClasses;
+
+    static {
+        symbolClasses = new HashMap<>();
+        symbolClasses.put("@", AtTheRateSymbol.class);
+        symbolClasses.put(">", GreaterThanSymbol.class);
+        symbolClasses.put("<", LessThanSymbol.class);
+        symbolClasses.put("(", OpenParanthesisSymbol.class);
+        symbolClasses.put(")", CloseParenthesisSymbol.class);
+        symbolClasses.put("-", MinusSymbol.class);
+        symbolClasses.put("||", PipeSymbol.class);
+    }
 }
