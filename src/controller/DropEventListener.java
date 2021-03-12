@@ -1,6 +1,5 @@
 package controller;
 
-import model.SymbolMap;
 import view.RightPanel;
 
 import javax.swing.*;
@@ -9,7 +8,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Ravikanth
@@ -53,18 +51,18 @@ public class DropEventListener {
                         Point panelPosition = panel.getLocationOnScreen();
                         int x = mousePosition.x - panelPosition.x;
                         int y = mousePosition.y - panelPosition.y;
-                        JButton symbol = (JButton) SymbolMap.symbolClasses
-                                .get(value.toString())
-                                .getDeclaredConstructor(JComponent.class,
-                                        int.class, int.class)
-                                .newInstance(panel, x, y);
+                        // TODO - delete this block if application is running
+                        //  fine
+//                        JButton symbol = (JButton) SymbolMap.symbolClasses
+//                                .get(value.toString())
+//                                .getDeclaredConstructor(JComponent.class,
+//                                        int.class, int.class)
+//                                .newInstance(panel, x, y);
+                        SymbolFactory.createSymbol(panel, value.toString(), x, y);
                         panel.repaint();
 
                     }
-                } catch (IOException | IllegalAccessException
-                        | NoSuchMethodException | InvocationTargetException
-                        | InstantiationException
-                        | UnsupportedFlavorException e) {
+                } catch (IOException | UnsupportedFlavorException e) {
                     e.printStackTrace();
                 }
             }
