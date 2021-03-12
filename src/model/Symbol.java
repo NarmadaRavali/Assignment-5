@@ -17,6 +17,8 @@ public class Symbol extends JButton {
     private int symbolHeight;
     private final int x;
     private final int y;
+    
+    protected String userInput;
 
     public Symbol(String text, int x, int y) {
         super(text);
@@ -30,5 +32,15 @@ public class Symbol extends JButton {
         setBounds(x, y, symbolWidth, symbolHeight);
         setTransferHandler(new TransferHandler(text));
     }
+    
+
+	public String getUserInput() {
+		return userInput;
+	}
+
+	public void setUserInput(String userInput) {
+		this.userInput = userInput;
+	}
+
 
 }
