@@ -22,6 +22,8 @@ public class CommonConstants {
     public static final String SAVE = "Save", LOAD = "Load", SPACE = "New " +
             "Space";
     public static final Color LIGHT_GREY = new Color(235, 235, 235);
+    public static final String[] symbolNames = {"(", ")", "<", ">", "@", "||"
+            , "-"};
     public static final Map<String, Class<?>> symbolClasses;
 
     static {

@@ -14,12 +14,12 @@ public class SymbolFactory {
             symbol = (Symbol) CommonConstants.symbolClasses
                     .get(symbolName)
                     .getDeclaredConstructor(int.class, int.class)
-                    .newInstance( x, y);
+                    .newInstance(x, y);
             panel.add(symbol);
             if (panel.getName().equals("Left Panel")) {
                 new DragEventListener(symbol);
             } else if (panel.getName().equals("Right Panel")) {
-                new SymbolEventListener(symbol);
+                new SymbolMouseHandler(panel, symbol);
             }
 
         }

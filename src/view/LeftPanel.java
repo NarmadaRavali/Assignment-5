@@ -35,9 +35,8 @@ public class LeftPanel extends JPanel {
 //        new MinusSymbol(this, 0, 0);
 
         for (String symbolName :
-                CommonConstants.symbolClasses.keySet()) {
+                CommonConstants.symbolNames) {
             SymbolFactory.createSymbol(this, symbolName, 0, 0);
-
         }
     }
 }
