@@ -53,4 +53,13 @@ public class RightSpace implements java.io.Serializable {
         RightPanel panel = new RightPanel(rightSpaceWidth, rightSpaceHeight);
         rightPanelTab.addTab(name, panel);
     }
+    
+    public JTabbedPane getRightPanel() {
+		return rightPanelTab;
+	}
+
+	public void setRightPanel(JTabbedPane rightPanel) {
+		this.rightPanelTab = rightPanel;
+	}
+	
 }
