@@ -41,30 +41,19 @@ public class Graph {
     }
 
     public void removeEdge(SymbolIO node) {
-        if(edges.containsKey(node)) {
-            for(SymbolIO c2 : edges.get(node)) {
-                if(c2 instanceof Dot) {
-                    c2.setConnected(false);
-                }
-                else {
-//                    checkBarFalse(c2);
-                }
-            }
-            edges.remove(node);
-            node.setConnected(false);
-        }
-        Iterator<SymbolIO> iterator = edges.keySet().iterator();
-        while (iterator.hasNext()) {
-            SymbolIO output = iterator.next();
+        Iterator<SymbolIO> outputs = edges.keySet().iterator();
+        while (outputs.hasNext()) {
+            SymbolIO output = outputs.next();
             if (edges.get(output) != null) {
-                Iterator<SymbolIO> iterator1 = edges.get(output).iterator();
-                while (iterator1.hasNext()) {
-                    SymbolIO input = iterator1.next();
+                Iterator<SymbolIO> inputs = edges.get(output).iterator();
+                while (inputs.hasNext()) {
+                    SymbolIO input = inputs.next();
                     if (node == input) {
-                        iterator1.remove();
+                        inputs.remove();
+                        input.setConnected(false);
                     }
                     if (edges.get(output).isEmpty()) {
-                        iterator.remove();
+                        outputs.remove();
                         output.setConnected(false);
                     }
                 }

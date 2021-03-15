@@ -1,5 +1,6 @@
 package controller;
 
+import model.Pipe;
 import model.SymbolIO;
 import view.RightPanel;
 
@@ -30,8 +31,7 @@ public class ConnectionListener extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         if (!(((SymbolIO)e.getComponent()).getType() == CommonConstants.Type.OUTPUT)) {
-            ConnectionCollection.getInstance().removeConnection(selectedOut);
-            selectedOut.setConnected(false);
+            ConnectionCollection.getInstance().removeConnection((SymbolIO) e.getComponent());
         }
     }
 
@@ -43,11 +43,7 @@ public class ConnectionListener extends MouseAdapter {
         startPoint = new Point(e.getComponent().getParent().getX()
                         , e.getComponent().getParent().getY());
         if (selectedOut.getType() == CommonConstants.Type.OUTPUT
-                && !selectedOut.getConnected()){
-            panel.setStart(new Point(selectedOut.getX() + selectedOut.getParent().getX() + selectedOut.getWidth()/2,
-                    selectedOut.getY() + selectedOut.getParent().getY() + selectedOut.getHeight()/2));
-        }
-        else if(selectedOut.getType().equals(CommonConstants.Type.BOTH)){
+                && ((!selectedOut.getConnected()) || selectedOut instanceof Pipe)){
             panel.setStart(new Point(selectedOut.getX() + selectedOut.getParent().getX() + selectedOut.getWidth()/2,
                     selectedOut.getY() + selectedOut.getParent().getY() + selectedOut.getHeight()/2));
         }
@@ -68,9 +64,9 @@ public class ConnectionListener extends MouseAdapter {
                 .getComponentAt(e.getX() + startPoint.x + e.getComponent().getX()- button.x
                 , e.getY() + startPoint.y +  e.getComponent().getY() - button.y);
 
-        if (selectedOut!=null && selectedIn instanceof SymbolIO && selectedIn.getParent() != selectedOut.getParent()) {
-            if ((((SymbolIO) selectedIn).getType().equals(CommonConstants.Type.INPUT) && !((SymbolIO) selectedIn).getConnected())
-        || ((SymbolIO) selectedIn).getType().equals(CommonConstants.Type.BOTH))
+        if (selectedOut != null && selectedIn instanceof SymbolIO && !selectedIn.getParent().equals(selectedOut.getParent())) {
+            if (((SymbolIO) selectedIn).getType().equals(CommonConstants.Type.INPUT) && (!((SymbolIO) selectedIn).getConnected()
+        || selectedIn instanceof Pipe))
             ConnectionCollection.getInstance().addConnection(panel,
                     selectedOut,
                     (SymbolIO) selectedIn);

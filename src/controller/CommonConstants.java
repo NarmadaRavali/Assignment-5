@@ -15,8 +15,7 @@ import java.util.Map;
 public class CommonConstants {
     public enum Type {
         INPUT,
-        OUTPUT,
-        BOTH
+        OUTPUT
     }
     public static final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 800;
     public static final int SYMBOL_WIDTH = 180;
