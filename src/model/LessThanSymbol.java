@@ -1,5 +1,7 @@
 package model;
 
+import controller.CommonConstants;
+
 /**
  * @author Mariya Varghese
  * @Description: Class representing '<' symbol
@@ -13,9 +15,9 @@ public class LessThanSymbol extends Symbol {
         super("<", x, y);
         int width = this.getPreferredSize().width;
         int height = this.getPreferredSize().height;
-        new Dot(10, height / 2 - 7, this);
-        new Dot(width - 25, 10, this);
-        new Dot(width - 25, height - 25, this);
+        new Dot(10, height / 2 - 7, this, CommonConstants.Type.INPUT);
+        new Dot(width - 25, 10, this, CommonConstants.Type.OUTPUT);
+        new Dot(width - 25, height - 25, this, CommonConstants.Type.OUTPUT);
     }
 
 }

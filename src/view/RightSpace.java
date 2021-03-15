@@ -15,7 +15,6 @@ public class RightSpace implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
     private static RightSpace rightSpaceObj;
-    private CommonConstants constants = new CommonConstants();
     private JTabbedPane rightPanelTab;
     private int rightSpaceWidth, rightSpaceHeight;
 
@@ -38,7 +37,7 @@ public class RightSpace implements java.io.Serializable {
         rightPanelTab.setName("Tabbed Panel");
         rightPanelTab.setPreferredSize(
                 new Dimension(rightSpaceWidth, rightSpaceHeight));
-        rightPanelTab.setBackground(constants.LIGHT_GREY);
+        rightPanelTab.setBackground(CommonConstants.LIGHT_GREY);
         addTab("Main");
         JScrollPane scrollPane = new JScrollPane(rightPanelTab);
         jFrame.add(scrollPane);
@@ -61,5 +60,6 @@ public class RightSpace implements java.io.Serializable {
 	public void setRightPanel(JTabbedPane rightPanel) {
 		this.rightPanelTab = rightPanel;
 	}
-	
+
+
 }
