@@ -26,16 +26,15 @@ public class SymbolFactory {
                 new DragEventListener(symbol);
 
             } else if (panel.getName().equals("Right Panel")) {
-                ConnectionHandler connectionHandler =
-                        ConnectionHandler.getInstance();
-                symbol.setOpaque(false);
+                ConnectionListener connectionListener =
+                        ConnectionListener.getInstance();
                 symbol.setBorder(BorderFactory.createLineBorder(Color.black));
                 new SymbolMouseHandler(panel, symbol);
                 for (Component component :
                         symbol.getComponents()) {
                     if (component instanceof SymbolIO){
-                       component.addMouseListener(connectionHandler);
-                       component.addMouseMotionListener(connectionHandler);
+                       component.addMouseListener(connectionListener);
+                       component.addMouseMotionListener(connectionListener);
                     }
                 }
             }

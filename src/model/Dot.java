@@ -13,7 +13,7 @@ import java.awt.*;
 public class Dot extends SymbolIO {
     public Dot(int x, int y, Symbol symbol, CommonConstants.Type type) {
         super(type);
-        setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
         setBounds(x, y, 15, 15);
         setBackground(new Color(147, 184, 189));
         symbol.add(this);

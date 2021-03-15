@@ -35,10 +35,24 @@ public class Graph {
                 edges.put(node1, a);
             }
         }
+        node1.setConnected(true);
+        node2.setConnected(true);
 
     }
 
     public void removeEdge(SymbolIO node) {
+        if(edges.containsKey(node)) {
+            for(SymbolIO c2 : edges.get(node)) {
+                if(c2 instanceof Dot) {
+                    c2.setConnected(false);
+                }
+                else {
+//                    checkBarFalse(c2);
+                }
+            }
+            edges.remove(node);
+            node.setConnected(false);
+        }
         Iterator<SymbolIO> iterator = edges.keySet().iterator();
         while (iterator.hasNext()) {
             SymbolIO output = iterator.next();
@@ -51,7 +65,7 @@ public class Graph {
                     }
                     if (edges.get(output).isEmpty()) {
                         iterator.remove();
-//                        output.setLine(false);
+                        output.setConnected(false);
                     }
                 }
             }

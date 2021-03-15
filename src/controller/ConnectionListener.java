@@ -8,21 +8,31 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class ConnectionHandler extends MouseAdapter {
+public class ConnectionListener extends MouseAdapter {
     private RightPanel panel;
-    private static ConnectionHandler handler;
+    private static ConnectionListener listener;
     private Point startPoint;
     private SymbolIO selectedOut;
-    public static ConnectionHandler getInstance() {
 
-        if (handler == null) {
-            handler = new ConnectionHandler();
+    public static ConnectionListener getInstance() {
+
+        if (listener == null) {
+            listener = new ConnectionListener();
         }
-        return handler;
+        return listener;
     }
 
     public void setPanel(RightPanel panel) {
         this.panel = panel;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
+        if (!(((SymbolIO)e.getComponent()).getType() == CommonConstants.Type.OUTPUT)) {
+            ConnectionCollection.getInstance().removeConnection(selectedOut);
+            selectedOut.setConnected(false);
+        }
     }
 
     @Override
@@ -32,12 +42,17 @@ public class ConnectionHandler extends MouseAdapter {
         setPanel((RightPanel) selectedOut.getParent().getParent());
         startPoint = new Point(e.getComponent().getParent().getX()
                         , e.getComponent().getParent().getY());
-        if (selectedOut.getType().equals(CommonConstants.Type.OUTPUT)){
+        if (selectedOut.getType() == CommonConstants.Type.OUTPUT
+                && !selectedOut.getConnected()){
+            panel.setStart(new Point(selectedOut.getX() + selectedOut.getParent().getX() + selectedOut.getWidth()/2,
+                    selectedOut.getY() + selectedOut.getParent().getY() + selectedOut.getHeight()/2));
+        }
+        else if(selectedOut.getType().equals(CommonConstants.Type.BOTH)){
             panel.setStart(new Point(selectedOut.getX() + selectedOut.getParent().getX() + selectedOut.getWidth()/2,
                     selectedOut.getY() + selectedOut.getParent().getY() + selectedOut.getHeight()/2));
         }
         else{
-           ConnectionCollection.getInstance().removeConnection(selectedOut);
+            selectedOut = null;
         }
 
     }
@@ -48,18 +63,18 @@ public class ConnectionHandler extends MouseAdapter {
         Point button =
                 panel.getComponentAt(e.getX() + startPoint.x + e.getComponent().getX(),
                 e.getY() + startPoint.y + e.getComponent().getY()).getLocation();
+
         Component selectedIn =  panel.getComponentAt(button)
                 .getComponentAt(e.getX() + startPoint.x + e.getComponent().getX()- button.x
                 , e.getY() + startPoint.y +  e.getComponent().getY() - button.y);
 
-        if (selectedIn instanceof SymbolIO && selectedIn.getParent() != selectedOut.getParent()){
-           if (!((SymbolIO) selectedIn).getType().equals(CommonConstants.Type.OUTPUT))
+        if (selectedOut!=null && selectedIn instanceof SymbolIO && selectedIn.getParent() != selectedOut.getParent()) {
+            if ((((SymbolIO) selectedIn).getType().equals(CommonConstants.Type.INPUT) && !((SymbolIO) selectedIn).getConnected())
+        || ((SymbolIO) selectedIn).getType().equals(CommonConstants.Type.BOTH))
             ConnectionCollection.getInstance().addConnection(panel,
                     selectedOut,
                     (SymbolIO) selectedIn);
 
-//            panel.setEnd(new Point(selectedOutput.getX() + selectedOutput.getParent().getX() + selectedOutput.getWidth() / 2,
-//                    selectedOutput.getY() + selectedOutput.getParent().getY() + selectedOutput.getHeight() / 2));
         }
         panel.setEnd(null);
         panel.setStart(null);

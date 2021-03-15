@@ -37,7 +37,7 @@ public class RightPanel extends JPanel {
     }
 
     public void setConnectionHandler(){
-        ConnectionHandler.getInstance().setPanel(this);
+        ConnectionListener.getInstance().setPanel(this);
     }
 
     public boolean isOpenP() {
