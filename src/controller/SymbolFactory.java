@@ -1,8 +1,10 @@
 package controller;
 
 import model.Symbol;
+import model.SymbolIO;
 
 import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @author Ravikanth
@@ -19,13 +21,25 @@ public class SymbolFactory {
                     .get(symbolName)
                     .getDeclaredConstructor(int.class, int.class)
                     .newInstance(x, y);
-            panel.add(symbol);
             if (panel.getName().equals("Left Panel")) {
-                new DragEventListener(symbol);
-            } else if (panel.getName().equals("Right Panel")) {
-                new SymbolMouseHandler(panel, symbol);
-            }
 
+                new DragEventListener(symbol);
+
+            } else if (panel.getName().equals("Right Panel")) {
+                ConnectionHandler connectionHandler =
+                        ConnectionHandler.getInstance();
+                symbol.setOpaque(false);
+                symbol.setBorder(BorderFactory.createLineBorder(Color.black));
+                new SymbolMouseHandler(panel, symbol);
+                for (Component component :
+                        symbol.getComponents()) {
+                    if (component instanceof SymbolIO){
+                       component.addMouseListener(connectionHandler);
+                       component.addMouseMotionListener(connectionHandler);
+                    }
+                }
+            }
+            panel.add(symbol);
         }
         catch ( IllegalAccessException
                 | NoSuchMethodException | InvocationTargetException

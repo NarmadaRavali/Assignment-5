@@ -27,7 +27,7 @@ public class SymbolMouseHandler extends MouseAdapter{
     }
 
     /**
-     * Changes the symbol position as whenever it is dragged
+     * Changes the symbol position whenever it is dragged
      * @param e
      */
     @Override
@@ -42,6 +42,7 @@ public class SymbolMouseHandler extends MouseAdapter{
                 panelBottomBoundary);
         symbol.setLocation(newXPosition, newYPosition);
         panel.setComponentZOrder(symbol, 0);
+        panel.repaint();
     }
 
 

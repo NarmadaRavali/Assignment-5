@@ -3,18 +3,14 @@
  */
 package controller;
 
-import java.awt.Component;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
-
 import model.Symbol;
 import view.RightPanel;
 import view.RightSpace;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * @author Nikhil Hiremath
@@ -50,7 +46,7 @@ public class SaveApplication {
 					for (Component j : tab.getComponents()) {
 						Symbol symbol = (Symbol) j;
 
-						String name = symbol.getText();
+						String name = "d";
 						String x = Integer.toString(symbol.getX());
 						String y = Integer.toString(symbol.getY());
 						String userInput = symbol.getUserInput();

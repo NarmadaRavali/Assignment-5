@@ -13,7 +13,11 @@ import java.util.Map;
  * @since 03-06-2021
  */
 public class CommonConstants {
-
+    public enum Type {
+        INPUT,
+        OUTPUT,
+        BOTH
+    }
     public static final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 800;
     public static final int SYMBOL_WIDTH = 180;
     public static final int SYMBOL_HEIGHT = 80;

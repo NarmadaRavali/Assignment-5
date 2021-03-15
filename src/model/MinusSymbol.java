@@ -1,5 +1,7 @@
 package model;
 
+import controller.CommonConstants;
+
 /**
  * @author Narmada Ravali
  * @Description: Class representing '-' symbols
@@ -10,7 +12,7 @@ public class MinusSymbol extends Symbol {
         super("-", x, y);
         int width = this.getPreferredSize().width;
         int height = this.getPreferredSize().height;
-        new Dot(10, height / 2 - 7, this);
-        new Dot(width - 25, height / 2 - 7, this);
+        new Dot(10, height / 2 - 7, this, CommonConstants.Type.INPUT);
+        new Dot(width - 25, height / 2 - 7, this, CommonConstants.Type.OUTPUT);
     }
 }
