@@ -4,6 +4,7 @@
 package controller;
 
 import model.Symbol;
+import model.SymbolIO;
 import view.RightPanel;
 import view.RightSpace;
 
@@ -11,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Nikhil Hiremath
@@ -27,19 +31,26 @@ public class SaveApplication {
 		JLabel fileName = new JLabel("no file selected");
 		JFileChooser fileChooser = new JFileChooser();
 		int choice = fileChooser.showSaveDialog(null);
+		int tabIndex;
 
 		if (choice == JFileChooser.APPROVE_OPTION) {
-			try (FileWriter fw = new FileWriter(fileChooser.getSelectedFile() + ".txt")) {
+			try (FileWriter fw = new FileWriter(
+					fileChooser.getSelectedFile() + ".txt")) {
 				JTabbedPane rightPannelTab = RightSpace.getInstance()
 						.getRightPanel();
-				int tabIndex = 0;
-				for (Component i : rightPannelTab.getComponents()) {
+				tabIndex = 0;
+				
+				
+				// Save all the tabs
+				for ( Component i : rightPannelTab.getComponents()) {
 					String tabTitle = rightPannelTab.getTitleAt(tabIndex);
 					fw.write("Tab" + ";" + tabIndex + ";" + tabTitle
 							+ System.lineSeparator());
 					tabIndex++;
 				}
 				tabIndex = 0;
+				
+				//Save all the Symbols
 				for (Component i : rightPannelTab.getComponents()) {
 					RightPanel tab = (RightPanel) i;
 
@@ -57,8 +68,11 @@ public class SaveApplication {
 					}
 					tabIndex++;
 				}
-				// String lines = getLines();
-				// fw.write(lines);
+				
+				
+				//Save all the symbols
+				String lines = getLines();
+				fw.write(lines);
 
 				fw.close();
 
@@ -69,5 +83,61 @@ public class SaveApplication {
 		} else
 			fileName.setText("the user cancelled the operation");
 	}
+
+	
+	private String getLines() {
+		String lines = "";
+		Map<RightPanel, Graph> tabLines = ConnectionCollection.getInstance().getGraphMap();
+		for (RightPanel tab : tabLines.keySet()) {
+			Graph graph = tabLines.get(tab);
+			Map<SymbolIO, ArrayList<SymbolIO>> edges = graph.getEdges();
+			 Set<SymbolIO> outputs = edges.keySet();
+			for (SymbolIO c1 : outputs) {
+				int tabIndex = RightSpace.getInstance().getRightPanel()
+						.indexOfComponent(tab);
+				int pC1Index = getSymbolIndex((Symbol) c1.getParent(), tab);
+				int c1Index = getConnectorIndex(c1, (Symbol) c1.getParent());
+
+				lines += "line" + ";" + tabIndex + ";" + pC1Index + ";"
+						+ c1Index + ";";
+
+				for (SymbolIO c2 : edges.get(c1)) {
+					int pC2Index = getSymbolIndex((Symbol) c2.getParent(), tab);
+					int c2Index = getConnectorIndex(c2,
+							(Symbol) c2.getParent());
+
+					lines += pC2Index + "-" + c2Index + ":";
+				}
+				lines += System.lineSeparator();
+			}
+		}
+		return lines;
+	}
+	
+	private int getSymbolIndex(Symbol symbol, RightPanel tab) {
+		int i = 0;
+		for(Component s : tab.getComponents()) {
+			if(symbol == (Symbol) s) {
+				return i;
+			}
+			i++;
+		}
+		return -1;
+		
+	}
+	
+	private int getConnectorIndex(SymbolIO c1, Symbol symbol) {
+		int i = 0;
+		for(Component c2 : symbol.getComponents()) {
+			if(c1== (SymbolIO) c2) {
+				return i;
+			}
+			i++;
+		}
+		return -1;
+		
+	}
+	
+	
 
 }

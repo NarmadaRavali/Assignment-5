@@ -66,7 +66,7 @@ public class RightPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
 
         if (startPoint!= null && endPoint != null) {
             g.setColor(Color.GREEN);
