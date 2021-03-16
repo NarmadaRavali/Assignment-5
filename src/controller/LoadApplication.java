@@ -1,18 +1,14 @@
 package controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
-
 import model.Symbol;
 import model.SymbolIO;
 import view.RightPanel;
 import view.RightSpace;
+
+import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  * @author Mariya Varghese
@@ -89,32 +85,9 @@ public class LoadApplication implements java.io.Serializable{
 	}
 	
 	private void createSymbol(String name,int x, int y, String userInput, int tabIndex) {
-		
-		Symbol symbol = null;
 		JTabbedPane rp = RightSpace.getInstance().getRightPanel();
 		RightPanel wp = (RightPanel) rp.getComponent(tabIndex);
-		switch(name){
-			case "(": symbol = SymbolFactory.createSymbol(wp, "(", x, y);
-				wp.setOpenP(true);
-				break;
-			case ")": symbol =  SymbolFactory.createSymbol(wp, ")", x, y);
-				wp.setCloseP(true);
-				break;
-			case "<": symbol = SymbolFactory.createSymbol(wp, "<", x, y);
-				break;
-			case ">": symbol = SymbolFactory.createSymbol(wp, ">", x, y);
-				break;
-			case "@": symbol = SymbolFactory.createSymbol(wp, "@", x, y);
-				break;
-			case "||": symbol = SymbolFactory.createSymbol(wp, "||", x, y);
-				break;
-			case "-": symbol = SymbolFactory.createSymbol(wp, "-", x, y);
-				break;
-			default:
-				System.out.println("Invalid case");
-
-		}
-		symbol.setUserInput(userInput);
+		SymbolFactory.createSymbol(wp, name, x, y);
 	}
 	
 	private void addLine(int tabIndex, int component1Index, int connectFrom, int component2Index, int connectTo) {
@@ -128,7 +101,7 @@ public class LoadApplication implements java.io.Serializable{
 		SymbolIO connection2 = (SymbolIO) symbol2.getComponent(connectTo);
 		connection1.setConnected(true);
 		connection2.setConnected(true);
-		
+
 		ConnectionCollection.getInstance().addConnection(panel, connection1, connection2);
 		
 	}

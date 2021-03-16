@@ -24,8 +24,8 @@ public class RightPanel extends JPanel {
     private Point startPoint, endPoint;
 
     public RightPanel(int width, int height) {
-        this.setOpenP(false);
-        this.setCloseP(false);
+        this.setOpenParen(false);
+        this.setCloseParen(false);
         this.rightPanelWidth = width;
         this.rightPanelHeight = height - 100;
         this.setName(CommonConstants.RIGHT_PANEL_NAME);
@@ -40,19 +40,19 @@ public class RightPanel extends JPanel {
         ConnectionListener.getInstance().setPanel(this);
     }
 
-    public boolean isOpenP() {
+    public boolean isOpenParen() {
         return isOpenP;
     }
 
-    public void setOpenP(boolean isOpenP) {
+    public void setOpenParen(boolean isOpenP) {
         this.isOpenP = isOpenP;
     }
 
-    public boolean isCloseP() {
+    public boolean isCloseParen() {
         return isCloseP;
     }
 
-    public void setCloseP(boolean isCloseP) {
+    public void setCloseParen(boolean isCloseP) {
         this.isCloseP = isCloseP;
     }
 

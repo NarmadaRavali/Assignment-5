@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SymbolIO extends JButton {
-    private CommonConstants.Type type;
+    private final CommonConstants.Type type;
     private Boolean connected;
 
     public SymbolIO(CommonConstants.Type type) {
