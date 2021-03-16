@@ -1,6 +1,7 @@
 package view;
 
 import controller.CommonConstants;
+import controller.LoadApplication;
 import controller.SaveApplication;
 
 import javax.swing.*;
@@ -47,6 +48,11 @@ public class MenuBar implements MenuListener {
         if (menuSelected.equals(CommonConstants.SAVE)) {
         	
 			new SaveApplication(mainFrame1);
+            myMenu.setSelected(false);
+        }
+        if (menuSelected.equals(CommonConstants.LOAD)) {
+        	
+			new LoadApplication(mainFrame1);
             myMenu.setSelected(false);
         }
     }
