@@ -1,6 +1,10 @@
 package view;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 import controller.CommonConstants;
+import controller.Compile;
+import controller.LoadApplication;
 import controller.SaveApplication;
 
 import java.awt.event.ActionEvent;
@@ -30,6 +34,7 @@ public class MenuBar implements ActionListener {
         newSpace.addActionListener(this);
         load.addActionListener(this);
         save.addActionListener(this);
+        compile.addActionListener(this);
         menu.add(save);
         menu.add(load);
         menu.add(newSpace);
@@ -37,7 +42,7 @@ public class MenuBar implements ActionListener {
         mainFrame.setJMenuBar(menu);
         mainFrame1 = mainFrame;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(newSpace)) {
@@ -48,7 +53,10 @@ public class MenuBar implements ActionListener {
         } else if (e.getSource().equals(save)) {
             new SaveApplication(mainFrame1);
         } else if (e.getSource().equals(load)) {
-            
+            new LoadApplication(mainFrame1);
+        }else if (e.getSource().equals(compile)) {
+            String msg = new Compile().compileWorkSpace();
+            showMessageDialog(null, msg);
         }
     }
 }

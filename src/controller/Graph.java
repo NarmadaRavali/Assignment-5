@@ -6,6 +6,7 @@ import model.SymbolIO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -16,9 +17,11 @@ import java.util.Map;
  */
 public class Graph {
     private final Map<SymbolIO, ArrayList<SymbolIO>> edges;
+    private int Vertices;
 
     public Graph() {
         edges = new HashMap<>();
+        Vertices = edges.size();
     }
 
     public void addEdge(SymbolIO node1, SymbolIO node2) {
@@ -66,5 +69,60 @@ public class Graph {
         return edges;
     }
 
+    public boolean checkLoop(Integer s) {
+        boolean visited[] = new boolean[Vertices];
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        visited[s]=true; 
+        queue.add(s); 
+
+//        while (queue.size() != 0) {             
+//            Integer t = queue.poll();           
+//            Iterator<SymbolIO> i = edges.get(key)
+//            while (i.hasNext()) 
+//            { 
+//                int n = i.next(); 
+//                if (!visited[n]) 
+//                { 
+//                    visited[n] = true; 
+//                    queue.add(n); 
+//                } 
+//                if (n == s) {
+//                    return true;
+//                }
+//            } 
+//        }       
+        
+        return false;
+    }
+    
+    public boolean checkConnection(int s){ 
+        boolean visited[] = new boolean[Vertices];
+        LinkedList<Integer> queue = new LinkedList<Integer>();       
+        visited[s]=true; 
+        queue.add(s); 
+
+//        while (queue.size() != 0) {             
+//            s = queue.poll();           
+//            Iterator<Integer> i = adj.get(s).listIterator(); 
+//            while (i.hasNext()) 
+//            { 
+//                int n = i.next(); 
+//                if (!visited[n]) 
+//                { 
+//                    visited[n] = true; 
+//                    queue.add(n); 
+//                } 
+//            } 
+//        }       
+        
+        for(boolean flag: visited) {
+            if (!flag) {
+                return false;
+            }
+        }
+        
+        return true;
+    } 
+    
 
 }
