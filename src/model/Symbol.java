@@ -13,19 +13,12 @@ import java.awt.*;
 public class Symbol extends JButton {
 
     private static final long serialVersionUID = 1L;
-    private int symbolWidth;
-    private int symbolHeight;
-    private final int x;
-    private final int y;
-    
     protected String userInput;
 
     public Symbol(String text, int x, int y) {
         super(text);
-        this.symbolWidth = CommonConstants.SYMBOL_WIDTH;
-        this.symbolHeight = CommonConstants.SYMBOL_HEIGHT;
-        this.x = x;
-        this.y = y;
+        int symbolWidth = CommonConstants.SYMBOL_WIDTH;
+        int symbolHeight = CommonConstants.SYMBOL_HEIGHT;
         setLayout(null);
         setPreferredSize(new Dimension(symbolWidth, symbolHeight));
         setMinimumSize(new Dimension(symbolWidth, symbolHeight));

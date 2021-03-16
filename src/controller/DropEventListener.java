@@ -22,7 +22,8 @@ public class DropEventListener {
     }
 
     /**
-     * This class adds a new Symbol instance in the Right Panel.
+     * This class adds a new Symbol instance in the Right Panel whenever a
+     * symbol from left panel is dragged and dropped on Right Panel
      */
     public static class SymbolImportTransferHandler extends TransferHandler {
 
@@ -44,23 +45,27 @@ public class DropEventListener {
                     Transferable t = support.getTransferable();
                     Object value = t.getTransferData(SUPPORTED_DATE_FLAVOR);
                     if (value instanceof String) {
+
                         Component component = support.getComponent();
                         RightPanel panel = (RightPanel) component;
-                        Point mousePosition = MouseInfo.getPointerInfo()
-                                .getLocation();
-                        Point panelPosition = panel.getLocationOnScreen();
-                        int x = mousePosition.x - panelPosition.x;
-                        int y = mousePosition.y - panelPosition.y;
-                        // TODO - delete this block if application is running
-                        //  fine
-//                        JButton symbol = (JButton) SymbolMap.symbolClasses
-//                                .get(value.toString())
-//                                .getDeclaredConstructor(JComponent.class,
-//                                        int.class, int.class)
-//                                .newInstance(panel, x, y);
-                        SymbolFactory.createSymbol(panel, value.toString(), x, y);
-                        panel.repaint();
-
+                        boolean canAddSymbol = true;
+                        if (value.toString().equals("(")){
+                            canAddSymbol = !panel.isOpenParen();
+                            panel.setOpenParen(true);
+                        }
+                        else if (value.toString().equals(")")){
+                            canAddSymbol = !panel.isCloseParen();
+                            panel.setCloseParen(true);
+                        }
+                        if (canAddSymbol) {
+                            Point mousePosition = MouseInfo.getPointerInfo()
+                                    .getLocation();
+                            Point panelPosition = panel.getLocationOnScreen();
+                            int x = mousePosition.x - panelPosition.x;
+                            int y = mousePosition.y - panelPosition.y;
+                            SymbolFactory.createSymbol(panel, value.toString(), x, y);
+                            panel.repaint();
+                        }
                     }
                 } catch (IOException | UnsupportedFlavorException e) {
                     e.printStackTrace();

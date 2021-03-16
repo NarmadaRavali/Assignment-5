@@ -81,8 +81,8 @@ public class ConnectionListener extends MouseAdapter {
     @Override
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);
-        panel.setEnd(new Point(e.getX() + startPoint.x + e.getComponent().getX()
-                , e.getY() + startPoint.y +  e.getComponent().getY()));
+        panel.setEnd(new Point(e.getX() + startPoint.x + e.getComponent()
+                .getX(), e.getY() + startPoint.y +  e.getComponent().getY()));
         panel.repaint();
     }
 
