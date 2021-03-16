@@ -23,7 +23,7 @@ public class CommonConstants {
     public static final String LEFT_PANEL_NAME = "Left Panel",
             RIGHT_PANEL_NAME = "Right Panel";
     public static final String SAVE = "Save", LOAD = "Load", SPACE = "New " +
-            "Space";
+            "Space", COMPILE = "compile";
     public static final Color LIGHT_GREY = new Color(235, 235, 235);
     public static final String[] symbolNames = {"(", ")", "<", ">", "@", "||"
             , "-"};

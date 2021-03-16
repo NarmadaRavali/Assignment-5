@@ -7,8 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
+
 
 /**
  * @author Nikhil Hiremath
@@ -20,19 +19,21 @@ public class MenuBar implements ActionListener {
     private int counter = 1;
     private String spaceLabel;
     JFrame mainFrame1;
-    JMenuItem save, load, newSpace;
+    JMenuItem save, load, newSpace, compile;
 
     public MenuBar(JFrame mainFrame) {
         JMenuBar menu = new JMenuBar();
         save = new JMenuItem(CommonConstants.SAVE);
         load = new JMenuItem(CommonConstants.LOAD);
         newSpace = new JMenuItem(CommonConstants.SPACE);
+        compile = new JMenuItem(CommonConstants.COMPILE);
         newSpace.addActionListener(this);
         load.addActionListener(this);
         save.addActionListener(this);
         menu.add(save);
         menu.add(load);
         menu.add(newSpace);
+        menu.add(compile);
         mainFrame.setJMenuBar(menu);
         mainFrame1 = mainFrame;
     }
