@@ -64,6 +64,25 @@ public class SymbolMouseHandler extends MouseAdapter{
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-
+        if (e.getClickCount() == 2) 
+            setInputForSymbol(symbol);    
+    }
+    
+    
+    /**
+     * This method sets input given by user to the symbol
+     * @param symbol   symbol to which user gives input
+     */
+    private void setInputForSymbol(Symbol symbol) {
+        String prevInput = symbol.getUserInput();
+        String input = (String) JOptionPane.showInputDialog(null,
+                 "Data:",
+                 "Enter User Input",
+                 JOptionPane.QUESTION_MESSAGE, null,null, prevInput);
+        
+        if (input == null)
+            input = prevInput;
+        
+        symbol.setUserInput(input);
     }
 }
