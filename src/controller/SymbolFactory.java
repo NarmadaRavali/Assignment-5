@@ -28,6 +28,7 @@ public class SymbolFactory {
             } else if (panel.getName().equals("Right Panel")) {
                 ConnectionListener connectionListener =
                         ConnectionListener.getInstance();
+                symbol.setOpaque(false);
                 symbol.setBorder(BorderFactory.createLineBorder(Color.black));
                 new SymbolMouseHandler(panel, symbol);
                 for (Component component :
