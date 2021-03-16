@@ -6,9 +6,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
+import javax.swing.JTabbedPane;
+
 import model.Symbol;
 import model.SymbolIO;
 import view.RightPanel;
+import view.RightSpace;
 
 /**
  *
@@ -21,26 +24,35 @@ public class Compile {
     private ArrayList<LinkedList<Integer>> adj;
     
     public String compileWorkSpace() {
-        Map<RightPanel, Graph> tabsGraph = ConnectionCollection.getInstance()
-                .getGraphMap();
-        for (RightPanel tab : tabsGraph.keySet()) {
-            Graph graph = tabsGraph.get(tab);
+//        Map<RightPanel, Graph> tabsGraph = ConnectionCollection.getInstance()
+//                .getGraphMap();
+        
+        JTabbedPane rightPannelTab = RightSpace.getInstance()
+                .getRightPanel();
+        
+        System.out.println("open parn ");
+        for (Component i : rightPannelTab.getComponents()) {
+            RightPanel tab = (RightPanel) i;
+            //Graph graph = tabsGraph.get(tab);
             String tabName = tab.getName();
             
-            if (!tab.isOpenP()) {
+            System.out.println("open parn "+tab.isOpenParen());
+            System.out.println("open parn "+tab.isCloseParen());
+            
+            if (!tab.isOpenParen()) {
                 return "Open Paranthesis missing on "+tabName;
             }
-            if (!tab.isCloseP()) {
+            if (!tab.isCloseParen()) {
                 return "Close Paranthesis missing on  "+tabName;
             }
             
-            String msg = checkAllConnections(tab, graph);
+            String msg = checkAllConnections(tab);
             if (!msg.equals("Compiled Successfully")) {
                 return msg+ " on "+tabName;
             }
             
             
-            String msgFromTab = checkTab(tab, graph);
+            String msgFromTab = checkTab(tab);
             if (!msgFromTab.equals("Compiled Successfully")) {
                 return msgFromTab+ " on "+ tabName;
             }
@@ -49,7 +61,7 @@ public class Compile {
         return "Compiled Successfully";
     }
     
-    public String checkAllConnections(RightPanel tab, Graph graph) {
+    public String checkAllConnections(RightPanel tab) {
         int noOfSymbols = tab.getComponents().length;    
         
        
@@ -82,45 +94,44 @@ public class Compile {
     }
     
 
-    public String checkTab(RightPanel tab, Graph graph) {
+    public String checkTab(RightPanel tab) {
         Component[] symbols = tab.getComponents();
-        int noOfSymbols = tab.getComponents().length;
-        V = noOfSymbols;
-        Map<SymbolIO, ArrayList<SymbolIO>> tabLines = graph.getEdges();
-        Graph tempGraph = new Graph();
+        int noOfSymbols = tab.getComponents().length;   
+        //Graph graph = new Graph(noOfSymbols);
+        Graph graph = ConnectionCollection.getInstance().getGraphMap().get(tab);
         
-
-        for (Map.Entry line : tabLines.entrySet()) {
-
-            int fromSymbolIndex = getSymbolId(symbols,
-                    ((SymbolIO) line.getKey()).getParent());
-
-            ArrayList<SymbolIO> connectorList = (ArrayList<SymbolIO>) line
-                    .getValue();
-            int size = connectorList.size();
-            for (int index = 0; index < size; index++) {
-                int toSymbolIndex = getSymbolId(symbols,
-                        connectorList.get(index).getParent());
-                tempGraph.addEdge((SymbolIO) line.getKey(), connectorList.get(index));
-            }
-        }
-
-        ArrayList<Integer> atSymbolVertex = getAtSymbolVertex(symbols);
-        for (Integer at : atSymbolVertex) {
-            if (!tempGraph.checkLoop(at)) {
+        
+        
+        
+        
+//        for (Map.Entry line : tabLines.entrySet()) {
+//            
+//            int fromSymbolIndex = getSymbolId(symbols, ((SymbolIO) line.getKey()).getParent());
+//            
+//            ArrayList<SymbolIO> connectorList = (ArrayList<SymbolIO>) line.getValue(); 
+//            int size = connectorList.size();
+//            for(int index = 0; index < size ; index++) {
+//                int toSymbolIndex = getSymbolId(symbols, connectorList.get(index).getParent());
+//                graph.addEdge(fromSymbolIndex, toSymbolIndex);
+//            }           
+//        }
+        
+//        int openParaVertex = getOpenParaVertex(symbols);
+//        if (openParaVertex == -1) {
+//            return "Something Went Wrong....";
+//        }
+//        
+        String res  =  graph.checkLoop();
+            if(res.equals("@")) {
                 return "Compile Failed : \n Loop not present at  @";
-            }
-        }
+            } 
+            else if (res.equals("D"))
+                return "Compile Failed : \n Disconnected graph";
         
-        int openParaVertex = getOpenParaVertex(symbols);
-        if (openParaVertex == -1) {
-            return "Something Went Wrong....";
-        }
+//        if (!graph.checkConnection(openParaVertex)) {
+//            return "Compile Failed : \nDisconnected circuit present";
+//        }   
         
-        if (!tempGraph.checkConnection(openParaVertex)) {
-            return "Compile Failed : \nDisconnected circuit present";
-        }
-
         return "Compiled Successfully";
     }
     

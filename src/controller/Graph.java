@@ -1,6 +1,8 @@
 package controller;
 
+import model.AtTheRateSymbol;
 import model.Dot;
+import model.OpenParanthesisSymbol;
 import model.SymbolIO;
 
 import java.util.ArrayList;
@@ -69,30 +71,70 @@ public class Graph {
         return edges;
     }
 
-    public boolean checkLoop(Integer s) {
-        boolean visited[] = new boolean[Vertices];
-        LinkedList<Integer> queue = new LinkedList<Integer>();
-        visited[s]=true; 
-        queue.add(s); 
+    public String checkLoop() {
+        boolean atLoop  = false, disconnected = false;
+        Iterator<SymbolIO> outputs = edges.keySet().iterator();
+        while (outputs.hasNext()) {
+            SymbolIO output = outputs.next();
+            
+            
+        Map<SymbolIO, Boolean> visited = new HashMap();
+        LinkedList<SymbolIO> queue = new LinkedList<SymbolIO>();
+        visited.put(output, true); 
+        queue.add(output); 
 
-//        while (queue.size() != 0) {             
-//            Integer t = queue.poll();           
-//            Iterator<SymbolIO> i = edges.get(key)
-//            while (i.hasNext()) 
-//            { 
-//                int n = i.next(); 
-//                if (!visited[n]) 
-//                { 
-//                    visited[n] = true; 
-//                    queue.add(n); 
-//                } 
-//                if (n == s) {
-//                    return true;
-//                }
-//            } 
-//        }       
+        while (queue.size() != 0) {             
+            SymbolIO t = queue.poll();           
+            Iterator<SymbolIO> i = edges.get(t).iterator();
+            while (i.hasNext()) 
+            { 
+                SymbolIO n = i.next(); 
+                if (!visited.getOrDefault(n, false)) 
+                { 
+                    visited.put(n, true);  
+                    queue.add(n); 
+                } 
+                if (n.getParent() instanceof AtTheRateSymbol) {
+                          atLoop = true;
+                }
+            } 
+        }       
+        }
+        while (outputs.hasNext()) {
+            SymbolIO output = outputs.next();
+            if (output.getParent() instanceof OpenParanthesisSymbol) {
+                Map<SymbolIO, Boolean> visited = new HashMap();
+                LinkedList<SymbolIO> queue = new LinkedList<SymbolIO>();
+                visited.put(output, true); 
+                queue.add(output); 
+
+                while (queue.size() != 0) {             
+                    SymbolIO t = queue.poll();           
+                    Iterator<SymbolIO> i = edges.get(t).iterator();
+                    while (i.hasNext()) 
+                    { 
+                        SymbolIO n = i.next(); 
+                        if (!visited.get(n)) 
+                        { 
+                            visited.put(n, true);  
+                            queue.add(n); 
+                        } 
+                       
+                    } 
+                }
+                for(SymbolIO s: edges.keySet()) {
+                    if (!visited.getOrDefault(s, false))
+                        disconnected = true;
+                }
+                
+            }
+        }
+        if (!atLoop)
+            return "@";
+        else if (!disconnected)
+            return "D";
         
-        return false;
+        return "OK";
     }
     
     public boolean checkConnection(int s){ 
