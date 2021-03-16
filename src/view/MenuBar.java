@@ -10,7 +10,7 @@ import javax.swing.event.MenuListener;
 
 /**
  * @author Nikhil Hiremath
- * @Description: Class for menu bar with save, load and new space commands
+ * @Description: Class for menu bar with save, load and new space commands.
  * @since 03-07-2021
  */
 public class MenuBar implements MenuListener {

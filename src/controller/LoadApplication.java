@@ -16,7 +16,7 @@ import view.RightSpace;
 
 /**
  * @author Mariya Varghese
- * @Description: Used to load the saved work including all tabs, symbols and connections. 
+ * @Description: Used to load the saved work including tabs, values, symbols and connections. 
  * @since 03-11-2021
  */
 public class LoadApplication implements java.io.Serializable{

@@ -20,7 +20,7 @@ import java.util.Set;
  * @author Nikhil Hiremath
  * @since 03-12-2021
  * @Description: Stores all the data in the space tabs including symbol's
- *               properties in a .txt file.
+ *               properties in a .txt file
  *
  */
 
