@@ -57,7 +57,7 @@ public class SaveApplication {
 					for (Component j : tab.getComponents()) {
 						Symbol symbol = (Symbol) j;
 
-						String name = "d";
+						String name = symbol.getText();
 						String x = Integer.toString(symbol.getX());
 						String y = Integer.toString(symbol.getY());
 						String userInput = symbol.getUserInput();
