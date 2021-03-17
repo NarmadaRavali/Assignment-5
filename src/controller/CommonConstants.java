@@ -14,19 +14,19 @@ import java.util.Map;
  */
 public class CommonConstants {
     public enum Type {
-        INPUT,
-        OUTPUT
+        INPUT, OUTPUT
     }
+
     public static final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 800;
     public static final int SYMBOL_WIDTH = 180;
     public static final int SYMBOL_HEIGHT = 80;
     public static final String LEFT_PANEL_NAME = "Left Panel",
             RIGHT_PANEL_NAME = "Right Panel";
-    public static final String SAVE = "Save", LOAD = "Load", SPACE = "New " +
-            "Space", COMPILE = "compile";
+    public static final String SAVE = "Save", LOAD = "Load",
+            SPACE = "New " + "Space", COMPILE = "compile";
     public static final Color LIGHT_GREY = new Color(235, 235, 235);
-    public static final String[] symbolNames = {"(", ")", "<", ">", "@", "||"
-            , "-"};
+    public static final String[] symbolNames = { "(", ")", "<", ">", "@", "||",
+            "-" };
     public static final Map<String, Class<?>> symbolClasses;
 
     static {
