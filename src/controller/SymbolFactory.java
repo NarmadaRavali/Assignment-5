@@ -29,6 +29,7 @@ public class SymbolFactory {
                 ConnectionListener connectionListener = ConnectionListener
                         .getInstance();
                 symbol.setOpaque(false);
+                symbol.setContentAreaFilled(false);
                 symbol.setBorder(BorderFactory.createLineBorder(Color.black));
                 new SymbolMouseHandler(panel, symbol);
                 for (Component component : symbol.getComponents()) {
