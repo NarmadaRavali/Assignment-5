@@ -5,10 +5,9 @@ import controller.CommonConstants;
 import javax.swing.*;
 import java.awt.*;
 
+
 /**
  * @author Nikhil Hiremath
- * @Description: This class is for adding shapes and interacting with added
- *               shapes
  * @since 03-07-2021
  */
 public class RightSpace implements java.io.Serializable {
@@ -32,8 +31,8 @@ public class RightSpace implements java.io.Serializable {
      */
     public void createTabbedPane(JFrame jFrame) {
         rightPanelTab = new JTabbedPane();
-        rightSpaceWidth = jFrame.getPreferredSize().width / 6 * 5;
-        rightSpaceHeight = jFrame.getPreferredSize().height / 8 * 7;
+        rightSpaceWidth = CommonConstants.FRAME_WIDTH / 6 * 5;
+        rightSpaceHeight = CommonConstants.FRAME_HEIGHT / 8 * 7;
         rightPanelTab.setName("Tabbed Panel");
         rightPanelTab.setPreferredSize(
                 new Dimension(rightSpaceWidth, rightSpaceHeight));

@@ -4,8 +4,6 @@ package controller;
 import model.SymbolIO;
 import view.RightPanel;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,15 +11,10 @@ import java.util.Map;
  *
  * @author Ravikanth
  * @since 03-14-2021
- * @Description:
  */
 public class ConnectionCollection {
 
     private static ConnectionCollection dataObj;
-
-    private String symbolSelected;
-
-    private SymbolIO connectorSelected;
     private Map<RightPanel, SymbolIoGraph> graphMap;
 
     public static ConnectionCollection getInstance() {
@@ -29,85 +22,48 @@ public class ConnectionCollection {
         if (dataObj == null) {
             dataObj = new ConnectionCollection();
             dataObj.graphMap = new HashMap<>();
-            dataObj.connectorSelected = null;
         }
         return dataObj;
     }
 
-
-    public String getSymbolSelected() {
-        return symbolSelected;
+    /**
+     * When a saved file is loaded, this method is called to clear the
+     * existing graph map
+     */
+    public void initialize() {
+        graphMap.clear();
     }
 
-    public void setSymbolSelected(String symbolSelected) {
-        this.symbolSelected = symbolSelected;
-    }
-
-    public SymbolIoGraph getGraph(RightPanel w) {
-        return graphMap.get(w);
-    }
-
-    public void addConnection(RightPanel w, SymbolIO c1, SymbolIO c2) {
+    /**
+     * Adds a new edge between two SymbolIos in a graph associated with the
+     * working
+     * space.
+     */
+    public void addConnection(RightPanel w, SymbolIO output, SymbolIO input) {
 
         if(graphMap.containsKey(w)) {
-           graphMap.get(w).addEdge(c1, c2);
+           graphMap.get(w).addEdge(output, input);
         }
         else {
             SymbolIoGraph symbolIOGraph = new SymbolIoGraph();
-            symbolIOGraph.addEdge(c1, c2);
+            symbolIOGraph.addEdge(output, input);
             graphMap.put(w, symbolIOGraph);
         }
         w.repaint();
     }
-
-    public SymbolIO getConnectorSelected() {
-        return connectorSelected;
-    }
-
-    public void setConnectorSelected(SymbolIO connectorSelected) {
-        if(this.connectorSelected != null) {
-            this.connectorSelected.setBorder(UIManager.getBorder("Button.border"));
-        }
-        this.connectorSelected = connectorSelected;
-        if(this.connectorSelected != null) {
-            this.connectorSelected.setBorder(BorderFactory.createLineBorder(Color.RED));
-        }
-    }
-
+    /**
+     * Removes an existing edge between two SymbolIos in a graph associated
+     * with the working space.
+     */
     public void removeConnection(SymbolIO c) {
         RightPanel workPanel = (RightPanel) c.getParent().getParent();
         if (graphMap.containsKey(workPanel))
             graphMap.get(workPanel).removeEdge(c);
     }
-//
-//    private void checkBarFalse(Connector c2) {
-//        WorkPanel workPanel = (WorkPanel) c2.getParent().getParent();
-//        Map<Connector, ArrayList<Connector>> map = this.graphs.get(workPanel);
-//        if (map == null){
-//            return;
-//        }
-//        Map<Connector, ArrayList<Connector>> Lines = ConnectionHolder.getInstance().getTabLines(workPanel);
-//        int count = 0;
-//        for(Connector c1 : Lines.keySet()) {
-//            if(c1.equals(c2)) {
-//                count += Lines.get(c1).size();
-//            }else {
-//                for(Connector c : Lines.get(c1)) {
-//                    if(c.equals(c2)) {
-//                        count ++;
-//                    }
-//                }
-//            }
-//
-//        }
-//
-//        if (count <= 1) {
-//            c2.setLine(false);
-//        }else {
-//            c2.setLine(true);
-//        }
-//
-//    }
+
+    public SymbolIoGraph getGraph(RightPanel w) {
+        return graphMap.get(w);
+    }
 
     public Map<RightPanel, SymbolIoGraph> getGraphMap() {
         return graphMap;
@@ -117,7 +73,5 @@ public class ConnectionCollection {
         this.graphMap = graphMap;
     }
 
-    public void initialize() {
-        graphMap.clear();
-    }
+
 }

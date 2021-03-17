@@ -4,7 +4,6 @@ import controller.CommonConstants;
 
 /**
  * @author Mariya Varghese
- * @Description: Class representing '@' symbol
  * @since 03-05-2021
  */
 public class AtTheRateSymbol extends Symbol {

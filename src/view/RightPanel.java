@@ -10,7 +10,6 @@ import java.util.Map;
 
 /**
  * @author Nikhil Hiremath
- * @Description: Panel class which contains work spaces in it.
  * @since 03-07-2021
  */
 public class RightPanel extends JPanel {
@@ -19,26 +18,19 @@ public class RightPanel extends JPanel {
     private boolean isOpenP;
     private boolean isCloseP;
     private RightPanel panel;
-    private int rightPanelWidth;
-    private int rightPanelHeight;
     private Point startPoint, endPoint;
 
     public RightPanel(int width, int height) {
         this.setOpenParen(false);
         this.setCloseParen(false);
-        this.rightPanelWidth = width;
-        this.rightPanelHeight = height - 100;
         this.setName(CommonConstants.RIGHT_PANEL_NAME);
         this.setLayout(null);
-        this.setPreferredSize(new Dimension(rightPanelWidth, rightPanelHeight));
+        this.setPreferredSize(new Dimension(width, height - 100));
         this.setBackground(CommonConstants.LIGHT_GREY);
         this.setPanel(this);
         new DropEventListener(this);
     }
 
-    public void setConnectionHandler(){
-        ConnectionListener.getInstance().setPanel(this);
-    }
 
     public boolean isOpenParen() {
         return isOpenP;
@@ -56,14 +48,14 @@ public class RightPanel extends JPanel {
         this.isCloseP = isCloseP;
     }
 
-    public RightPanel getPanel() {
-        return panel;
-    }
-
     public void setPanel(RightPanel panel) {
         this.panel = panel;
     }
 
+    /**
+     * Draws lines for all the existing connections and also for a new
+     * connection which is being created
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -81,17 +73,21 @@ public class RightPanel extends JPanel {
 
         if(symbolIOGraph != null) {
             Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
-            for(SymbolIO c1 : edges.keySet()) {
-                for(SymbolIO c2 : edges.get(c1)) {
+            for(SymbolIO output : edges.keySet()) {
+                for(SymbolIO input : edges.get(output)) {
 
-                    int x1 = c1.getX() + c1.getParent().getX() + c1.getWidth()/2;
-                    int x2 = c2.getX() + c2.getParent().getX() + c2.getWidth()/2;
+                    int startX =
+                            output.getX() + output.getParent().getX() + output.getWidth()/2;
+                    int endX =
+                            input.getX() + input.getParent().getX() + input.getWidth()/2;
 
-                    int y1 = c1.getY() + c1.getParent().getY() + c1.getHeight()/2;
-                    int y2 = c2.getY() + c2.getParent().getY() + c2.getHeight()/2;
+                    int startY =
+                            output.getY() + output.getParent().getY() + output.getHeight()/2;
+                    int endY =
+                            input.getY() + input.getParent().getY() + input.getHeight()/2;
+
                     g.setColor(Color.BLACK);
-
-                    g.drawLine(x1, y1, x2, y2);
+                    g.drawLine(startX, startY, endX, endY);
                 }
             }
         }

@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 
 /**
  * @author Ravikanth
- * @Description:
  * @since 03-12-2021
  */
 public class SymbolMouseHandler extends MouseAdapter{
@@ -28,7 +27,6 @@ public class SymbolMouseHandler extends MouseAdapter{
 
     /**
      * Changes the symbol position whenever it is dragged
-     * @param e
      */
     @Override
     public void mouseDragged(MouseEvent e) {

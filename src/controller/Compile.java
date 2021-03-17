@@ -13,11 +13,13 @@ import java.util.Map;
 /**
  *
  * @author Narmada Ravali
- * @since 03-14-2021
- * @Description:
+ * @since 03-15-2021
  */
 public class Compile {
-    
+    /**
+     * This method compiles all the workspaces in the application
+     * @return - message to be shown in dialog
+     */
     public String compileWorkSpace() {
         
         JTabbedPane rightPanelTab = RightSpace.getInstance()
@@ -46,7 +48,12 @@ public class Compile {
         }
         return "Compiled Successfully!";
     }
-    
+
+    /**
+     * This method checks for inputs/outputs which are not connected in a work
+     * space.
+     * @return - message to be shown in dialog
+     */
     public String checkIfDisconnected(RightPanel panel) {
         Component[] components = panel.getComponents();
 
@@ -66,8 +73,12 @@ public class Compile {
         }
         return "Compiled Successfully!";
     }
-    
 
+    /**
+     * This method checks for valid '@' loops and for Islands/Disconnected
+     * graphs in a work space
+     * @return - message to be shown in the dialog
+     */
     public String checkPanel(RightPanel panel) {
         Component[] symbols = panel.getComponents();
         SymbolGraph graph = new SymbolGraph(symbols.length);
@@ -100,8 +111,13 @@ public class Compile {
         return "Compiled Successfully!";
 
     }
-    
-    
+
+    /**
+     * Returns the index of Symbol object in the work space
+     * @param symbols - symbols present in work space
+     * @param key - required symbol
+     * @return - index of the key
+     */
     private int getSymbolId(Component[] symbols, Component key) {
         int size = symbols.length;
         for(int index = 0; index < size ; index++) {
@@ -111,7 +127,12 @@ public class Compile {
         }
         return -1;
     }
-    
+
+    /**
+     * Returns the list of indices of a particular symbol in work space
+     * @param name - name of the symbol
+     * @return - list of indices
+     */
     private ArrayList<Integer> getSymbolVertices(Component[] symbols,
                                                  String name) {
         ArrayList<Integer> list = new ArrayList<Integer>();

@@ -19,14 +19,14 @@ import java.util.Set;
 /**
  * @author Nikhil Hiremath
  * @since 03-12-2021
- * @Description: Stores all the data in the space tabs including symbol's
- *               properties in a .txt file.
- *
  */
 
 public class SaveWorkSpaces {
 
-	public SaveWorkSpaces(JFrame mainFrame) {
+	/**
+	 * Opens the file chooser to save all workspaces into a file
+	 */
+	public SaveWorkSpaces() {
 		super();
 		JLabel fileName = new JLabel("No File Selected");
 		JFileChooser fileChooser = new JFileChooser();
@@ -49,7 +49,7 @@ public class SaveWorkSpaces {
 					spaceIndex++;
 				}
 				spaceIndex = 0;
-				
+
 				//Save all the Symbols
 				for (Component i : rightPanel.getComponents()) {
 					RightPanel tab = (RightPanel) i;
@@ -67,12 +67,9 @@ public class SaveWorkSpaces {
 					}
 					spaceIndex++;
 				}
-				
-				
-				//Save all the symbols
+
 				String lines = getLines();
 				fileWriter.write(lines);
-				fileWriter.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -80,7 +77,10 @@ public class SaveWorkSpaces {
 			fileName.setText("Cancelled");
 	}
 
-	
+	/**
+	 * Creates the formatted text data to be saved from the workspaces.
+	 * @return - String of text to be saved
+	 */
 	private String getLines() {
 		String lines = "";
 		Map<RightPanel, SymbolIoGraph> panelGraphMap = ConnectionCollection.getInstance().getGraphMap();
@@ -92,14 +92,14 @@ public class SaveWorkSpaces {
 				int panelIndex = RightSpace.getInstance().getRightPanel()
 						.indexOfComponent(tab);
 				int symbol1Index = getSymbolIndex((Symbol) output.getParent(), tab);
-				int outputIndex = getConnectorIndex(output, (Symbol) output.getParent());
+				int outputIndex = getSymbolIOIndex(output, (Symbol) output.getParent());
 
 				lines += "line" + ";" + panelIndex + ";" + symbol1Index + ";"
 						+ outputIndex + ";";
 
 				for (SymbolIO input : edges.get(output)) {
 					int symbol2Index = getSymbolIndex((Symbol) input.getParent(), tab);
-					int inputIndex = getConnectorIndex(input,
+					int inputIndex = getSymbolIOIndex(input,
 							(Symbol) input.getParent());
 
 					lines += symbol2Index + "-" + inputIndex + ":";
@@ -109,7 +109,8 @@ public class SaveWorkSpaces {
 		}
 		return lines;
 	}
-	
+
+
 	private int getSymbolIndex(Symbol symbol, RightPanel rightPanel) {
 		int i = 0;
 		for(Component component : rightPanel.getComponents()) {
@@ -122,10 +123,10 @@ public class SaveWorkSpaces {
 		
 	}
 	
-	private int getConnectorIndex(SymbolIO symbolIO, Symbol symbol) {
+	private int getSymbolIOIndex(SymbolIO symbolIO, Symbol symbol) {
 		int i = 0;
 		for(Component component : symbol.getComponents()) {
-			if(symbolIO== (SymbolIO) component) {
+			if(symbolIO ==  component) {
 				return i;
 			}
 			i++;

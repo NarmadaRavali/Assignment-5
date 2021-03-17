@@ -4,7 +4,6 @@ import controller.CommonConstants;
 
 /**
  * @author Narmada Ravali
- * @Description: Class representing '(' symbol
  * @since 03-06-2021
  */
 public class OpenParanthesisSymbol extends Symbol {

@@ -7,7 +7,6 @@ import java.awt.*;
 
 /**
  * @author Narmada Ravali
- * @Description: Class for window of the application
  * @since 03-07-2021
  */
 public class MainFrame extends JFrame {

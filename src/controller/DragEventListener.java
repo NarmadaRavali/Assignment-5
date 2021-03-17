@@ -12,8 +12,6 @@ import java.awt.event.MouseEvent;
 
 /**
  * @author Ravikanth
- * @Description: This Class handles mouse drag listener and sends the value of
- *               the dragged symbol
  * @since 03-06-2021
  */
 public class DragEventListener {

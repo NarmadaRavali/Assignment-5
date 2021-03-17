@@ -4,7 +4,6 @@ import controller.CommonConstants;
 
 /**
  * @author Narmada Ravali
- * @Description: Class representing ')' symbol
  * @since 03-05-2021
  */
 

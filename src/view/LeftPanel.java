@@ -8,7 +8,6 @@ import java.awt.*;
 
 /**
  * @author Narmada Ravali
- * @Description: Panel class for selecting a symbol to drag
  * @since 03-07-2021
  */
 public class LeftPanel extends JPanel {
@@ -19,8 +18,8 @@ public class LeftPanel extends JPanel {
         super();
         this.setName(CommonConstants.LEFT_PANEL_NAME);
         this.setLayout(new FlowLayout());
-        int leftPanelWidth = mainFrame.getPreferredSize().width / 5;
-        int leftPanelHeight = mainFrame.getPreferredSize().height;
+        int leftPanelWidth = CommonConstants.FRAME_WIDTH / 5;
+        int leftPanelHeight = CommonConstants.FRAME_HEIGHT;
         this.setPreferredSize(new Dimension(leftPanelWidth, leftPanelHeight));
         JScrollPane scrollPane = new JScrollPane(this);
         mainFrame.add(scrollPane, BorderLayout.LINE_START);

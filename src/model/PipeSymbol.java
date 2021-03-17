@@ -4,7 +4,6 @@ import controller.CommonConstants;
 
 /**
  * @author Narmada Ravali
- * @Description: Class for pipe symbol
  * @since 03-06-2021
  */
 public class PipeSymbol extends Symbol {

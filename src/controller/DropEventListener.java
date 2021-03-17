@@ -11,8 +11,6 @@ import java.io.IOException;
 
 /**
  * @author Ravikanth
- * @Description: This class handles mouse drop listeners and adds a new symbol
- *               to the right panel.
  * @since 03-07-2021
  */
 public class DropEventListener {

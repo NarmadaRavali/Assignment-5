@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
  *
  * @author Ravikanth
  * @since 03-14-2021
- * @Description:
  */
 public class ConnectionListener extends MouseAdapter {
     private RightPanel panel;
@@ -28,10 +27,10 @@ public class ConnectionListener extends MouseAdapter {
         return listener;
     }
 
-    public void setPanel(RightPanel panel) {
-        this.panel = panel;
-    }
 
+    /**
+     * Removes the connection when input is clicked
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -40,11 +39,14 @@ public class ConnectionListener extends MouseAdapter {
         }
     }
 
+    /**
+     * Stores the start location of selected output.
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
         selectedOut = (SymbolIO) e.getComponent();
-        setPanel((RightPanel) selectedOut.getParent().getParent());
+        this.panel = (RightPanel) selectedOut.getParent().getParent();
         startPoint = new Point(e.getComponent().getParent().getX()
                         , e.getComponent().getParent().getY());
         if (selectedOut.getType() == CommonConstants.Type.OUTPUT
@@ -58,16 +60,20 @@ public class ConnectionListener extends MouseAdapter {
 
     }
 
+    /**
+     * Draws a permanent line between an input and an output when mouse is
+     * released on a SymbolIO object of input type.
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         super.mouseReleased(e);
-        Point button =
+        Point symbolLocation =
                 panel.getComponentAt(e.getX() + startPoint.x + e.getComponent().getX(),
                 e.getY() + startPoint.y + e.getComponent().getY()).getLocation();
 
-        Component selectedIn =  panel.getComponentAt(button)
-                .getComponentAt(e.getX() + startPoint.x + e.getComponent().getX()- button.x
-                , e.getY() + startPoint.y +  e.getComponent().getY() - button.y);
+        Component selectedIn =  panel.getComponentAt(symbolLocation)
+                .getComponentAt(e.getX() + startPoint.x + e.getComponent().getX()- symbolLocation.x
+                , e.getY() + startPoint.y +  e.getComponent().getY() - symbolLocation.y);
 
         if (selectedOut != null && selectedIn instanceof SymbolIO && !selectedIn.getParent().equals(selectedOut.getParent())) {
             if (((SymbolIO) selectedIn).getType().equals(CommonConstants.Type.INPUT) && (!((SymbolIO) selectedIn).getConnected()
@@ -83,6 +89,9 @@ public class ConnectionListener extends MouseAdapter {
 
     }
 
+    /**
+     * Draws the line when mouse is being dragged from output sumbolIO
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);

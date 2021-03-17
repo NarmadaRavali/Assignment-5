@@ -8,7 +8,6 @@ import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 /**
  * @author Ravikanth
- * @Description: Factory class for creating Symbol objects
  * @since 03-12-2021
  */
 public class SymbolFactory {
@@ -21,11 +20,11 @@ public class SymbolFactory {
                     .get(symbolName)
                     .getDeclaredConstructor(int.class, int.class)
                     .newInstance(x, y);
-            if (panel.getName().equals("Left Panel")) {
+            if (panel.getName().equals(CommonConstants.LEFT_PANEL_NAME)) {
 
                 new DragEventListener(symbol);
 
-            } else if (panel.getName().equals("Right Panel")) {
+            } else if (panel.getName().equals(CommonConstants.RIGHT_PANEL_NAME)) {
                 ConnectionListener connectionListener =
                         ConnectionListener.getInstance();
                 symbol.setOpaque(false);

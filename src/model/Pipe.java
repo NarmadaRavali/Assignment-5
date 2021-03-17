@@ -6,7 +6,6 @@ import java.awt.*;
 
 /**
  * @author Narmada Ravali
- * @Description: Class for bar on pipe symbol
  * @since 03-06-2021
  */
 public class Pipe extends SymbolIO {

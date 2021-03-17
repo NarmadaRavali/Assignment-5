@@ -1,21 +1,18 @@
 package view;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
-import controller.CommonConstants;
 import controller.Compile;
 import controller.LoadWorkSpaces;
 import controller.SaveWorkSpaces;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 
 /**
  * @author Nikhil Hiremath
- * @Description: Class for menu bar with save, load and new space commands
  * @since 03-07-2021
  */
 public class MenuBar implements ActionListener {
@@ -27,10 +24,10 @@ public class MenuBar implements ActionListener {
 
     public MenuBar(JFrame mainFrame) {
         JMenuBar menu = new JMenuBar();
-        save = new JMenuItem(CommonConstants.SAVE);
-        load = new JMenuItem(CommonConstants.LOAD);
-        newSpace = new JMenuItem(CommonConstants.SPACE);
-        compile = new JMenuItem(CommonConstants.COMPILE);
+        save = new JMenuItem("save");
+        load = new JMenuItem("load");
+        newSpace = new JMenuItem("new space");
+        compile = new JMenuItem("compile");
         newSpace.addActionListener(this);
         load.addActionListener(this);
         save.addActionListener(this);
@@ -47,13 +44,13 @@ public class MenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(newSpace)) {
             RightSpace a = RightSpace.getInstance();
-            spaceLabel = CommonConstants.SPACE + " " + String.valueOf(counter);
+            spaceLabel = "space " + counter;
             a.addTab(spaceLabel);
             counter += 1;
         } else if (e.getSource().equals(save)) {
-            new SaveWorkSpaces(mainFrame1);
+            new SaveWorkSpaces();
         } else if (e.getSource().equals(load)) {
-            new LoadWorkSpaces(mainFrame1);
+            new LoadWorkSpaces();
         }else if (e.getSource().equals(compile)) {
             String msg = new Compile().compileWorkSpace();
             showMessageDialog(null, msg);

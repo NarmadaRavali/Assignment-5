@@ -1,13 +1,10 @@
 package model;
 
-import controller.CommonConstants;
-
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * @author Mariya Varghese
- * @Description: Super Class for all the symbol classes
  * @since 03-04-2021
  */
 public class Symbol extends JButton {
@@ -17,8 +14,8 @@ public class Symbol extends JButton {
 
     public Symbol(String text, int x, int y) {
         super(text);
-        int symbolWidth = CommonConstants.SYMBOL_WIDTH;
-        int symbolHeight = CommonConstants.SYMBOL_HEIGHT;
+        int symbolWidth = 180;
+        int symbolHeight = 80;
         setLayout(null);
         setPreferredSize(new Dimension(symbolWidth, symbolHeight));
         setMinimumSize(new Dimension(symbolWidth, symbolHeight));

@@ -4,7 +4,6 @@ import controller.CommonConstants;
 
 /**
  * @author Mariya Varghese
- * @Description: Class representing '>' symbol
  * @since 03-07-2021
  */
 public class GreaterThanSymbol extends Symbol {

@@ -6,7 +6,6 @@ import java.awt.*;
 
 /**
  * @author Narmada Ravali
- * @Description: Class for adding Dots on symbols
  * @since 03-04-2021
  */
 public class Dot extends SymbolIO {

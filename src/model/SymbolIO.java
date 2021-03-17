@@ -5,6 +5,10 @@ import controller.CommonConstants;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Ravikanth
+ * @since 03-04-2021
+ */
 public class SymbolIO extends JButton {
     private final CommonConstants.Type type;
     private Boolean connected;

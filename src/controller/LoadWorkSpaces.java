@@ -12,14 +12,16 @@ import java.io.FileReader;
 
 /**
  * @author Mariya Varghese
- * @Description: Used to load the saved work including all tabs, symbols and connections. 
  * @since 03-11-2021
  */
 public class LoadWorkSpaces implements java.io.Serializable{
 		
 	private static final long serialVersionUID = 1L;
 
-	public LoadWorkSpaces(JFrame frame) {
+	/**
+	 * Opens the file chooser and loads the selected file
+	 */
+	public LoadWorkSpaces() {
 		super();
 		
 		JLabel fileName = new JLabel("no file selected");
@@ -30,7 +32,7 @@ public class LoadWorkSpaces implements java.io.Serializable{
             fileName.setText(fileChooser.getSelectedFile().getAbsolutePath()); 
             
             File fileContent = fileChooser.getSelectedFile();
-    		BufferedReader reader;	
+    		BufferedReader reader;
     		
     		JTabbedPane rightSpace = RightSpace.getInstance().getRightPanel();
     		rightSpace.removeAll();
@@ -83,13 +85,25 @@ public class LoadWorkSpaces implements java.io.Serializable{
 		else
 			fileName.setText("Cancelled!!"); 
 	}
-	
+
+	/**
+	 * Creates a symbol and sets its value
+	 * @param name - type of the symbol
+	 * @param x - x coordinate of symbol
+	 * @param y - x coordinate of symbol
+	 * @param userInput - value of the symbol
+	 * @param tabIndex - work space index
+	 */
 	private void createSymbol(String name,int x, int y, String userInput, int tabIndex) {
 		JTabbedPane rightSpace = RightSpace.getInstance().getRightPanel();
 		RightPanel workSpace = (RightPanel) rightSpace.getComponent(tabIndex);
-		SymbolFactory.createSymbol(workSpace, name, x, y);
+		Symbol symbol = SymbolFactory.createSymbol(workSpace, name, x, y);
+		symbol.setUserInput(userInput);
 	}
-	
+
+	/**
+	 * Creates a connection/edge between an onput and an input.
+	 */
 	private void createLine(int workSpaceIndex, int startSymbolIndex, int connectFrom, int endSymbolIndex, int connectTo) {
 		
 		RightPanel panel = (RightPanel) RightSpace.getInstance().getRightPanel().getComponent(workSpaceIndex);
