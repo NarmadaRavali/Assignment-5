@@ -23,8 +23,7 @@ public class LeftPanel extends JPanel {
         this.setPreferredSize(new Dimension(leftPanelWidth, leftPanelHeight));
         JScrollPane scrollPane = new JScrollPane(this);
         mainFrame.add(scrollPane, BorderLayout.LINE_START);
-        for (String symbolName :
-                CommonConstants.symbolNames) {
+        for (String symbolName : CommonConstants.symbolNames) {
             SymbolFactory.createSymbol(this, symbolName, 0, 0);
         }
     }

@@ -14,6 +14,7 @@ public class CommonConstants {
     public enum Type {
         INPUT, OUTPUT
     }
+
     public static final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 800;
     public static final String LEFT_PANEL_NAME = "Left Panel",
             RIGHT_PANEL_NAME = "Right Panel";

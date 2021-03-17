@@ -18,12 +18,12 @@ import java.util.Map;
 public class Compile {
     /**
      * This method compiles all the workspaces in the application
+     * 
      * @return - message to be shown in dialog
      */
     public String compileWorkSpace() {
-        
-        JTabbedPane rightPanelTab = RightSpace.getInstance()
-                .getRightPanel();
+
+        JTabbedPane rightPanelTab = RightSpace.getInstance().getRightPanel();
 
         for (Component component : rightPanelTab.getComponents()) {
             RightPanel tab = (RightPanel) component;
@@ -33,7 +33,7 @@ public class Compile {
                 return "Open Parenthesis symbol missing on " + panelName;
             }
             if (!tab.isCloseParen()) {
-                return "Close Parenthesis symbol missing on "+panelName;
+                return "Close Parenthesis symbol missing on " + panelName;
             }
 
             String msg1 = checkIfDisconnected(tab);
@@ -52,22 +52,20 @@ public class Compile {
     /**
      * This method checks for inputs/outputs which are not connected in a work
      * space.
+     * 
      * @return - message to be shown in dialog
      */
     public String checkIfDisconnected(RightPanel panel) {
         Component[] components = panel.getComponents();
 
-        for(Component component:
-        components) {
+        for (Component component : components) {
             Symbol symbol = (Symbol) component;
-            for(Component component1:
-            symbol.getComponents()) {
+            for (Component component1 : symbol.getComponents()) {
                 SymbolIO symbolIO = (SymbolIO) component1;
                 if (!symbolIO.getConnected()) {
-                    return panel.getName()+":\nOne or more Input/Output of" +
-                            " a '" + symbol.getText() +
-                            "' is " +
-                            "not connected.";
+                    return panel.getName() + ":\nOne or more Input/Output of"
+                            + " a '" + symbol.getText() + "' is "
+                            + "not connected.";
                 }
             }
         }
@@ -77,35 +75,34 @@ public class Compile {
     /**
      * This method checks for valid '@' loops and for Islands/Disconnected
      * graphs in a work space
+     * 
      * @return - message to be shown in the dialog
      */
     public String checkPanel(RightPanel panel) {
         Component[] symbols = panel.getComponents();
         SymbolGraph graph = new SymbolGraph(symbols.length);
-        Map<SymbolIO, ArrayList<SymbolIO>> edges =
-                ConnectionCollection.getInstance().getGraph(panel).getEdges();
+        Map<SymbolIO, ArrayList<SymbolIO>> edges = ConnectionCollection
+                .getInstance().getGraph(panel).getEdges();
 
         edges.forEach((key, value) -> {
             for (SymbolIO symbolIO : value) {
-                graph.addEdge(getSymbolId(symbols,
-                        key.getParent()), getSymbolId(symbols,
-                        symbolIO.getParent()));
+                graph.addEdge(getSymbolId(symbols, key.getParent()),
+                        getSymbolId(symbols, symbolIO.getParent()));
             }
         });
 
-        ArrayList<Integer> AtTheRateVertices = getSymbolVertices(symbols,
-                "@");
-        for(Integer v : AtTheRateVertices) {
+        ArrayList<Integer> AtTheRateVertices = getSymbolVertices(symbols, "@");
+        for (Integer v : AtTheRateVertices) {
             if (graph.isInValid(v, 0)) {
-                return panel.getName()+":\nCompilation Failed: Loop not present for '@' symbol";
+                return panel.getName()
+                        + ":\nCompilation Failed: Loop not present for '@' symbol";
             }
         }
 
-        if (!graph.isInValid(getSymbolVertices(symbols, "(").get(0)
-        , 1)) {
-            return panel.getName()+":\nCompilation Failed: Disconnected symbols present in " +
-                    "the " +
-                    "program";
+        if (!graph.isInValid(getSymbolVertices(symbols, "(").get(0), 1)) {
+            return panel.getName()
+                    + ":\nCompilation Failed: Disconnected symbols present in "
+                    + "the " + "program";
         }
 
         return "Compiled Successfully!";
@@ -114,13 +111,14 @@ public class Compile {
 
     /**
      * Returns the index of Symbol object in the work space
+     * 
      * @param symbols - symbols present in work space
-     * @param key - required symbol
+     * @param key     - required symbol
      * @return - index of the key
      */
     private int getSymbolId(Component[] symbols, Component key) {
         int size = symbols.length;
-        for(int index = 0; index < size ; index++) {
+        for (int index = 0; index < size; index++) {
             if (key.equals(symbols[index])) {
                 return index;
             }
@@ -130,19 +128,20 @@ public class Compile {
 
     /**
      * Returns the list of indices of a particular symbol in work space
+     * 
      * @param name - name of the symbol
      * @return - list of indices
      */
     private ArrayList<Integer> getSymbolVertices(Component[] symbols,
-                                                 String name) {
+            String name) {
         ArrayList<Integer> list = new ArrayList<Integer>();
         int size = symbols.length;
-        for(int index = 0; index < size ; index++) {
+        for (int index = 0; index < size; index++) {
             if (((Symbol) (symbols[index])).getText().equals(name)) {
                 list.add(index);
             }
         }
         return list;
     }
-    
+
 }

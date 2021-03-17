@@ -31,7 +31,6 @@ public class RightPanel extends JPanel {
         new DropEventListener(this);
     }
 
-
     public boolean isOpenParen() {
         return isOpenP;
     }
@@ -60,31 +59,30 @@ public class RightPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (startPoint!= null && endPoint != null) {
+        if (startPoint != null && endPoint != null) {
             g.setColor(Color.GREEN);
             g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
-        }
-        else if (startPoint != null){
+        } else if (startPoint != null) {
             g.clearRect(startPoint.x, startPoint.y, 1, 1);
         }
 
-       SymbolIoGraph symbolIOGraph =
-                ConnectionCollection.getInstance().getGraph(this.panel);
+        SymbolIoGraph symbolIOGraph = ConnectionCollection.getInstance()
+                .getGraph(this.panel);
 
-        if(symbolIOGraph != null) {
+        if (symbolIOGraph != null) {
             Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
-            for(SymbolIO output : edges.keySet()) {
-                for(SymbolIO input : edges.get(output)) {
+            for (SymbolIO output : edges.keySet()) {
+                for (SymbolIO input : edges.get(output)) {
 
-                    int startX =
-                            output.getX() + output.getParent().getX() + output.getWidth()/2;
-                    int endX =
-                            input.getX() + input.getParent().getX() + input.getWidth()/2;
+                    int startX = output.getX() + output.getParent().getX()
+                            + output.getWidth() / 2;
+                    int endX = input.getX() + input.getParent().getX()
+                            + input.getWidth() / 2;
 
-                    int startY =
-                            output.getY() + output.getParent().getY() + output.getHeight()/2;
-                    int endY =
-                            input.getY() + input.getParent().getY() + input.getHeight()/2;
+                    int startY = output.getY() + output.getParent().getY()
+                            + output.getHeight() / 2;
+                    int endY = input.getY() + input.getParent().getY()
+                            + input.getHeight() / 2;
 
                     g.setColor(Color.BLACK);
                     g.drawLine(startX, startY, endX, endY);
@@ -96,6 +94,7 @@ public class RightPanel extends JPanel {
     public void setStart(Point point) {
         startPoint = point;
     }
+
     public void setEnd(Point point) {
         endPoint = point;
     }

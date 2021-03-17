@@ -5,7 +5,6 @@ import controller.CommonConstants;
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
  * @author Nikhil Hiremath
  * @since 03-07-2021
@@ -51,14 +50,13 @@ public class RightSpace implements java.io.Serializable {
         RightPanel panel = new RightPanel(rightSpaceWidth, rightSpaceHeight);
         rightPanelTab.addTab(name, panel);
     }
-    
+
     public JTabbedPane getRightPanel() {
-		return rightPanelTab;
-	}
+        return rightPanelTab;
+    }
 
-	public void setRightPanel(JTabbedPane rightPanel) {
-		this.rightPanelTab = rightPanel;
-	}
-
+    public void setRightPanel(JTabbedPane rightPanel) {
+        this.rightPanelTab = rightPanel;
+    }
 
 }

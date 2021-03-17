@@ -22,15 +22,13 @@ public class Symbol extends JButton {
         setBounds(x, y, symbolWidth, symbolHeight);
         setTransferHandler(new TransferHandler(text));
     }
-    
 
-	public String getUserInput() {
-		return userInput;
-	}
+    public String getUserInput() {
+        return userInput;
+    }
 
-	public void setUserInput(String userInput) {
-		this.userInput = userInput;
-	}
-
+    public void setUserInput(String userInput) {
+        this.userInput = userInput;
+    }
 
 }

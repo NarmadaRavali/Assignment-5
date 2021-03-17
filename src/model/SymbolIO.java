@@ -14,7 +14,7 @@ public class SymbolIO extends JButton {
     private Boolean connected;
 
     public SymbolIO(CommonConstants.Type type) {
-    	super();
+        super();
         this.type = type;
         connected = false;
         setBorder(BorderFactory.createLineBorder(Color.GRAY));

@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
-
 /**
  * @author Nikhil Hiremath
  * @since 03-07-2021
@@ -51,7 +50,7 @@ public class MenuBar implements ActionListener {
             new SaveWorkSpaces();
         } else if (e.getSource().equals(load)) {
             new LoadWorkSpaces();
-        }else if (e.getSource().equals(compile)) {
+        } else if (e.getSource().equals(compile)) {
             String msg = new Compile().compileWorkSpace();
             showMessageDialog(null, msg);
         }

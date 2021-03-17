@@ -10,8 +10,8 @@ public class AtTheRateSymbol extends Symbol {
 
     private static final long serialVersionUID = 1L;
 
-    public AtTheRateSymbol( int x, int y) {
-        super("@",  x, y);
+    public AtTheRateSymbol(int x, int y) {
+        super("@", x, y);
         int width = this.getPreferredSize().width;
         int height = this.getPreferredSize().height;
         new Dot(10, 10, this, CommonConstants.Type.INPUT);

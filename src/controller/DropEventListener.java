@@ -47,11 +47,10 @@ public class DropEventListener {
                         Component component = support.getComponent();
                         RightPanel panel = (RightPanel) component;
                         boolean canAddSymbol = true;
-                        if (value.toString().equals("(")){
+                        if (value.toString().equals("(")) {
                             canAddSymbol = !panel.isOpenParen();
                             panel.setOpenParen(true);
-                        }
-                        else if (value.toString().equals(")")){
+                        } else if (value.toString().equals(")")) {
                             canAddSymbol = !panel.isCloseParen();
                             panel.setCloseParen(true);
                         }
@@ -61,7 +60,8 @@ public class DropEventListener {
                             Point panelPosition = panel.getLocationOnScreen();
                             int x = mousePosition.x - panelPosition.x;
                             int y = mousePosition.y - panelPosition.y;
-                            SymbolFactory.createSymbol(panel, value.toString(), x, y);
+                            SymbolFactory.createSymbol(panel, value.toString(),
+                                    x, y);
                             panel.repaint();
                         }
                     }

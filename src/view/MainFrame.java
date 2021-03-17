@@ -18,9 +18,8 @@ public class MainFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.setMinimumSize(new Dimension(CommonConstants.FRAME_WIDTH / 2,
                 CommonConstants.FRAME_HEIGHT / 2));
-        this.setPreferredSize(
-                new Dimension(CommonConstants.FRAME_WIDTH,
-                        CommonConstants.FRAME_HEIGHT));
+        this.setPreferredSize(new Dimension(CommonConstants.FRAME_WIDTH,
+                CommonConstants.FRAME_HEIGHT));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         new MenuBar(this);
         new LeftPanel(this);

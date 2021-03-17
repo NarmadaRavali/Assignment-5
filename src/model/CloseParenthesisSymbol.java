@@ -9,7 +9,7 @@ import controller.CommonConstants;
 
 public class CloseParenthesisSymbol extends Symbol {
 
-    public CloseParenthesisSymbol( int x, int y) {
+    public CloseParenthesisSymbol(int x, int y) {
         super(")", x, y);
         int width = this.getPreferredSize().width;
         int height = this.getPreferredSize().height;

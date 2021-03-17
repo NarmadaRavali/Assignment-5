@@ -1,6 +1,5 @@
 package controller;
 
-
 import model.SymbolIO;
 import view.RightPanel;
 
@@ -27,8 +26,8 @@ public class ConnectionCollection {
     }
 
     /**
-     * When a saved file is loaded, this method is called to clear the
-     * existing graph map
+     * When a saved file is loaded, this method is called to clear the existing
+     * graph map
      */
     public void initialize() {
         graphMap.clear();
@@ -36,24 +35,23 @@ public class ConnectionCollection {
 
     /**
      * Adds a new edge between two SymbolIos in a graph associated with the
-     * working
-     * space.
+     * working space.
      */
     public void addConnection(RightPanel w, SymbolIO output, SymbolIO input) {
 
-        if(graphMap.containsKey(w)) {
-           graphMap.get(w).addEdge(output, input);
-        }
-        else {
+        if (graphMap.containsKey(w)) {
+            graphMap.get(w).addEdge(output, input);
+        } else {
             SymbolIoGraph symbolIOGraph = new SymbolIoGraph();
             symbolIOGraph.addEdge(output, input);
             graphMap.put(w, symbolIOGraph);
         }
         w.repaint();
     }
+
     /**
-     * Removes an existing edge between two SymbolIos in a graph associated
-     * with the working space.
+     * Removes an existing edge between two SymbolIos in a graph associated with
+     * the working space.
      */
     public void removeConnection(SymbolIO c) {
         RightPanel workPanel = (RightPanel) c.getParent().getParent();
@@ -72,6 +70,5 @@ public class ConnectionCollection {
     public void setGraphMap(Map<RightPanel, SymbolIoGraph> graphMap) {
         this.graphMap = graphMap;
     }
-
 
 }

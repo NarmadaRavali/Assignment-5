@@ -61,10 +61,8 @@ public class SymbolIoGraph {
         }
     }
 
-    public Map<SymbolIO, ArrayList<SymbolIO>> getEdges(){
+    public Map<SymbolIO, ArrayList<SymbolIO>> getEdges() {
         return edges;
     }
-
-    
 
 }

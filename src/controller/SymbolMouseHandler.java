@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
  * @author Ravikanth
  * @since 03-12-2021
  */
-public class SymbolMouseHandler extends MouseAdapter{
+public class SymbolMouseHandler extends MouseAdapter {
     private int panelLeftBoundary, panelRightBoundary, panelBottomBoundary,
             panelTopBoundary;
     private int prevMouseXPos, prevMouseYPos;
@@ -32,8 +32,7 @@ public class SymbolMouseHandler extends MouseAdapter{
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);
         int newXPosition = e.getXOnScreen() + prevSymbolXPos - prevMouseXPos;
-        int newYPosition =
-                e.getYOnScreen() + prevSymbolYPos - prevMouseYPos;
+        int newYPosition = e.getYOnScreen() + prevSymbolYPos - prevMouseYPos;
         newXPosition = Math.min(Math.max(newXPosition, panelLeftBoundary),
                 panelRightBoundary);
         newYPosition = Math.min(Math.max(newYPosition, panelTopBoundary),
@@ -42,7 +41,6 @@ public class SymbolMouseHandler extends MouseAdapter{
         panel.setComponentZOrder(symbol, 0);
         panel.repaint();
     }
-
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -53,8 +51,7 @@ public class SymbolMouseHandler extends MouseAdapter{
         prevMouseYPos = e.getYOnScreen();
         panelLeftBoundary = panel.getX() + panel.getParent().getX();
         panelRightBoundary = panel.getX() + panel.getBounds().width - 190;
-        panelBottomBoundary =
-                panel.getY() + panel.getBounds().height - 110;
+        panelBottomBoundary = panel.getY() + panel.getBounds().height - 110;
         panelTopBoundary = panel.getY() + panel.getParent().getY();
 
     }
@@ -62,25 +59,24 @@ public class SymbolMouseHandler extends MouseAdapter{
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if (e.getClickCount() == 2) 
-            setInputForSymbol(symbol);    
+        if (e.getClickCount() == 2)
+            setInputForSymbol(symbol);
     }
-    
-    
+
     /**
      * This method sets input given by user to the symbol
-     * @param symbol   symbol to which user gives input
+     * 
+     * @param symbol symbol to which user gives input
      */
     private void setInputForSymbol(Symbol symbol) {
         String prevInput = symbol.getUserInput();
-        String input = (String) JOptionPane.showInputDialog(null,
-                 "Data:",
-                 "Enter User Input",
-                 JOptionPane.QUESTION_MESSAGE, null,null, prevInput);
-        
+        String input = (String) JOptionPane.showInputDialog(null, "Data:",
+                "Enter User Input", JOptionPane.QUESTION_MESSAGE, null, null,
+                prevInput);
+
         if (input == null)
             input = prevInput;
-        
+
         symbol.setUserInput(input);
     }
 }
