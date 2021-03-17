@@ -76,11 +76,11 @@ public class RightPanel extends JPanel {
             g.clearRect(startPoint.x, startPoint.y, 1, 1);
         }
 
-       Graph graph =
+       SymbolIoGraph symbolIOGraph =
                 ConnectionCollection.getInstance().getGraph(this.panel);
 
-        if(graph != null) {
-            Map<SymbolIO, ArrayList<SymbolIO>> edges = graph.getEdges();
+        if(symbolIOGraph != null) {
+            Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
             for(SymbolIO c1 : edges.keySet()) {
                 for(SymbolIO c2 : edges.get(c1)) {
 

@@ -8,7 +8,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
+/**
+ *
+ * @author Ravikanth
+ * @since 03-14-2021
+ * @Description:
+ */
 public class ConnectionListener extends MouseAdapter {
     private RightPanel panel;
     private static ConnectionListener listener;

@@ -14,10 +14,10 @@ import java.util.Map;
  * @since 03-14-2021
  * @Description:
  */
-public class Graph {
+public class SymbolIoGraph {
     private final Map<SymbolIO, ArrayList<SymbolIO>> edges;
 
-    public Graph() {
+    public SymbolIoGraph() {
         edges = new HashMap<>();
     }
 
@@ -66,5 +66,6 @@ public class Graph {
         return edges;
     }
 
+    
 
 }
