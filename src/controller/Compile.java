@@ -8,7 +8,6 @@ import view.RightSpace;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -18,96 +17,87 @@ import java.util.Map;
  * @Description:
  */
 public class Compile {
-    private int V;
-    private ArrayList<LinkedList<Integer>> adj;
     
     public String compileWorkSpace() {
         
-        JTabbedPane rightPannelTab = RightSpace.getInstance()
+        JTabbedPane rightPanelTab = RightSpace.getInstance()
                 .getRightPanel();
-        
-        System.out.println("open parn ");
-        for (Component i : rightPannelTab.getComponents()) {
-            RightPanel tab = (RightPanel) i;
-            String tabName = tab.getName();
-            
-            System.out.println("open parn "+tab.isOpenParen());
-            System.out.println("open parn "+tab.isCloseParen());
-            
+
+        for (Component component : rightPanelTab.getComponents()) {
+            RightPanel tab = (RightPanel) component;
+            String panelName = tab.getName();
+
             if (!tab.isOpenParen()) {
-                return "Open Paranthesis missing on "+tabName;
+                return "Open Parenthesis symbol missing on " + panelName;
             }
             if (!tab.isCloseParen()) {
-                return "Close Paranthesis missing on  "+tabName;
-            }
-            
-            String msg = checkAllConnections(tab);
-            if (!msg.equals("Compiled Successfully")) {
-                return msg+ " on "+tabName;
-            }
-            
-            
-            String msgFromTab = checkTab(tab);
-            if (!msgFromTab.equals("Compiled Successfully")) {
-                return msgFromTab+ " on "+ tabName;
+                return "Close Parenthesis symbol missing on "+panelName;
             }
 
+            String msg1 = checkIfDisconnected(tab);
+            String msg2 = checkPanel(tab);
+
+            if (!msg1.equals("Compiled Successfully!")) {
+                return msg1;
+            }
+            if (!msg2.equals("Compiled Successfully!")) {
+                return msg2;
+            }
         }
-        return "Compiled Successfully";
+        return "Compiled Successfully!";
     }
     
-    public String checkAllConnections(RightPanel tab) {
-        int noOfSymbols = tab.getComponents().length;    
+    public String checkIfDisconnected(RightPanel panel) {
+        Component[] components = panel.getComponents();
 
-        for(int symbolIndex = 0; symbolIndex < noOfSymbols; symbolIndex++) {
-            Symbol symbol = (Symbol) tab.getComponent(symbolIndex);
-            
-            int noOfConnectors = symbol.getComponents().length;
-            int connectorIndex;
-            for(connectorIndex = 0; connectorIndex < noOfConnectors; connectorIndex++) {
-                SymbolIO connector = (SymbolIO) symbol.getComponent(connectorIndex);
-                if (!connector.getConnected()) {
-                    return "Connector # " + connectorIndex +" of symbol # "+symbolIndex+" Not connected";
+        for(Component component:
+        components) {
+            Symbol symbol = (Symbol) component;
+            for(Component component1:
+            symbol.getComponents()) {
+                SymbolIO symbolIO = (SymbolIO) component1;
+                if (!symbolIO.getConnected()) {
+                    return panel.getName()+":\nOne or more Input/Output of" +
+                            " a '" + symbol.getText() +
+                            "' is " +
+                            "not connected.";
                 }
             }
         }
-        return "Compiled Successfully";
+        return "Compiled Successfully!";
     }
     
 
-    public String checkTab(RightPanel tab) {
-        Component[] symbols = tab.getComponents();
-        int noOfSymbols = tab.getComponents().length;
-        SymbolGraph graph = new SymbolGraph(noOfSymbols);
+    public String checkPanel(RightPanel panel) {
+        Component[] symbols = panel.getComponents();
+        SymbolGraph graph = new SymbolGraph(symbols.length);
         Map<SymbolIO, ArrayList<SymbolIO>> edges =
-                ConnectionCollection.getInstance().getGraph(tab).getEdges();
+                ConnectionCollection.getInstance().getGraph(panel).getEdges();
 
         edges.forEach((key, value) -> {
-            int fromSymbolIndex = getSymbolId(symbols,
-                    key.getParent());
-            int size = value.size();
             for (SymbolIO symbolIO : value) {
-                int toSymbolIndex = getSymbolId(symbols,
-                        symbolIO.getParent());
-                graph.addEdge(fromSymbolIndex, toSymbolIndex);
+                graph.addEdge(getSymbolId(symbols,
+                        key.getParent()), getSymbolId(symbols,
+                        symbolIO.getParent()));
             }
         });
 
-        ArrayList<Integer> AtTheRateVertices = getNamedSymbolVertices(symbols,
+        ArrayList<Integer> AtTheRateVertices = getSymbolVertices(symbols,
                 "@");
         for(Integer v : AtTheRateVertices) {
-            if (!graph.checkForLoops(v)) {
-                return "Compilation Failed: \n Loop not present at '@' symbol";
+            if (graph.isInValid(v, 0)) {
+                return panel.getName()+":\nCompilation Failed: Loop not present for '@' symbol";
             }
         }
 
-        if (!graph.checkForIslands(getNamedSymbolVertices(symbols, "(").get(0))) {
-            return "Compilation Failed: \nDisconnected symbols present in " +
+        if (!graph.isInValid(getSymbolVertices(symbols, "(").get(0)
+        , 1)) {
+            return panel.getName()+":\nCompilation Failed: Disconnected symbols present in " +
                     "the " +
                     "program";
         }
 
-        return "Compiled Successfully";
+        return "Compiled Successfully!";
 
     }
     
@@ -122,8 +112,8 @@ public class Compile {
         return -1;
     }
     
-    private ArrayList<Integer> getNamedSymbolVertices(Component[] symbols,
-                                                      String name) {
+    private ArrayList<Integer> getSymbolVertices(Component[] symbols,
+                                                 String name) {
         ArrayList<Integer> list = new ArrayList<Integer>();
         int size = symbols.length;
         for(int index = 0; index < size ; index++) {
