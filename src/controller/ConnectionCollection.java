@@ -1,7 +1,7 @@
 package controller;
 
 import model.SymbolIO;
-import view.RightPanel;
+import view.RightSpace;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class ConnectionCollection {
 
     private static ConnectionCollection dataObj;
-    private Map<RightPanel, SymbolIoGraph> graphMap;
+    private Map<RightSpace, SymbolIoGraph> graphMap;
 
     public static ConnectionCollection getInstance() {
 
@@ -37,7 +37,7 @@ public class ConnectionCollection {
      * Adds a new edge between two SymbolIos in a graph associated with the
      * working space.
      */
-    public void addConnection(RightPanel w, SymbolIO output, SymbolIO input) {
+    public void addConnection(RightSpace w, SymbolIO output, SymbolIO input) {
 
         if (graphMap.containsKey(w)) {
             graphMap.get(w).addEdge(output, input);
@@ -54,20 +54,20 @@ public class ConnectionCollection {
      * the working space.
      */
     public void removeConnection(SymbolIO c) {
-        RightPanel workPanel = (RightPanel) c.getParent().getParent();
+        RightSpace workPanel = (RightSpace) c.getParent().getParent();
         if (graphMap.containsKey(workPanel))
             graphMap.get(workPanel).removeEdge(c);
     }
 
-    public SymbolIoGraph getGraph(RightPanel w) {
+    public SymbolIoGraph getGraph(RightSpace w) {
         return graphMap.get(w);
     }
 
-    public Map<RightPanel, SymbolIoGraph> getGraphMap() {
+    public Map<RightSpace, SymbolIoGraph> getGraphMap() {
         return graphMap;
     }
 
-    public void setGraphMap(Map<RightPanel, SymbolIoGraph> graphMap) {
+    public void setGraphMap(Map<RightSpace, SymbolIoGraph> graphMap) {
         this.graphMap = graphMap;
     }
 

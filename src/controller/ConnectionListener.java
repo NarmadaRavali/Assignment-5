@@ -2,7 +2,7 @@ package controller;
 
 import model.Pipe;
 import model.SymbolIO;
-import view.RightPanel;
+import view.RightSpace;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
  * @since 03-14-2021
  */
 public class ConnectionListener extends MouseAdapter {
-    private RightPanel panel;
+    private RightSpace panel;
     private static ConnectionListener listener;
     private Point startPoint;
     private SymbolIO selectedOut;
@@ -47,7 +47,7 @@ public class ConnectionListener extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
         selectedOut = (SymbolIO) e.getComponent();
-        this.panel = (RightPanel) selectedOut.getParent().getParent();
+        this.panel = (RightSpace) selectedOut.getParent().getParent();
         startPoint = new Point(e.getComponent().getParent().getX(),
                 e.getComponent().getParent().getY());
         if (selectedOut.getType() == CommonConstants.Type.OUTPUT

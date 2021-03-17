@@ -5,8 +5,8 @@ package controller;
 
 import model.Symbol;
 import model.SymbolIO;
-import view.RightPanel;
 import view.RightSpace;
+import view.RightPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +36,7 @@ public class SaveWorkSpaces {
         if (choice == JFileChooser.APPROVE_OPTION) {
             try (FileWriter fileWriter = new FileWriter(
                     fileChooser.getSelectedFile() + ".txt")) {
-                JTabbedPane rightPanel = RightSpace.getInstance()
+                JTabbedPane rightPanel = RightPanel.getInstance()
                         .getRightPanel();
                 spaceIndex = 0;
 
@@ -51,7 +51,7 @@ public class SaveWorkSpaces {
 
                 // Save all the Symbols
                 for (Component i : rightPanel.getComponents()) {
-                    RightPanel tab = (RightPanel) i;
+                    RightSpace tab = (RightSpace) i;
 
                     for (Component j : tab.getComponents()) {
                         Symbol symbol = (Symbol) j;
@@ -83,14 +83,14 @@ public class SaveWorkSpaces {
      */
     private String getLines() {
         String lines = "";
-        Map<RightPanel, SymbolIoGraph> panelGraphMap = ConnectionCollection
+        Map<RightSpace, SymbolIoGraph> panelGraphMap = ConnectionCollection
                 .getInstance().getGraphMap();
-        for (RightPanel tab : panelGraphMap.keySet()) {
+        for (RightSpace tab : panelGraphMap.keySet()) {
             SymbolIoGraph symbolIOGraph = panelGraphMap.get(tab);
             Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
             Set<SymbolIO> outputs = edges.keySet();
             for (SymbolIO output : outputs) {
-                int panelIndex = RightSpace.getInstance().getRightPanel()
+                int panelIndex = RightPanel.getInstance().getRightPanel()
                         .indexOfComponent(tab);
                 int symbol1Index = getSymbolIndex((Symbol) output.getParent(),
                         tab);
@@ -114,9 +114,9 @@ public class SaveWorkSpaces {
         return lines;
     }
 
-    private int getSymbolIndex(Symbol symbol, RightPanel rightPanel) {
+    private int getSymbolIndex(Symbol symbol, RightSpace rightSpace) {
         int i = 0;
-        for (Component component : rightPanel.getComponents()) {
+        for (Component component : rightSpace.getComponents()) {
             if (symbol == (Symbol) component) {
                 return i;
             }

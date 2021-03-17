@@ -1,6 +1,6 @@
 package controller;
 
-import view.RightPanel;
+import view.RightSpace;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class DropEventListener {
 
-    public DropEventListener(RightPanel panel) {
+    public DropEventListener(RightSpace panel) {
         panel.setTransferHandler(new SymbolImportTransferHandler());
     }
 
@@ -45,7 +45,7 @@ public class DropEventListener {
                     if (value instanceof String) {
 
                         Component component = support.getComponent();
-                        RightPanel panel = (RightPanel) component;
+                        RightSpace panel = (RightSpace) component;
                         boolean canAddSymbol = true;
                         if (value.toString().equals("(")) {
                             canAddSymbol = !panel.isOpenParen();

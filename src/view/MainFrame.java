@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
         new MenuBar(this);
         new LeftPanel(this);
         this.setVisible(true);
-        RightSpace.getInstance().createTabbedPane(this);
+        RightPanel.getInstance().createTabbedPane(this);
         this.setVisible(true);
     }
 
