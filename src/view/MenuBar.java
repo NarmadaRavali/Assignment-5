@@ -4,8 +4,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 import controller.CommonConstants;
 import controller.Compile;
-import controller.LoadApplication;
-import controller.SaveApplication;
+import controller.LoadWorkSpaces;
+import controller.SaveWorkSpaces;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,9 +51,9 @@ public class MenuBar implements ActionListener {
             a.addTab(spaceLabel);
             counter += 1;
         } else if (e.getSource().equals(save)) {
-            new SaveApplication(mainFrame1);
+            new SaveWorkSpaces(mainFrame1);
         } else if (e.getSource().equals(load)) {
-            new LoadApplication(mainFrame1);
+            new LoadWorkSpaces(mainFrame1);
         }else if (e.getSource().equals(compile)) {
             String msg = new Compile().compileWorkSpace();
             showMessageDialog(null, msg);
