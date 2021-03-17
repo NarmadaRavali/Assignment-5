@@ -87,10 +87,10 @@ public class SaveApplication {
 	
 	private String getLines() {
 		String lines = "";
-		Map<RightPanel, Graph> tabLines = ConnectionCollection.getInstance().getGraphMap();
+		Map<RightPanel, SymbolIoGraph> tabLines = ConnectionCollection.getInstance().getGraphMap();
 		for (RightPanel tab : tabLines.keySet()) {
-			Graph graph = tabLines.get(tab);
-			Map<SymbolIO, ArrayList<SymbolIO>> edges = graph.getEdges();
+			SymbolIoGraph symbolIOGraph = tabLines.get(tab);
+			Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
 			 Set<SymbolIO> outputs = edges.keySet();
 			for (SymbolIO c1 : outputs) {
 				int tabIndex = RightSpace.getInstance().getRightPanel()

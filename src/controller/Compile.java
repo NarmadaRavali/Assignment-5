@@ -1,17 +1,15 @@
 package controller;
 
-import java.awt.Component;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
-
-import javax.swing.JTabbedPane;
-
 import model.Symbol;
 import model.SymbolIO;
 import view.RightPanel;
 import view.RightSpace;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  *
@@ -24,8 +22,6 @@ public class Compile {
     private ArrayList<LinkedList<Integer>> adj;
     
     public String compileWorkSpace() {
-//        Map<RightPanel, Graph> tabsGraph = ConnectionCollection.getInstance()
-//                .getGraphMap();
         
         JTabbedPane rightPannelTab = RightSpace.getInstance()
                 .getRightPanel();
@@ -33,7 +29,6 @@ public class Compile {
         System.out.println("open parn ");
         for (Component i : rightPannelTab.getComponents()) {
             RightPanel tab = (RightPanel) i;
-            //Graph graph = tabsGraph.get(tab);
             String tabName = tab.getName();
             
             System.out.println("open parn "+tab.isOpenParen());
@@ -63,20 +58,9 @@ public class Compile {
     
     public String checkAllConnections(RightPanel tab) {
         int noOfSymbols = tab.getComponents().length;    
-        
-       
-        int symbolIndex = 0;
-        int lessSymbolCount = 0;
-        int greatSymbolCount = 0;
-        for(symbolIndex = 0; symbolIndex < noOfSymbols; symbolIndex++) {
+
+        for(int symbolIndex = 0; symbolIndex < noOfSymbols; symbolIndex++) {
             Symbol symbol = (Symbol) tab.getComponent(symbolIndex);
-            
-            if (symbol.getText().equals("<")) {
-                lessSymbolCount++;
-            }
-            if (symbol.getText().equals(">")) {
-                greatSymbolCount++;
-            }
             
             int noOfConnectors = symbol.getComponents().length;
             int connectorIndex;
@@ -87,52 +71,44 @@ public class Compile {
                 }
             }
         }
-        if (lessSymbolCount != greatSymbolCount) {
-            return "# of open and close not equal";
-        }
         return "Compiled Successfully";
     }
     
 
     public String checkTab(RightPanel tab) {
         Component[] symbols = tab.getComponents();
-        int noOfSymbols = tab.getComponents().length;   
-        //Graph graph = new Graph(noOfSymbols);
-        Graph graph = ConnectionCollection.getInstance().getGraphMap().get(tab);
-        
-        
-        
-        
-        
-//        for (Map.Entry line : tabLines.entrySet()) {
-//            
-//            int fromSymbolIndex = getSymbolId(symbols, ((SymbolIO) line.getKey()).getParent());
-//            
-//            ArrayList<SymbolIO> connectorList = (ArrayList<SymbolIO>) line.getValue(); 
-//            int size = connectorList.size();
-//            for(int index = 0; index < size ; index++) {
-//                int toSymbolIndex = getSymbolId(symbols, connectorList.get(index).getParent());
-//                graph.addEdge(fromSymbolIndex, toSymbolIndex);
-//            }           
-//        }
-        
-//        int openParaVertex = getOpenParaVertex(symbols);
-//        if (openParaVertex == -1) {
-//            return "Something Went Wrong....";
-//        }
-//        
-        String res  =  graph.checkLoop();
-            if(res.equals("@")) {
-                return "Compile Failed : \n Loop not present at  @";
-            } 
-            else if (res.equals("D"))
-                return "Compile Failed : \n Disconnected graph";
-        
-//        if (!graph.checkConnection(openParaVertex)) {
-//            return "Compile Failed : \nDisconnected circuit present";
-//        }   
-        
+        int noOfSymbols = tab.getComponents().length;
+        SymbolGraph graph = new SymbolGraph(noOfSymbols);
+        Map<SymbolIO, ArrayList<SymbolIO>> edges =
+                ConnectionCollection.getInstance().getGraph(tab).getEdges();
+
+        edges.forEach((key, value) -> {
+            int fromSymbolIndex = getSymbolId(symbols,
+                    key.getParent());
+            int size = value.size();
+            for (SymbolIO symbolIO : value) {
+                int toSymbolIndex = getSymbolId(symbols,
+                        symbolIO.getParent());
+                graph.addEdge(fromSymbolIndex, toSymbolIndex);
+            }
+        });
+
+        ArrayList<Integer> AtTheRateVertices = getNamedSymbolVertices(symbols,
+                "@");
+        for(Integer v : AtTheRateVertices) {
+            if (!graph.checkForLoops(v)) {
+                return "Compilation Failed: \n Loop not present at '@' symbol";
+            }
+        }
+
+        if (!graph.checkForIslands(getNamedSymbolVertices(symbols, "(").get(0))) {
+            return "Compilation Failed: \nDisconnected symbols present in " +
+                    "the " +
+                    "program";
+        }
+
         return "Compiled Successfully";
+
     }
     
     
@@ -146,21 +122,12 @@ public class Compile {
         return -1;
     }
     
-    private int getOpenParaVertex(Component[] symbols) {
-        int size = symbols.length;
-        for(int index = 0; index < size ; index++) {
-            if (((Symbol) (symbols[index])).getText().equals("(")) {
-                return index;
-            }
-        }
-        return -1;
-    }
-    
-    private ArrayList<Integer> getAtSymbolVertex(Component[] symbols) {
+    private ArrayList<Integer> getNamedSymbolVertices(Component[] symbols,
+                                                      String name) {
         ArrayList<Integer> list = new ArrayList<Integer>();
         int size = symbols.length;
         for(int index = 0; index < size ; index++) {
-            if (((Symbol) (symbols[index])).getText().equals("@")) {
+            if (((Symbol) (symbols[index])).getText().equals(name)) {
                 list.add(index);
             }
         }

@@ -22,7 +22,7 @@ public class ConnectionCollection {
     private String symbolSelected;
 
     private SymbolIO connectorSelected;
-    private Map<RightPanel, Graph> graphMap;
+    private Map<RightPanel, SymbolIoGraph> graphMap;
 
     public static ConnectionCollection getInstance() {
 
@@ -43,7 +43,7 @@ public class ConnectionCollection {
         this.symbolSelected = symbolSelected;
     }
 
-    public Graph getGraph(RightPanel w) {
+    public SymbolIoGraph getGraph(RightPanel w) {
         return graphMap.get(w);
     }
 
@@ -53,9 +53,9 @@ public class ConnectionCollection {
            graphMap.get(w).addEdge(c1, c2);
         }
         else {
-            Graph graph = new Graph();
-            graph.addEdge(c1, c2);
-            graphMap.put(w,graph);
+            SymbolIoGraph symbolIOGraph = new SymbolIoGraph();
+            symbolIOGraph.addEdge(c1, c2);
+            graphMap.put(w, symbolIOGraph);
         }
         w.repaint();
     }
@@ -109,11 +109,11 @@ public class ConnectionCollection {
 //
 //    }
 
-    public Map<RightPanel, Graph> getGraphMap() {
+    public Map<RightPanel, SymbolIoGraph> getGraphMap() {
         return graphMap;
     }
 
-    public void setGraphMap(Map<RightPanel, Graph> graphMap) {
+    public void setGraphMap(Map<RightPanel, SymbolIoGraph> graphMap) {
         this.graphMap = graphMap;
     }
 
