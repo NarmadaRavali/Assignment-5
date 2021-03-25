@@ -2,6 +2,7 @@ package model;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 /**
  * @author Mariya Varghese
@@ -20,6 +21,7 @@ public class Symbol extends JButton {
         setPreferredSize(new Dimension(symbolWidth, symbolHeight));
         setMinimumSize(new Dimension(symbolWidth, symbolHeight));
         setBounds(x, y, symbolWidth, symbolHeight);
+        setBorder(BorderFactory.createLineBorder(Color.black));
         setTransferHandler(new TransferHandler(text));
     }
 
@@ -30,5 +32,23 @@ public class Symbol extends JButton {
     public void setUserInput(String userInput) {
         this.userInput = userInput;
     }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        if (getModel().isArmed()) {
+          g.setColor(Color.lightGray);
+        } else {
+          g.setColor(getBackground());
+        }
+        g.fillOval(0, 0, getSize().width-1,getSize().height-1);
+        super.paintComponent(g);
+      }
+    
+    
+    @Override
+    protected void paintBorder(Graphics g) {
+        g.setColor(getForeground());
+        g.drawOval(0, 0, getSize().width-1, getSize().height-1);
+      }
 
 }
