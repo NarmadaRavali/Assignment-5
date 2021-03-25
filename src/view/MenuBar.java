@@ -20,6 +20,7 @@ public class MenuBar implements ActionListener {
     private String spaceLabel;
     JFrame mainFrame1;
     JMenuItem save, load, newSpace, compile;
+    Compile compileWorkSpace;
 
     public MenuBar(JFrame mainFrame) {
         JMenuBar menu = new JMenuBar();
@@ -27,6 +28,7 @@ public class MenuBar implements ActionListener {
         load = new JMenuItem("load");
         newSpace = new JMenuItem("new space");
         compile = new JMenuItem("compile");
+        compileWorkSpace = new Compile();
         newSpace.addActionListener(this);
         load.addActionListener(this);
         save.addActionListener(this);
@@ -42,7 +44,7 @@ public class MenuBar implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(newSpace)) {
-            RightSpace a = RightSpace.getInstance();
+            RightPanel a = RightPanel.getInstance();
             spaceLabel = "space " + counter;
             a.addTab(spaceLabel);
             counter += 1;
@@ -51,7 +53,7 @@ public class MenuBar implements ActionListener {
         } else if (e.getSource().equals(load)) {
             new LoadWorkSpaces();
         } else if (e.getSource().equals(compile)) {
-            String msg = new Compile().compileWorkSpace();
+            String msg = compileWorkSpace.compileWorkSpace();
             showMessageDialog(null, msg);
         }
     }

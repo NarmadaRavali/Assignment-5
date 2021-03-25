@@ -2,8 +2,8 @@ package controller;
 
 import model.Symbol;
 import model.SymbolIO;
-import view.RightPanel;
 import view.RightSpace;
+import view.RightPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +23,10 @@ public class Compile {
      */
     public String compileWorkSpace() {
 
-        JTabbedPane rightPanelTab = RightSpace.getInstance().getRightPanel();
+        JTabbedPane rightPanelTab = RightPanel.getInstance().getRightPanel();
 
         for (Component component : rightPanelTab.getComponents()) {
-            RightPanel tab = (RightPanel) component;
+            RightSpace tab = (RightSpace) component;
             String panelName = tab.getName();
 
             if (!tab.isOpenParen()) {
@@ -55,7 +55,7 @@ public class Compile {
      * 
      * @return - message to be shown in dialog
      */
-    public String checkIfDisconnected(RightPanel panel) {
+    public String checkIfDisconnected(RightSpace panel) {
         Component[] components = panel.getComponents();
 
         for (Component component : components) {
@@ -78,7 +78,7 @@ public class Compile {
      * 
      * @return - message to be shown in the dialog
      */
-    public String checkPanel(RightPanel panel) {
+    public String checkPanel(RightSpace panel) {
         Component[] symbols = panel.getComponents();
         SymbolGraph graph = new SymbolGraph(symbols.length);
         Map<SymbolIO, ArrayList<SymbolIO>> edges = ConnectionCollection

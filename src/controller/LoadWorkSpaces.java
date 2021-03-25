@@ -2,8 +2,8 @@ package controller;
 
 import model.Symbol;
 import model.SymbolIO;
-import view.RightPanel;
 import view.RightSpace;
+import view.RightPanel;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -34,7 +34,7 @@ public class LoadWorkSpaces implements java.io.Serializable {
             File fileContent = fileChooser.getSelectedFile();
             BufferedReader reader;
 
-            JTabbedPane rightSpace = RightSpace.getInstance().getRightPanel();
+            JTabbedPane rightSpace = RightPanel.getInstance().getRightPanel();
             rightSpace.removeAll();
 
             ConnectionCollection.getInstance().initialize();
@@ -49,9 +49,9 @@ public class LoadWorkSpaces implements java.io.Serializable {
 
                     if (line[0].equals("Tab")) {
 
-                        RightPanel rightPanel = new RightPanel(
+                        RightSpace rightS = new RightSpace(
                                 rightSpace.getWidth(), rightSpace.getHeight());
-                        rightSpace.addTab(line[2], rightPanel);
+                        rightSpace.addTab(line[2], rightS);
                     } else if (line[0].equals("shape")) {
 
                         String symbolName = line[1];
@@ -97,9 +97,15 @@ public class LoadWorkSpaces implements java.io.Serializable {
      */
     private void createSymbol(String name, int x, int y, String userInput,
             int tabIndex) {
-        JTabbedPane rightSpace = RightSpace.getInstance().getRightPanel();
-        RightPanel workSpace = (RightPanel) rightSpace.getComponent(tabIndex);
+        JTabbedPane rightSpace = RightPanel.getInstance().getRightPanel();
+        RightSpace workSpace = (RightSpace) rightSpace.getComponent(tabIndex);
         Symbol symbol = SymbolFactory.createSymbol(workSpace, name, x, y);
+        if (symbol.getText().equals("(")){
+            workSpace.setOpenParen(true);
+        }
+        if (symbol.getText().equals("(")){
+            workSpace.setCloseParen(true);
+        }
         symbol.setUserInput(userInput);
     }
 
@@ -109,7 +115,7 @@ public class LoadWorkSpaces implements java.io.Serializable {
     private void createLine(int workSpaceIndex, int startSymbolIndex,
             int connectFrom, int endSymbolIndex, int connectTo) {
 
-        RightPanel panel = (RightPanel) RightSpace.getInstance().getRightPanel()
+        RightSpace panel = (RightSpace) RightPanel.getInstance().getRightPanel()
                 .getComponent(workSpaceIndex);
 
         Symbol startSymbol = (Symbol) panel.getComponent(startSymbolIndex);
