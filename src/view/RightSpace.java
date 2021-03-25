@@ -61,7 +61,8 @@ public class RightSpace extends JPanel {
 
         if (startPoint != null && endPoint != null) {
             g.setColor(Color.GREEN);
-            g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+            drawArrowLine(g, startPoint.x, startPoint.y, endPoint.x, endPoint.y,
+                    5, 4);
         } else if (startPoint != null) {
             g.clearRect(startPoint.x, startPoint.y, 1, 1);
         }
@@ -84,11 +85,31 @@ public class RightSpace extends JPanel {
                     int endY = input.getY() + input.getParent().getY()
                             + input.getHeight() / 2;
 
-                    g.setColor(Color.BLACK);
-                    g.drawLine(startX, startY, endX, endY);
+                    drawArrowLine(g, startX, startY, endX, endY, 5, 4);
                 }
             }
         }
+    }
+
+    private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h) {
+        int dx = x2 - x1, dy = y2 - y1;
+        double D = Math.sqrt(dx*dx + dy*dy);
+        double xm = D - d, xn = xm, ym = h, yn = -h, x;
+        double sin = dy / D, cos = dx / D;
+
+        x = xm*cos - ym*sin + x1;
+        ym = xm*sin + ym*cos + y1;
+        xm = x;
+
+        x = xn*cos - yn*sin + x1;
+        yn = xn*sin + yn*cos + y1;
+        xn = x;
+
+        int[] xpoints = {x2, (int) xm, (int) xn};
+        int[] ypoints = {y2, (int) ym, (int) yn};
+
+        g.drawLine(x1, y1, x2, y2);
+        g.fillPolygon(xpoints, ypoints, 3);
     }
 
     public void setStart(Point point) {
