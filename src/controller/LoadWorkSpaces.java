@@ -59,8 +59,8 @@ public class LoadWorkSpaces implements java.io.Serializable {
                         int y = Integer.parseInt(line[3]);
                         String symbolValue = line[4];
                         int symbolIndex = Integer.parseInt(line[5]);
-                        createSymbol(symbolName, x, y, symbolValue,
-                                symbolIndex);
+//                        createSymbol(symbolName, x, y, symbolValue,
+//                                symbolIndex);
                         rightSpace.repaint();
                     } else {
 
