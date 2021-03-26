@@ -15,7 +15,7 @@ public class SymbolFactory {
     private static Symbol symbol;
 
     public static Symbol createSymbol(JPanel panel, String symbolName, int x,
-            int y, int inputs, int outputs) {
+            int y) {
         try {
             symbol = (Symbol) CommonConstants.symbolClasses.get(symbolName)
                     .getDeclaredConstructor(int.class, int.class)
