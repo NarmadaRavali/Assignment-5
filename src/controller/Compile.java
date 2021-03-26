@@ -81,13 +81,13 @@ public class Compile {
     public String checkPanel(RightSpace panel) {
         Component[] symbols = panel.getComponents();
         SymbolGraph graph = new SymbolGraph(symbols.length);
-        Map<SymbolIO, ArrayList<SymbolIO>> edges = ConnectionCollection
+        Map<Symbol, ArrayList<Symbol>> edges = ConnectionCollection
                 .getInstance().getGraph(panel).getEdges();
 
         edges.forEach((key, value) -> {
-            for (SymbolIO symbolIO : value) {
+            for (Symbol symbol : value) {
                 graph.addEdge(getSymbolId(symbols, key.getParent()),
-                        getSymbolId(symbols, symbolIO.getParent()));
+                        getSymbolId(symbols, symbol));
             }
         });
 

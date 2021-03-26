@@ -1,6 +1,6 @@
 package controller;
 
-import model.SymbolIO;
+import model.Symbol;
 import view.RightSpace;
 
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class ConnectionCollection {
 
     private static ConnectionCollection dataObj;
-    private Map<RightSpace, SymbolIoGraph> graphMap;
+    private Map<RightSpace, ConnectionGraph> graphMap;
 
     public static ConnectionCollection getInstance() {
 
@@ -37,37 +37,37 @@ public class ConnectionCollection {
      * Adds a new edge between two SymbolIos in a graph associated with the
      * working space.
      */
-    public void addConnection(RightSpace w, SymbolIO output, SymbolIO input) {
+    public void addConnection(RightSpace w, Symbol output, Symbol input) {
 
         if (graphMap.containsKey(w)) {
             graphMap.get(w).addEdge(output, input);
         } else {
-            SymbolIoGraph symbolIOGraph = new SymbolIoGraph();
-            symbolIOGraph.addEdge(output, input);
-            graphMap.put(w, symbolIOGraph);
+            ConnectionGraph connectionGraph = new ConnectionGraph();
+            connectionGraph.addEdge(output, input);
+            graphMap.put(w, connectionGraph);
         }
         w.repaint();
     }
 
     /**
-     * Removes an existing edge between two SymbolIos in a graph associated with
+     * Removes an existing edge between two Symbols in a graph associated with
      * the working space.
      */
-    public void removeConnection(SymbolIO c) {
+    public void removeConnection(Symbol c) {
         RightSpace workPanel = (RightSpace) c.getParent().getParent();
         if (graphMap.containsKey(workPanel))
             graphMap.get(workPanel).removeEdge(c);
     }
 
-    public SymbolIoGraph getGraph(RightSpace w) {
+    public ConnectionGraph getGraph(RightSpace w) {
         return graphMap.get(w);
     }
 
-    public Map<RightSpace, SymbolIoGraph> getGraphMap() {
+    public Map<RightSpace, ConnectionGraph> getGraphMap() {
         return graphMap;
     }
 
-    public void setGraphMap(Map<RightSpace, SymbolIoGraph> graphMap) {
+    public void setGraphMap(Map<RightSpace, ConnectionGraph> graphMap) {
         this.graphMap = graphMap;
     }
 

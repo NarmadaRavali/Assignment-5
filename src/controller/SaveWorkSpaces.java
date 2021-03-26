@@ -83,11 +83,11 @@ public class SaveWorkSpaces {
      */
     private String getLines() {
         String lines = "";
-        Map<RightSpace, SymbolIoGraph> panelGraphMap = ConnectionCollection
+        Map<RightSpace, ConnectionGraph> panelGraphMap = ConnectionCollection
                 .getInstance().getGraphMap();
         for (RightSpace tab : panelGraphMap.keySet()) {
-            SymbolIoGraph symbolIOGraph = panelGraphMap.get(tab);
-            Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
+            ConnectionGraph connectionGraph = panelGraphMap.get(tab);
+            Map<SymbolIO, ArrayList<SymbolIO>> edges = connectionGraph.getEdges();
             Set<SymbolIO> outputs = edges.keySet();
             for (SymbolIO output : outputs) {
                 int panelIndex = RightPanel.getInstance().getRightPanel()

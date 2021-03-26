@@ -67,11 +67,11 @@ public class RightSpace extends JPanel {
             g.clearRect(startPoint.x, startPoint.y, 1, 1);
         }
 
-        SymbolIoGraph symbolIOGraph = ConnectionCollection.getInstance()
+        ConnectionGraph connectionGraph = ConnectionCollection.getInstance()
                 .getGraph(this.panel);
 
-        if (symbolIOGraph != null) {
-            Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
+        if (connectionGraph != null) {
+            Map<SymbolIO, ArrayList<SymbolIO>> edges = connectionGraph.getEdges();
             for (SymbolIO output : edges.keySet()) {
                 for (SymbolIO input : edges.get(output)) {
 

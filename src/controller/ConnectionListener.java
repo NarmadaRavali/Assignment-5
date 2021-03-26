@@ -36,7 +36,7 @@ public class ConnectionListener extends MouseAdapter {
         if (!(((SymbolIO) e.getComponent())
                 .getType() == CommonConstants.Type.OUTPUT)) {
             ConnectionCollection.getInstance()
-                    .removeConnection((SymbolIO) e.getComponent());
+                    .removeConnection((Symbol) e.getComponent());
         }
     }
 
