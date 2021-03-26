@@ -19,25 +19,19 @@ public class SymbolFactory {
             symbol = (Symbol) CommonConstants.symbolClasses.get(symbolName)
                     .getDeclaredConstructor(int.class, int.class)
                     .newInstance(x, y);
+            symbol.setBorder(BorderFactory.createLineBorder(Color.black));
+            symbol.setOpaque(false);
+            symbol.setContentAreaFilled(false);
+            symbol.setBorderPainted(false);
+            symbol.setBorder(null);
             if (panel.getName().equals(CommonConstants.LEFT_PANEL_NAME)) {
-
                 new DragEventListener(symbol);
-
             } else if (panel.getName()
                     .equals(CommonConstants.RIGHT_PANEL_NAME)) {
                 ConnectionListener connectionListener = ConnectionListener
                         .getInstance();
-                symbol.setOpaque(false);
-                symbol.setContentAreaFilled(false);
-                symbol.setBorder(BorderFactory.createLineBorder(Color.black));
                 symbol.addMouseListener(connectionListener);
                 symbol.addMouseMotionListener(connectionListener);
-//                for (Component component : symbol.getComponents()) {
-//                    if (component instanceof SymbolIO) {
-//                        component.addMouseListener(connectionListener);
-//                        component.addMouseMotionListener(connectionListener);
-//                    }
-//                }
             }
             panel.add(symbol);
         } catch (IllegalAccessException | NoSuchMethodException

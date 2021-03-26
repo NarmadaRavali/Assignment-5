@@ -54,7 +54,7 @@ public class ConnectionCollection {
      * the working space.
      */
     public void removeConnection(Symbol c) {
-        RightSpace workPanel = (RightSpace) c.getParent().getParent();
+        RightSpace workPanel = (RightSpace) c.getParent();
         if (graphMap.containsKey(workPanel))
             graphMap.get(workPanel).removeEdge(c);
     }

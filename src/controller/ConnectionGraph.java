@@ -1,8 +1,6 @@
 package controller;
 
-import model.Dot;
 import model.Symbol;
-import model.SymbolIO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,13 +53,15 @@ public class ConnectionGraph {
                     Symbol input = inputs.next();
                     if (node == input) {
                         inputs.remove();
-//                        input.setConnected(false);
+                        input.setInputs(input.getInputs()+1);
+                        output.setOutputs(output.getOutputs()+1);
                     }
                     if (edges.get(output).isEmpty()) {
                         outputs.remove();
-//                        output.setConnected(false);
+
                     }
                 }
+
             }
 
         }

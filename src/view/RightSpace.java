@@ -65,7 +65,7 @@ public class RightSpace extends JPanel {
         if (startPoint != null && endPoint != null) {
             g.setColor(Color.GREEN);
             drawArrowLine(g, startPoint.x, startPoint.y, endPoint.x, endPoint.y,
-                    5, 4);
+                    10, 5);
         } else if (startPoint != null) {
             g.clearRect(startPoint.x, startPoint.y, 1, 1);
         }
@@ -78,17 +78,17 @@ public class RightSpace extends JPanel {
             for (Symbol output : edges.keySet()) {
                 for (Symbol input : edges.get(output)) {
 
-                    int startX = output.getX() + output.getParent().getX()
-                            + output.getWidth() / 2;
-                    int endX = input.getX() + input.getParent().getX()
-                            + input.getWidth() / 2;
+                    int startX = output.getX()
+                            + output.getWidth();
+                    int endX = input.getX()
+                            ;
 
-                    int startY = output.getY() + output.getParent().getY()
-                            + output.getHeight() / 2;
-                    int endY = input.getY() + input.getParent().getY()
-                            + input.getHeight() / 2;
+                    int startY = output.getY()
+                            + output.getHeight() / 2 ;
+                    int endY = input.getY() + input.getHeight() /2 ;
 
-                    drawArrowLine(g, startX, startY, endX, endY, 5, 4);
+                    g.setColor(Color.BLACK);
+                    drawArrowLine(g, startX, startY, endX, endY, 10, 5);
                 }
             }
         }
