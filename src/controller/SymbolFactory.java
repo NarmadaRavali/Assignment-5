@@ -1,7 +1,6 @@
 package controller;
 
 import model.Symbol;
-import model.SymbolIO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,24 +19,19 @@ public class SymbolFactory {
             symbol = (Symbol) CommonConstants.symbolClasses.get(symbolName)
                     .getDeclaredConstructor(int.class, int.class)
                     .newInstance(x, y);
+            symbol.setBorder(BorderFactory.createLineBorder(Color.black));
+            symbol.setOpaque(false);
+            symbol.setContentAreaFilled(false);
+            symbol.setBorderPainted(false);
+            symbol.setBorder(null);
             if (panel.getName().equals(CommonConstants.LEFT_PANEL_NAME)) {
-
                 new DragEventListener(symbol);
-
             } else if (panel.getName()
                     .equals(CommonConstants.RIGHT_PANEL_NAME)) {
                 ConnectionListener connectionListener = ConnectionListener
                         .getInstance();
-                symbol.setOpaque(false);
-                symbol.setContentAreaFilled(false);
-                symbol.setBorder(BorderFactory.createLineBorder(Color.black));
-                new SymbolMouseHandler(panel, symbol);
-                for (Component component : symbol.getComponents()) {
-                    if (component instanceof SymbolIO) {
-                        component.addMouseListener(connectionListener);
-                        component.addMouseMotionListener(connectionListener);
-                    }
-                }
+                symbol.addMouseListener(connectionListener);
+                symbol.addMouseMotionListener(connectionListener);
             }
             panel.add(symbol);
         } catch (IllegalAccessException | NoSuchMethodException

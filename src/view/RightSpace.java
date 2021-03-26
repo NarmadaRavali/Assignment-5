@@ -1,7 +1,10 @@
 package view;
 
-import controller.*;
-import model.SymbolIO;
+import controller.CommonConstants;
+import controller.ConnectionCollection;
+import controller.ConnectionGraph;
+import controller.DropEventListener;
+import model.Symbol;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,34 +64,55 @@ public class RightSpace extends JPanel {
 
         if (startPoint != null && endPoint != null) {
             g.setColor(Color.GREEN);
-            g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+            drawArrowLine(g, startPoint.x, startPoint.y, endPoint.x, endPoint.y,
+                    10, 5);
         } else if (startPoint != null) {
             g.clearRect(startPoint.x, startPoint.y, 1, 1);
         }
 
-        SymbolIoGraph symbolIOGraph = ConnectionCollection.getInstance()
+        ConnectionGraph connectionGraph = ConnectionCollection.getInstance()
                 .getGraph(this.panel);
 
-        if (symbolIOGraph != null) {
-            Map<SymbolIO, ArrayList<SymbolIO>> edges = symbolIOGraph.getEdges();
-            for (SymbolIO output : edges.keySet()) {
-                for (SymbolIO input : edges.get(output)) {
+        if (connectionGraph != null) {
+            Map<Symbol, ArrayList<Symbol>> edges = connectionGraph.getEdges();
+            for (Symbol output : edges.keySet()) {
+                for (Symbol input : edges.get(output)) {
 
-                    int startX = output.getX() + output.getParent().getX()
-                            + output.getWidth() / 2;
-                    int endX = input.getX() + input.getParent().getX()
-                            + input.getWidth() / 2;
+                    int startX = output.getX()
+                            + output.getWidth();
+                    int endX = input.getX()
+                            ;
 
-                    int startY = output.getY() + output.getParent().getY()
-                            + output.getHeight() / 2;
-                    int endY = input.getY() + input.getParent().getY()
-                            + input.getHeight() / 2;
+                    int startY = output.getY()
+                            + output.getHeight() / 2 ;
+                    int endY = input.getY() + input.getHeight() /2 ;
 
                     g.setColor(Color.BLACK);
-                    g.drawLine(startX, startY, endX, endY);
+                    drawArrowLine(g, startX, startY, endX, endY, 10, 5);
                 }
             }
         }
+    }
+
+    private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h) {
+        int dx = x2 - x1, dy = y2 - y1;
+        double D = Math.sqrt(dx*dx + dy*dy);
+        double xm = D - d, xn = xm, ym = h, yn = -h, x;
+        double sin = dy / D, cos = dx / D;
+
+        x = xm*cos - ym*sin + x1;
+        ym = xm*sin + ym*cos + y1;
+        xm = x;
+
+        x = xn*cos - yn*sin + x1;
+        yn = xn*sin + yn*cos + y1;
+        xn = x;
+
+        int[] xpoints = {x2, (int) xm, (int) xn};
+        int[] ypoints = {y2, (int) ym, (int) yn};
+
+        g.drawLine(x1, y1, x2, y2);
+        g.fillPolygon(xpoints, ypoints, 3);
     }
 
     public void setStart(Point point) {

@@ -1,7 +1,6 @@
 package controller;
 
-import model.Pipe;
-import model.SymbolIO;
+import model.Symbol;
 import view.RightSpace;
 
 import java.awt.*;
@@ -17,7 +16,7 @@ public class ConnectionListener extends MouseAdapter {
     private RightSpace panel;
     private static ConnectionListener listener;
     private Point startPoint;
-    private SymbolIO selectedOut;
+    private Symbol selectedOut;
 
     public static ConnectionListener getInstance() {
 
@@ -33,11 +32,9 @@ public class ConnectionListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if (!(((SymbolIO) e.getComponent())
-                .getType() == CommonConstants.Type.OUTPUT)) {
             ConnectionCollection.getInstance()
-                    .removeConnection((SymbolIO) e.getComponent());
-        }
+                    .removeConnection((Symbol) e.getComponent());
+
     }
 
     /**
@@ -46,18 +43,13 @@ public class ConnectionListener extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent e) {
         super.mousePressed(e);
-        selectedOut = (SymbolIO) e.getComponent();
-        this.panel = (RightSpace) selectedOut.getParent().getParent();
-        startPoint = new Point(e.getComponent().getParent().getX(),
-                e.getComponent().getParent().getY());
-        if (selectedOut.getType() == CommonConstants.Type.OUTPUT
-                && ((!selectedOut.getConnected())
-                        || selectedOut instanceof Pipe)) {
-            panel.setStart(new Point(
-                    selectedOut.getX() + selectedOut.getParent().getX()
-                            + selectedOut.getWidth() / 2,
-                    selectedOut.getY() + selectedOut.getParent().getY()
-                            + selectedOut.getHeight() / 2));
+        selectedOut = (Symbol) e.getComponent();
+        this.panel = (RightSpace) selectedOut.getParent();
+        startPoint =
+                new Point( e.getX() + e.getComponent().getX(),
+                e.getY() + e.getComponent().getY());
+        if (selectedOut.getOutputs() > 0) {
+        panel.setStart(startPoint);
         } else {
             selectedOut = null;
         }
@@ -73,26 +65,16 @@ public class ConnectionListener extends MouseAdapter {
         super.mouseReleased(e);
         Point symbolLocation = panel
                 .getComponentAt(
-                        e.getX() + startPoint.x + e.getComponent().getX(),
-                        e.getY() + startPoint.y + e.getComponent().getY())
+                        e.getX() + e.getComponent().getX(),
+                        e.getY() + e.getComponent().getY())
                 .getLocation();
 
-        Component selectedIn = panel.getComponentAt(symbolLocation)
-                .getComponentAt(
-                        e.getX() + startPoint.x + e.getComponent().getX()
-                                - symbolLocation.x,
-                        e.getY() + startPoint.y + e.getComponent().getY()
-                                - symbolLocation.y);
+        Component selectedIn = panel.getComponentAt(symbolLocation);
+        if (selectedOut != null && selectedIn instanceof Symbol
+                && !selectedIn.equals(selectedOut)) {
 
-        if (selectedOut != null && selectedIn instanceof SymbolIO
-                && !selectedIn.getParent().equals(selectedOut.getParent())) {
-            if (((SymbolIO) selectedIn).getType()
-                    .equals(CommonConstants.Type.INPUT)
-                    && (!((SymbolIO) selectedIn).getConnected()
-                            || selectedIn instanceof Pipe))
-                ConnectionCollection.getInstance().addConnection(panel,
-                        selectedOut, (SymbolIO) selectedIn);
-
+            ConnectionCollection.getInstance().addConnection(panel,
+                        selectedOut, (Symbol) selectedIn);
         }
         panel.setEnd(null);
         panel.setStart(null);
@@ -106,9 +88,11 @@ public class ConnectionListener extends MouseAdapter {
     @Override
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);
-        panel.setEnd(
-                new Point(e.getX() + startPoint.x + e.getComponent().getX(),
-                        e.getY() + startPoint.y + e.getComponent().getY()));
+//        panel.setEnd(
+//                new Point(e.getX() + startPoint.x + e.getComponent().getX(),
+//                        e.getY() + startPoint.y + e.getComponent().getY()));
+        panel.setEnd(new Point(e.getX() +e.getComponent().getX(),
+                e.getY() + e.getComponent().getY()));
         panel.repaint();
     }
 
