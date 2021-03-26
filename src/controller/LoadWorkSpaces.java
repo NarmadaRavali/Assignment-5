@@ -59,8 +59,8 @@ public class LoadWorkSpaces implements java.io.Serializable {
                         int y = Integer.parseInt(line[3]);
                         String symbolValue = line[4];
                         int symbolIndex = Integer.parseInt(line[5]);
-                        createSymbol(symbolName, x, y, symbolValue,
-                                symbolIndex);
+//                        createSymbol(symbolName, x, y, symbolValue,
+//                                symbolIndex);
                         rightSpace.repaint();
                     } else {
 
@@ -96,10 +96,10 @@ public class LoadWorkSpaces implements java.io.Serializable {
      * @param tabIndex  - work space index
      */
     private void createSymbol(String name, int x, int y, String userInput,
-            int tabIndex) {
+            int tabIndex, int inputs,int outputs) {
         JTabbedPane rightSpace = RightPanel.getInstance().getRightPanel();
         RightSpace workSpace = (RightSpace) rightSpace.getComponent(tabIndex);
-        Symbol symbol = SymbolFactory.createSymbol(workSpace, name, x, y);
+        Symbol symbol = SymbolFactory.createSymbol(workSpace, name, x, y, inputs, outputs);
         if (symbol.getText().equals("(")){
             workSpace.setOpenParen(true);
         }

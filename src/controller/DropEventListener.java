@@ -60,8 +60,8 @@ public class DropEventListener {
                             Point panelPosition = panel.getLocationOnScreen();
                             int x = mousePosition.x - panelPosition.x;
                             int y = mousePosition.y - panelPosition.y;
-                            SymbolFactory.createSymbol(panel, value.toString(),
-                                    x, y);
+//                            SymbolFactory.createSymbol(panel, value.toString(),
+//                                    x, y);
                             panel.repaint();
                         }
                     }
