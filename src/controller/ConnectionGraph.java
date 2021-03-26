@@ -23,24 +23,26 @@ public class ConnectionGraph {
 
     public void addEdge(Symbol node1, Symbol node2) {
         ArrayList<Symbol> a = new ArrayList<>();
-        if (node1.getOutputs() == Integer.MAX_VALUE){
+        if (node1.getOutputs() == Integer.MAX_VALUE && node2.getInputs()>0){
             if (edges.containsKey(node1)) {
                 edges.get(node1).add(node2);
             } else {
                 a.add(node2);
                 edges.put(node1, a);
             }
+            node2.setInputs(node2.getInputs()-1);
         }
-        else if(node1.getOutputs() > 0 and){
+        else if(node1.getOutputs() > 0  && node2.getInputs()>0){
             if (edges.containsKey(node1)) {
                 edges.get(node1).add(node2);
             } else {
                 a.add(node2);
                 edges.put(node1, a);
             }
+            node1.setOutputs(node1.getOutputs()-1);
+            node2.setInputs(node2.getInputs()-1);
+
         }
-        node1.setConnected(true);
-        node2.setConnected(true);
     }
 
     public void removeEdge(Symbol node) {

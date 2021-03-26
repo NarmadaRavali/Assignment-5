@@ -1,7 +1,10 @@
 package view;
 
-import controller.*;
-import model.SymbolIO;
+import controller.CommonConstants;
+import controller.ConnectionCollection;
+import controller.ConnectionGraph;
+import controller.DropEventListener;
+import model.Symbol;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,9 +74,9 @@ public class RightSpace extends JPanel {
                 .getGraph(this.panel);
 
         if (connectionGraph != null) {
-            Map<SymbolIO, ArrayList<SymbolIO>> edges = connectionGraph.getEdges();
-            for (SymbolIO output : edges.keySet()) {
-                for (SymbolIO input : edges.get(output)) {
+            Map<Symbol, ArrayList<Symbol>> edges = connectionGraph.getEdges();
+            for (Symbol output : edges.keySet()) {
+                for (Symbol input : edges.get(output)) {
 
                     int startX = output.getX() + output.getParent().getX()
                             + output.getWidth() / 2;
