@@ -21,25 +21,19 @@ public class ConnectionGraph {
 
     public void addEdge(Symbol node1, Symbol node2) {
         ArrayList<Symbol> a = new ArrayList<>();
-        if (node1.getOutputs() == Integer.MAX_VALUE && node2.getInputs()>0){
-            if (edges.containsKey(node1)) {
+        if (node1.getOutputs() > 0 && node2.getInputs()>0) {
+            if (edges.containsKey(node1) && !edges.get(node1).contains(node2)) {
                 edges.get(node1).add(node2);
-            } else {
+            } else if (!edges.containsKey(node1)) {
                 a.add(node2);
                 edges.put(node1, a);
-            }
-            node2.setInputs(node2.getInputs()-1);
-        }
-        else if(node1.getOutputs() > 0  && node2.getInputs()>0){
-            if (edges.containsKey(node1)) {
-                edges.get(node1).add(node2);
             } else {
-                a.add(node2);
-                edges.put(node1, a);
+                return;
             }
-            node1.setOutputs(node1.getOutputs()-1);
-            node2.setInputs(node2.getInputs()-1);
-
+            if (node1.getOutputs() != Integer.MAX_VALUE)
+                node1.setOutputs(node1.getOutputs() - 1);
+            if (node2.getInputs() != Integer.MAX_VALUE)
+                node2.setInputs(node2.getInputs() - 1);
         }
     }
 
@@ -53,17 +47,17 @@ public class ConnectionGraph {
                     Symbol input = inputs.next();
                     if (node == input) {
                         inputs.remove();
-                        input.setInputs(input.getInputs()+1);
-                        output.setOutputs(output.getOutputs()+1);
+                        if (input.getInputs() != Integer.MAX_VALUE)
+                            input.setInputs(input.getInputs()+1);
+
+                        if (output.getOutputs() != Integer.MAX_VALUE)
+                            output.setOutputs(output.getOutputs()+1);
                     }
                     if (edges.get(output).isEmpty()) {
                         outputs.remove();
-
                     }
                 }
-
             }
-
         }
     }
 
