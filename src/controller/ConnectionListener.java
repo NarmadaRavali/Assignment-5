@@ -15,7 +15,6 @@ import java.awt.event.MouseEvent;
 public class ConnectionListener extends MouseAdapter {
     private RightSpace panel;
     private static ConnectionListener listener;
-    private Point startPoint;
     private Symbol selectedOut;
 
     public static ConnectionListener getInstance() {
@@ -45,8 +44,7 @@ public class ConnectionListener extends MouseAdapter {
         super.mousePressed(e);
         selectedOut = (Symbol) e.getComponent();
         this.panel = (RightSpace) selectedOut.getParent();
-        startPoint =
-                new Point( e.getX() + e.getComponent().getX(),
+        Point startPoint = new Point(e.getX() + e.getComponent().getX(),
                 e.getY() + e.getComponent().getY());
         if (selectedOut.getOutputs() > 0) {
         panel.setStart(startPoint);
@@ -88,9 +86,6 @@ public class ConnectionListener extends MouseAdapter {
     @Override
     public void mouseDragged(MouseEvent e) {
         super.mouseDragged(e);
-//        panel.setEnd(
-//                new Point(e.getX() + startPoint.x + e.getComponent().getX(),
-//                        e.getY() + startPoint.y + e.getComponent().getY()));
         panel.setEnd(new Point(e.getX() +e.getComponent().getX(),
                 e.getY() + e.getComponent().getY()));
         panel.repaint();

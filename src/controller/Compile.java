@@ -1,7 +1,6 @@
 package controller;
 
 import model.Symbol;
-import model.SymbolIO;
 import view.RightSpace;
 import view.RightPanel;
 
@@ -60,14 +59,11 @@ public class Compile {
 
         for (Component component : components) {
             Symbol symbol = (Symbol) component;
-            for (Component component1 : symbol.getComponents()) {
-                SymbolIO symbolIO = (SymbolIO) component1;
-                if (!symbolIO.getConnected()) {
+                if (symbol.getInputs() > 0 && symbol.getOutputs() > 0) {
                     return panel.getName() + ":\nOne or more Input/Output of"
                             + " a '" + symbol.getText() + "' is "
                             + "not connected.";
                 }
-            }
         }
         return "Compiled Successfully!";
     }
@@ -86,7 +82,7 @@ public class Compile {
 
         edges.forEach((key, value) -> {
             for (Symbol symbol : value) {
-                graph.addEdge(getSymbolId(symbols, key.getParent()),
+                graph.addEdge(getSymbolId(symbols, key),
                         getSymbolId(symbols, symbol));
             }
         });

@@ -8,7 +8,7 @@ package model;
  */
 public class ClosePipeSymbol extends Symbol {
     public ClosePipeSymbol(int x, int y) {
-        super("|-", x, y,Integer.MAX_VALUE, 1);
+        super("-|", x, y, 1,Integer.MAX_VALUE);
         int width = this.getPreferredSize().width;
         int height = this.getPreferredSize().height;
     }
