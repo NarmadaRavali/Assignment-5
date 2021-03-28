@@ -3,8 +3,6 @@ package controller;
 import model.*;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +21,6 @@ public class CommonConstants {
     public static final Color LIGHT_GREY = new Color(235, 235, 235);
     public static final String[] symbolNames = { "(", ")", "<", ">", "@", "|-","-|",
             "-" };
-    public static final ArrayList<Integer> inputs = new ArrayList<Integer>(Arrays.asList(0,1,1,2,2,Integer.MAX_VALUE,1,1));
-    public static final ArrayList<Integer> outputs = new ArrayList<Integer>(Arrays.asList(1,0,2,1,2,1,Integer.MAX_VALUE,1));
     public static final Map<String, Class<?>> symbolClasses;
 
     static {

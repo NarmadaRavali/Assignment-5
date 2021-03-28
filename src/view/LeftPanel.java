@@ -5,7 +5,6 @@ import controller.SymbolFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * @author Narmada Ravali
@@ -24,12 +23,9 @@ public class LeftPanel extends JPanel {
         this.setPreferredSize(new Dimension(leftPanelWidth, leftPanelHeight));
         JScrollPane scrollPane = new JScrollPane(this);
         mainFrame.add(scrollPane, BorderLayout.LINE_START);
-        ArrayList<Integer> inputs = CommonConstants.inputs;
-        ArrayList<Integer> outputs = CommonConstants.outputs;
-        int i=0;
         for (String symbolName : CommonConstants.symbolNames) {
+            if (!symbolName.equals("(") && !symbolName.equals(")"))
             SymbolFactory.createSymbol(this, symbolName, 0, 0);
-            i++;
         }
     }
 }
