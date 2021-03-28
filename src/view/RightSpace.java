@@ -1,9 +1,6 @@
 package view;
 
-import controller.CommonConstants;
-import controller.ConnectionCollection;
-import controller.ConnectionGraph;
-import controller.DropEventListener;
+import controller.*;
 import model.Symbol;
 
 import javax.swing.*;
@@ -18,36 +15,18 @@ import java.util.Map;
 public class RightSpace extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private boolean isOpenP;
-    private boolean isCloseP;
     private RightSpace panel;
     private Point startPoint, endPoint;
 
     public RightSpace(int width, int height) {
-        this.setOpenParen(false);
-        this.setCloseParen(false);
         this.setName(CommonConstants.RIGHT_PANEL_NAME);
         this.setLayout(null);
         this.setPreferredSize(new Dimension(width, height - 100));
         this.setBackground(CommonConstants.LIGHT_GREY);
         this.setPanel(this);
         new DropEventListener(this);
-    }
-
-    public boolean isOpenParen() {
-        return isOpenP;
-    }
-
-    public void setOpenParen(boolean isOpenP) {
-        this.isOpenP = isOpenP;
-    }
-
-    public boolean isCloseParen() {
-        return isCloseP;
-    }
-
-    public void setCloseParen(boolean isCloseP) {
-        this.isCloseP = isCloseP;
+        this.add(SymbolFactory.createSymbol(this, "(", 20, 20));
+        this.add(SymbolFactory.createSymbol(this, ")", width-100, height-100));
     }
 
     public void setPanel(RightSpace panel) {

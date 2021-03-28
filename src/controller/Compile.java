@@ -26,14 +26,6 @@ public class Compile {
 
         for (Component component : rightPanelTab.getComponents()) {
             RightSpace tab = (RightSpace) component;
-            String panelName = tab.getName();
-
-            if (!tab.isOpenParen()) {
-                return "Open Parenthesis symbol missing on " + panelName;
-            }
-            if (!tab.isCloseParen()) {
-                return "Close Parenthesis symbol missing on " + panelName;
-            }
 
             String msg1 = checkIfDisconnected(tab);
             String msg2 = checkPanel(tab);
