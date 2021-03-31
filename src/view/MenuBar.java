@@ -1,6 +1,8 @@
 package view;
 
 import controller.Compile;
+import controller.LoadWorkSpaces;
+import controller.SaveWorkSpaces;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +16,9 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class MenuBar implements ActionListener {
 
-    private int counter = 1;
-    private String spaceLabel;
+    public static int counter = 1;
+  
+	private String spaceLabel;
     JFrame mainFrame1;
     JMenuItem save, load, newSpace, compile;
     Compile compileWorkSpace;
@@ -46,13 +49,22 @@ public class MenuBar implements ActionListener {
             spaceLabel = "space " + counter;
             a.addTab(spaceLabel);
             counter += 1;
-//        } else if (e.getSource().equals(save)) {
-//            new SaveWorkSpaces();
-//        } else if (e.getSource().equals(load)) {
-//            new LoadWorkSpaces();
+        } else if (e.getSource().equals(save)) {
+            new SaveWorkSpaces();
+        } else if (e.getSource().equals(load)) {
+            new LoadWorkSpaces();
         } else if (e.getSource().equals(compile)) {
             String msg = compileWorkSpace.compileWorkSpace();
             showMessageDialog(null, msg);
         }
     }
+    
+    public static int getCounter() {
+  		return counter;
+  	}
+
+  	public static void setCounter(int counter) {
+  		MenuBar.counter = counter;
+  	}
+
 }

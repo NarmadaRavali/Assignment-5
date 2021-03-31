@@ -30,8 +30,8 @@ public class RightPanel implements java.io.Serializable {
      */
     public void createTabbedPane(JFrame jFrame) {
         rightPanelTab = new JTabbedPane();
-        rightSpaceWidth = CommonConstants.FRAME_WIDTH / 6 * 5;
-        rightSpaceHeight = CommonConstants.FRAME_HEIGHT / 8 * 7;
+        rightSpaceWidth = CommonConstants.FRAME_WIDTH / 6 * 6;
+        rightSpaceHeight = CommonConstants.FRAME_HEIGHT / 8 * 8;
         rightPanelTab.setName("Tabbed Panel");
         rightPanelTab.setPreferredSize(
                 new Dimension(rightSpaceWidth, rightSpaceHeight));
