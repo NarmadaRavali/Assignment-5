@@ -66,8 +66,14 @@ public class SaveWorkSpaces {
                     spaceIndex++;
                 }
 
-                String lines = getLines();
-                fileWriter.write(lines);
+                ArrayList<String> lines = getLines();
+                lines.forEach((String line) -> {
+                    try {
+                        fileWriter.write(line);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -80,8 +86,8 @@ public class SaveWorkSpaces {
      *
      * @return - String of text to be saved
      */
-    private String getLines() {
-        String lines = "";
+    private ArrayList<String> getLines() {
+        ArrayList<String> lines = new ArrayList<>();
         Map<RightSpace, ConnectionGraph> panelGraphMap = ConnectionCollection
                 .getInstance().getGraphMap();
         for (RightSpace tab : panelGraphMap.keySet()) {
@@ -92,24 +98,21 @@ public class SaveWorkSpaces {
             System.out.println(" outputs= "+  edges.keySet());
             for (Symbol output : outputs) {
                 int panelIndex = RightPanel.getInstance().getRightPanel()
-                		.indexOfComponent(tab);
-                System.out.println(" panelIndex= "+panelIndex);
-                  
-                int symbol1Index = getSymbolIndex((Symbol) output,
-                        tab);
-                System.out.println(" symbol1Index= "+symbol1Index);
+                        .indexOfComponent(tab);
+                System.out.println(" panelIndex= " + panelIndex);
 
-                lines += "line" + ";" + panelIndex + ";" + symbol1Index + ";";
-           
+                int symbol1Index = getSymbolIndex(output,
+                        tab);
+                System.out.println("symbol1Index= " + symbol1Index);
+
+                String line = "line" + ";" + panelIndex + ";" + symbol1Index + ";";
+
                 for (Symbol input : edges.get(output)) {
                     int symbol2Index = getSymbolIndex(
-                            (Symbol) input, tab);
-
-                    lines += symbol2Index;
+                            input, tab);
+                    lines.add(line + symbol2Index + System.lineSeparator());
                 }
-                lines += System.lineSeparator();
             }
-            
         }
         return lines;
     }
@@ -117,7 +120,7 @@ public class SaveWorkSpaces {
     private int getSymbolIndex(Symbol symbol, RightSpace rightSpace) {
         int i = 0;
         for (Component component : rightSpace.getComponents()) {
-            if (symbol == (Symbol) component) {
+            if (symbol == component) {
                 return i;
             }
             i++;
