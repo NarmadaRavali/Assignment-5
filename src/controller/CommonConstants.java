@@ -11,9 +11,6 @@ import java.util.Map;
  * @since 03-06-2021
  */
 public class CommonConstants {
-    public enum Type {
-        INPUT, OUTPUT
-    }
 
     public static final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 800;
     public static final String LEFT_PANEL_NAME = "Left Panel",
@@ -21,6 +18,7 @@ public class CommonConstants {
     public static final Color LIGHT_GREY = new Color(235, 235, 235);
     public static final String[] symbolNames = { "(", ")", "<", ">", "@", "|-","-|",
             "-" };
+
     public static final Map<String, Class<?>> symbolClasses;
 
     static {
