@@ -23,7 +23,7 @@ public class RightSpace extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private RightSpace panel;
-    private Point startPoint, endPoint;
+
 
     public RightSpace(int width, int height) {
         this.setName(CommonConstants.RIGHT_PANEL_NAME);
@@ -41,20 +41,12 @@ public class RightSpace extends JPanel {
     }
 
     /**
-     * Draws lines for all the existing connections and also for a new
-     * connection which is being created
+     * Draws lines for all the existing connections
      */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (startPoint != null && endPoint != null) {
-            g.setColor(Color.GREEN);
-            drawArrowLine(g, startPoint.x, startPoint.y, endPoint.x, endPoint.y,
-                    10, 5);
-        } else if (startPoint != null) {
-            g.clearRect(startPoint.x, startPoint.y, 1, 1);
-        }
 
         ConnectionGraph connectionGraph = ConnectionCollection.getInstance()
                 .getGraph(this.panel);
@@ -101,11 +93,4 @@ public class RightSpace extends JPanel {
         g.fillPolygon(xpoints, ypoints, 3);
     }
 
-    public void setStart(Point point) {
-        startPoint = point;
-    }
-
-    public void setEnd(Point point) {
-        endPoint = point;
-    }
 }
