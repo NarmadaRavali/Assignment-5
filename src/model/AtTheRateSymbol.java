@@ -1,7 +1,5 @@
 package model;
 
-import controller.CommonConstants;
-
 /**
  * @author Mariya Varghese
  * @since 03-05-2021

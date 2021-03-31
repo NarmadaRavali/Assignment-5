@@ -1,9 +1,16 @@
 package view;
 
-import controller.*;
+
 import model.Symbol;
 
 import javax.swing.*;
+
+import controller.CommonConstants;
+import controller.ConnectionCollection;
+import controller.ConnectionGraph;
+import controller.DropEventListener;
+import controller.SymbolFactory;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
