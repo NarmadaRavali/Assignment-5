@@ -1,16 +1,10 @@
 package view;
 
 
+import controller.*;
 import model.Symbol;
 
 import javax.swing.*;
-
-import controller.CommonConstants;
-import controller.ConnectionCollection;
-import controller.ConnectionGraph;
-import controller.DropEventListener;
-import controller.SymbolFactory;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
@@ -22,7 +16,7 @@ import java.util.Map;
 public class RightSpace extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private RightSpace panel;
+
 
 
     public RightSpace(int width, int height) {
@@ -30,15 +24,12 @@ public class RightSpace extends JPanel {
         this.setLayout(null);
         this.setPreferredSize(new Dimension(width, height - 100));
         this.setBackground(CommonConstants.LIGHT_GREY);
-        this.setPanel(this);
         new DropEventListener(this);
         this.add(SymbolFactory.createSymbol(this, "(", 20, 20));
         this.add(SymbolFactory.createSymbol(this, ")", width-100, height-100));
     }
 
-    public void setPanel(RightSpace panel) {
-        this.panel = panel;
-    }
+
 
     /**
      * Draws lines for all the existing connections
@@ -49,7 +40,7 @@ public class RightSpace extends JPanel {
 
 
         ConnectionGraph connectionGraph = ConnectionCollection.getInstance()
-                .getGraph(this.panel);
+                .getGraph(this);
 
         if (connectionGraph != null) {
             Map<Symbol, ArrayList<Symbol>> edges = connectionGraph.getEdges();

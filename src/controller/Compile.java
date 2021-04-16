@@ -37,6 +37,7 @@ public class Compile {
                 return msg2;
             }
         }
+        new Translate().convert(ConnectionCollection.getInstance().getGraphMap());
         return "Compiled Successfully!";
     }
 
