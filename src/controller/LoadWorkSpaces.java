@@ -37,7 +37,6 @@ public class LoadWorkSpaces implements java.io.Serializable {
             BufferedReader reader;
 
             JTabbedPane rightSpace = RightPanel.getInstance().getRightPanel();
-            System.out.println("rightSpace = "+ rightSpace);
             rightSpace.removeAll();
 
             ConnectionCollection.getInstance().initialize();
@@ -51,28 +50,32 @@ public class LoadWorkSpaces implements java.io.Serializable {
                     String[] line = lines.split(";");
 
                     if (line[0].equals("Tab")) {
+                    	
+                    	RightSpace.loadFlag=true;
                         RightSpace rightS = new RightSpace(
                                 rightSpace.getWidth()-100, rightSpace.getHeight()-100);
+                        RightSpace.loadFlag=false;
                         rightSpace.addTab(line[2], rightS);
                         MenuBar.setCounter(Integer.parseInt(line[1])+1);
                     } else if (line[0].equals("shape")) {
                         String symbolName = line[1];
                         
-                        if (!symbolName.equals("(") & !symbolName.equals(")")) {            
-                        int x = Integer.parseInt(line[2]);
-                        int y = Integer.parseInt(line[3]);
-                        String symbolValue = line[4];
-                        int symbolIndex = Integer.parseInt(line[5]);
-                        createSymbol(symbolName, x, y, symbolValue,
-                                symbolIndex);
-                        rightSpace.repaint();
-                        }
-                    }else {
-                        int spaceIndex = Integer.parseInt(line[1]);
-                        int shapeStartIndex = Integer.parseInt(line[2]);
-                        int shapeEndIndex = Integer.parseInt(line[3]);
-                        createLine(spaceIndex, shapeStartIndex,shapeEndIndex);
-                    }
+            
+	                        int x = Integer.parseInt(line[2]);
+	                        int y = Integer.parseInt(line[3]);
+	                        String symbolValue = line[4];
+	                        int symbolIndex = Integer.parseInt(line[5]);
+	                        createSymbol(symbolName, x, y, symbolValue,
+	                                symbolIndex);
+	                        rightSpace.repaint();
+                        
+	                    }
+                    else {
+	                        int spaceIndex = Integer.parseInt(line[1]);
+	                        int shapeStartIndex = Integer.parseInt(line[2]);
+	                        int shapeEndIndex = Integer.parseInt(line[3]);
+	                        createLine(spaceIndex, shapeStartIndex,shapeEndIndex);
+	                    }
                     lines = reader.readLine();
                 }
             } catch (Exception e) {

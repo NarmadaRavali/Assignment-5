@@ -18,15 +18,18 @@ public class RightSpace extends JPanel {
     private static final long serialVersionUID = 1L;
 
 
-
+   public static boolean  loadFlag = false;
     public RightSpace(int width, int height) {
         this.setName(CommonConstants.RIGHT_PANEL_NAME);
         this.setLayout(null);
         this.setPreferredSize(new Dimension(width, height - 100));
         this.setBackground(CommonConstants.LIGHT_GREY);
         new DropEventListener(this);
+        
+       if (!loadFlag) {
         this.add(SymbolFactory.createSymbol(this, "(", 20, 20));
         this.add(SymbolFactory.createSymbol(this, ")", width-100, height-100));
+       }
     }
 
 
