@@ -86,28 +86,30 @@ public class SaveWorkSpaces {
                 .getInstance().getGraphMap();
         for (RightSpace tab : panelGraphMap.keySet()) {
             ConnectionGraph connectionGraph = panelGraphMap.get(tab);
-            System.out.println("connectionGraph = "+ connectionGraph.getEdges());
+         
 			Map<Symbol, ArrayList<Symbol>> edges = connectionGraph.getEdges();
             Set<Symbol> outputs = edges.keySet();
-            System.out.println(" outputs= "+  edges.keySet());
+      
             for (Symbol output : outputs) {
                 int panelIndex = RightPanel.getInstance().getRightPanel()
                 		.indexOfComponent(tab);
-                System.out.println(" panelIndex= "+panelIndex);
+                
                   
                 int symbol1Index = getSymbolIndex((Symbol) output,
                         tab);
-                System.out.println(" symbol1Index= "+symbol1Index);
+              
 
-                lines += "line" + ";" + panelIndex + ";" + symbol1Index + ";";
-           
+         
                 for (Symbol input : edges.get(output)) {
+                    lines += "line" + ";" + panelIndex + ";" + symbol1Index + ";";
+                    
                     int symbol2Index = getSymbolIndex(
                             (Symbol) input, tab);
 
                     lines += symbol2Index;
+                    lines += System.lineSeparator();
                 }
-                lines += System.lineSeparator();
+              
             }
             
         }
