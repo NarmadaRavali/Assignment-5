@@ -52,7 +52,8 @@ public class LoadWorkSpaces implements java.io.Serializable {
 
                     if (line[0].equals("Tab")) {
                         RightSpace rightS = new RightSpace(
-                                rightSpace.getWidth()-100, rightSpace.getHeight()-100);
+                                rightSpace.getWidth()-100,
+                                rightSpace.getHeight()-100, false);
                         rightSpace.addTab(line[2], rightS);
                         MenuBar.setCounter(Integer.parseInt(line[1])+1);
                     } else if (line[0].equals("shape")) {

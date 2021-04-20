@@ -48,7 +48,7 @@ public class RightPanel implements java.io.Serializable {
      */
     public void addTab(String name) {
         RightSpace panel = new RightSpace(rightSpaceWidth,
-                rightSpaceHeight);
+                rightSpaceHeight, false);
         rightPanelTab.addTab(name, panel);
     }
 

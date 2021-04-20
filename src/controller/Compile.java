@@ -16,7 +16,8 @@ import java.util.Map;
  */
 public class Compile {
     /**
-     * This method compiles all the workspaces in the application
+     * This method compiles all the workspaces in the application and shows the
+     * translation in new workspace
      * 
      * @return - message to be shown in dialog
      */
@@ -37,7 +38,18 @@ public class Compile {
                 return msg2;
             }
         }
-        new Translate().convert(ConnectionCollection.getInstance().getGraphMap());
+        String graphTranslation =
+                new Translate().convert(ConnectionCollection.getInstance().getGraphMap());
+        RightSpace translation =
+                new RightSpace(CommonConstants.FRAME_WIDTH / 6 * 6,
+                        CommonConstants.FRAME_HEIGHT/ 8 * 8, true);
+
+        JTextArea textArea = new JTextArea(100, 40);
+        textArea.setEditable(false);
+        textArea.setText(graphTranslation);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        translation.add(scrollPane);
+        rightPanelTab.addTab("Translation", translation);
         return "Compiled Successfully!";
     }
 

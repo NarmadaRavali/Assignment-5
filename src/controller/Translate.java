@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ * @author Ravikanth Dodda
+ * @since 04-20-2021
+ */
 public class Translate {
 
     private StringBuilder stringBuilder;
@@ -44,7 +49,13 @@ public class Translate {
 
     }
 
-    public void convert(Map<RightSpace, ConnectionGraph> graphMap){
+
+    /**
+     * generates the translation text from the map
+     * @param graphMap - hashmap of RightSpace to ConnectionGraph
+     * @return translated text
+     */
+    public String convert(Map<RightSpace, ConnectionGraph> graphMap){
         for (RightSpace space : graphMap.keySet()) {
             ConnectionGraph graph = graphMap.get(space);
             RightPanel panel =
@@ -52,8 +63,9 @@ public class Translate {
             String name =
                     panel.getRightPanel().getTitleAt(
                             panel.getRightPanel().indexOfComponent(space));
-            stringBuilder.append("subgraph ").append(name).append(
-                    " {\n");
+            stringBuilder.append("subgraph ")
+                    .append(name.replace(" ","_"))
+                    .append(" {\n");
             stringBuilder.append(getLines(graph, space));
             stringBuilder.append("\t}\n");
         }
@@ -64,9 +76,16 @@ public class Translate {
                 .append(";\n"));
         stringBuilder.append("}");
         writeToFile(stringBuilder.toString());
+        return stringBuilder.toString();
 
     }
 
+    /**
+     * Helper method for returning connections
+     * @param edgeGraph - map of symbol to its connected symbols
+     * @param tab - tab to which the connections belong
+     * @return formatted string of connections
+     */
     private String getLines(ConnectionGraph edgeGraph, RightSpace tab) {
         StringBuilder lines = new StringBuilder();
         Map<Symbol, ArrayList<Symbol>> edges = edgeGraph.getEdges();
