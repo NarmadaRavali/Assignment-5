@@ -82,15 +82,17 @@ public class Compile {
     public String checkPanel(RightSpace panel) {
         Component[] symbols = panel.getComponents();
         SymbolGraph graph = new SymbolGraph(symbols.length);
-        Map<Symbol, ArrayList<Symbol>> edges = ConnectionCollection
-                .getInstance().getGraph(panel).getEdges();
-
-        edges.forEach((key, value) -> {
-            for (Symbol symbol : value) {
-                graph.addEdge(getSymbolId(symbols, key),
-                        getSymbolId(symbols, symbol));
-            }
-        });
+        ConnectionGraph edgeGraph = ConnectionCollection
+                .getInstance().getGraph(panel);
+        if (edgeGraph != null) {
+            Map<Symbol, ArrayList<Symbol>> edges = edgeGraph.getEdges();
+            edges.forEach((key, value) -> {
+                for (Symbol symbol : value) {
+                    graph.addEdge(getSymbolId(symbols, key),
+                            getSymbolId(symbols, symbol));
+                }
+            });
+        }
 
         ArrayList<Integer> AtTheRateVertices = getSymbolVertices(symbols, "@");
         for (Integer v : AtTheRateVertices) {

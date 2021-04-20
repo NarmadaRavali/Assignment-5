@@ -60,6 +60,7 @@ public class ConnectionCollection {
     }
 
     public ConnectionGraph getGraph(RightSpace w) {
+
         return graphMap.get(w);
     }
 
@@ -67,8 +68,5 @@ public class ConnectionCollection {
         return graphMap;
     }
 
-    public void setGraphMap(Map<RightSpace, ConnectionGraph> graphMap) {
-        this.graphMap = graphMap;
-    }
 
 }
