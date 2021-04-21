@@ -46,14 +46,14 @@ public class DropEventListener {
 
                         Component component = support.getComponent();
                         RightSpace panel = (RightSpace) component;
-                            Point mousePosition = MouseInfo.getPointerInfo()
-                                    .getLocation();
-                            Point panelPosition = panel.getLocationOnScreen();
-                            int x = mousePosition.x - panelPosition.x;
-                            int y = mousePosition.y - panelPosition.y;
-                            SymbolFactory.createSymbol(panel, value.toString(),
-                                    x, y);
-                            panel.repaint();
+                        Point mousePosition = MouseInfo.getPointerInfo()
+                                .getLocation();
+                        Point panelPosition = panel.getLocationOnScreen();
+                        int x = mousePosition.x - panelPosition.x;
+                        int y = mousePosition.y - panelPosition.y;
+                        SymbolFactory.createSymbol(panel, value.toString(), x,
+                                y);
+                        panel.repaint();
 
                     }
                 } catch (IOException | UnsupportedFlavorException e) {

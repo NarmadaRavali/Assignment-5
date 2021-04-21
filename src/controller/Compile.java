@@ -38,11 +38,11 @@ public class Compile {
                 return msg2;
             }
         }
-        String graphTranslation =
-                new Translate().convert(ConnectionCollection.getInstance().getGraphMap());
-        RightSpace translation =
-                new RightSpace(CommonConstants.FRAME_WIDTH / 6 * 6,
-                        CommonConstants.FRAME_HEIGHT/ 8 * 8, true);
+        String graphTranslation = new Translate()
+                .convert(ConnectionCollection.getInstance().getGraphMap());
+        RightSpace translation = new RightSpace(
+                CommonConstants.FRAME_WIDTH / 6 * 6,
+                CommonConstants.FRAME_HEIGHT / 8 * 8, true);
 
         JTextArea textArea = new JTextArea(100, 40);
         textArea.setEditable(false);
@@ -64,11 +64,11 @@ public class Compile {
 
         for (Component component : components) {
             Symbol symbol = (Symbol) component;
-                if (symbol.getInputs() > 0 && symbol.getOutputs() > 0) {
-                    return panel.getName() + ":\nOne or more Input/Output of"
-                            + " a '" + symbol.getText() + "' is "
-                            + "not connected.";
-                }
+            if (symbol.getInputs() > 0 && symbol.getOutputs() > 0) {
+                return panel.getName() + ":\nOne or more Input/Output of"
+                        + " a '" + symbol.getText() + "' is "
+                        + "not connected.";
+            }
         }
         return "Compiled Successfully!";
     }
@@ -82,8 +82,8 @@ public class Compile {
     public String checkPanel(RightSpace panel) {
         Component[] symbols = panel.getComponents();
         SymbolGraph graph = new SymbolGraph(symbols.length);
-        ConnectionGraph edgeGraph = ConnectionCollection
-                .getInstance().getGraph(panel);
+        ConnectionGraph edgeGraph = ConnectionCollection.getInstance()
+                .getGraph(panel);
         if (edgeGraph != null) {
             Map<Symbol, ArrayList<Symbol>> edges = edgeGraph.getEdges();
             edges.forEach((key, value) -> {

@@ -1,6 +1,5 @@
 package view;
 
-
 import controller.*;
 import model.Symbol;
 
@@ -17,9 +16,8 @@ public class RightSpace extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
+    public static boolean loadFlag = false;
 
-
-   public static boolean  loadFlag = false;
     public RightSpace(int width, int height, boolean textPanel) {
 
         this.setName(CommonConstants.RIGHT_PANEL_NAME);
@@ -31,16 +29,14 @@ public class RightSpace extends JPanel {
             new DropEventListener(this);
             if (!loadFlag) {
                 this.add(SymbolFactory.createSymbol(this, "(", 20, 20));
-                this.add(SymbolFactory.createSymbol(this, ")", width-100, height-100));
+                this.add(SymbolFactory.createSymbol(this, ")", width - 100,
+                        height - 100));
             }
-        }
-        else{
+        } else {
             setLayout(new FlowLayout());
         }
         new DropEventListener(this);
     }
-
-
 
     /**
      * Draws lines for all the existing connections
@@ -48,7 +44,6 @@ public class RightSpace extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
 
         ConnectionGraph connectionGraph = ConnectionCollection.getInstance()
                 .getGraph(this);
@@ -58,14 +53,11 @@ public class RightSpace extends JPanel {
             for (Symbol output : edges.keySet()) {
                 for (Symbol input : edges.get(output)) {
 
-                    int startX = output.getX()
-                            + output.getWidth();
-                    int endX = input.getX()
-                            ;
+                    int startX = output.getX() + output.getWidth();
+                    int endX = input.getX();
 
-                    int startY = output.getY()
-                            + output.getHeight() / 2 ;
-                    int endY = input.getY() + input.getHeight() /2 ;
+                    int startY = output.getY() + output.getHeight() / 2;
+                    int endY = input.getY() + input.getHeight() / 2;
 
                     g.setColor(Color.BLACK);
                     drawArrowLine(g, startX, startY, endX, endY, 10, 5);
@@ -74,22 +66,23 @@ public class RightSpace extends JPanel {
         }
     }
 
-    private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h) {
+    private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2,
+            int d, int h) {
         int dx = x2 - x1, dy = y2 - y1;
-        double D = Math.sqrt(dx*dx + dy*dy);
+        double D = Math.sqrt(dx * dx + dy * dy);
         double xm = D - d, xn = xm, ym = h, yn = -h, x;
         double sin = dy / D, cos = dx / D;
 
-        x = xm*cos - ym*sin + x1;
-        ym = xm*sin + ym*cos + y1;
+        x = xm * cos - ym * sin + x1;
+        ym = xm * sin + ym * cos + y1;
         xm = x;
 
-        x = xn*cos - yn*sin + x1;
-        yn = xn*sin + yn*cos + y1;
+        x = xn * cos - yn * sin + x1;
+        yn = xn * sin + yn * cos + y1;
         xn = x;
 
-        int[] xpoints = {x2, (int) xm, (int) xn};
-        int[] ypoints = {y2, (int) ym, (int) yn};
+        int[] xpoints = { x2, (int) xm, (int) xn };
+        int[] ypoints = { y2, (int) ym, (int) yn };
 
         g.drawLine(x1, y1, x2, y2);
         g.fillPolygon(xpoints, ypoints, 3);

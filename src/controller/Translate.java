@@ -20,7 +20,7 @@ import java.util.Set;
 public class Translate {
 
     private StringBuilder stringBuilder;
-    private ArrayList<String> openParens,closeParens;
+    private ArrayList<String> openParens, closeParens;
 
     public Translate() {
         stringBuilder = new StringBuilder();
@@ -29,42 +29,38 @@ public class Translate {
         closeParens = new ArrayList<>();
     }
 
-    public void writeToFile(String data){
+    public void writeToFile(String data) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Save translation");
         int choice = fileChooser.showSaveDialog(null);
 
         if (choice == JFileChooser.APPROVE_OPTION) {
-            try  {
+            try {
                 FileWriter writer = new FileWriter(
                         fileChooser.getSelectedFile() + ".txt");
                 writer.write(data);
                 writer.flush();
                 writer.close();
-            }
-             catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
     }
 
-
     /**
      * generates the translation text from the map
+     * 
      * @param graphMap - hashmap of RightSpace to ConnectionGraph
      * @return translated text
      */
-    public String convert(Map<RightSpace, ConnectionGraph> graphMap){
+    public String convert(Map<RightSpace, ConnectionGraph> graphMap) {
         for (RightSpace space : graphMap.keySet()) {
             ConnectionGraph graph = graphMap.get(space);
-            RightPanel panel =
-                    RightPanel.getInstance();
-            String name =
-                    panel.getRightPanel().getTitleAt(
-                            panel.getRightPanel().indexOfComponent(space));
-            stringBuilder.append("subgraph ")
-                    .append(name.replace(" ","_"))
+            RightPanel panel = RightPanel.getInstance();
+            String name = panel.getRightPanel()
+                    .getTitleAt(panel.getRightPanel().indexOfComponent(space));
+            stringBuilder.append("subgraph ").append(name.replace(" ", "_"))
                     .append(" {\n");
             stringBuilder.append(getLines(graph, space));
             stringBuilder.append("\t}\n");
@@ -72,8 +68,7 @@ public class Translate {
         openParens.forEach(text -> stringBuilder.append("\tstart -> ")
                 .append(text).append(";\n"));
         closeParens.forEach(text -> stringBuilder.append("\t").append(text)
-                .append(" -> end")
-                .append(";\n"));
+                .append(" -> end").append(";\n"));
         stringBuilder.append("}");
         writeToFile(stringBuilder.toString());
         return stringBuilder.toString();
@@ -82,8 +77,9 @@ public class Translate {
 
     /**
      * Helper method for returning connections
+     * 
      * @param edgeGraph - map of symbol to its connected symbols
-     * @param tab - tab to which the connections belong
+     * @param tab       - tab to which the connections belong
      * @return formatted string of connections
      */
     private String getLines(ConnectionGraph edgeGraph, RightSpace tab) {
@@ -92,27 +88,25 @@ public class Translate {
         Set<Symbol> outputs = edges.keySet();
         int panelIndex = RightPanel.getInstance().getRightPanel()
                 .indexOfComponent(tab);
-        String panelTag = String.valueOf((char)(panelIndex + 97));
+        String panelTag = String.valueOf((char) (panelIndex + 97));
         for (Symbol output : outputs) {
-                int symbol1Index = getSymbolIndex(output,
-                        tab);
+            int symbol1Index = getSymbolIndex(output, tab);
 
-                String tmp =  panelTag + symbol1Index ;
+            String tmp = panelTag + symbol1Index;
 
-                if (output.getText().equals("("))
-                    openParens.add(tmp);
+            if (output.getText().equals("("))
+                openParens.add(tmp);
 
-                for (Symbol input : edges.get(output)) {
-                    int symbol2Index = getSymbolIndex( input, tab);
-                    if (input.getText().equals(")"))
-                        closeParens.add(panelTag +  symbol2Index);
+            for (Symbol input : edges.get(output)) {
+                int symbol2Index = getSymbolIndex(input, tab);
+                if (input.getText().equals(")"))
+                    closeParens.add(panelTag + symbol2Index);
 
-                    lines.append("\t\t").append(tmp).append(" -> ")
-                            .append(panelTag)
-                            .append(symbol2Index).append(";")
-                            .append(System.lineSeparator());
-                }
+                lines.append("\t\t").append(tmp).append(" -> ").append(panelTag)
+                        .append(symbol2Index).append(";")
+                        .append(System.lineSeparator());
             }
+        }
         return lines.toString();
     }
 

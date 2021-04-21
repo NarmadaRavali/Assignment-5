@@ -8,8 +8,6 @@ import controller.CommonConstants;
  */
 public class OpenParanthesisSymbol extends Symbol {
     public OpenParanthesisSymbol(int x, int y) {
-        super("(", x, y,0,1);
-        int width = this.getPreferredSize().width;
-        int height = this.getPreferredSize().height;
+        super("(", x, y, 0, 1);
     }
 }

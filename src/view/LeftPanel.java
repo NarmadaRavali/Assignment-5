@@ -25,7 +25,7 @@ public class LeftPanel extends JPanel {
         mainFrame.add(scrollPane, BorderLayout.LINE_START);
         for (String symbolName : CommonConstants.symbolNames) {
             if (!symbolName.equals("(") && !symbolName.equals(")"))
-            SymbolFactory.createSymbol(this, symbolName, 0, 0);
+                SymbolFactory.createSymbol(this, symbolName, 0, 0);
         }
     }
 }

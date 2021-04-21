@@ -14,7 +14,7 @@ public class Symbol extends JButton {
     private int inputs;
     private int outputs;
 
-    public Symbol(String text, int x, int y,int inputs, int outputs) {
+    public Symbol(String text, int x, int y, int inputs, int outputs) {
         super(text);
         this.inputs = inputs;
         this.outputs = outputs;
@@ -34,12 +34,11 @@ public class Symbol extends JButton {
     public void setUserInput(String userInput) {
         this.userInput = userInput;
     }
-    
 
     public int getOutputs() {
         return outputs;
     }
-    
+
     public int getInputs() {
         return inputs;
     }
@@ -54,8 +53,7 @@ public class Symbol extends JButton {
 
     @Override
     protected void paintBorder(Graphics g) {
-        g.drawOval(0, 0, getSize().width-1, getSize().height-1);
-      }
-
+        g.drawOval(0, 0, getSize().width - 1, getSize().height - 1);
+    }
 
 }

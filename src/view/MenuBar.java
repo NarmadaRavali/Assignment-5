@@ -17,8 +17,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class MenuBar implements ActionListener {
 
     public static int counter = 1;
-  
-	private String spaceLabel;
+
+    private String spaceLabel;
     JFrame mainFrame1;
     JMenuItem save, load, newSpace, compile;
     Compile compileWorkSpace;
@@ -58,13 +58,13 @@ public class MenuBar implements ActionListener {
             showMessageDialog(null, msg);
         }
     }
-    
-    public static int getCounter() {
-  		return counter;
-  	}
 
-  	public static void setCounter(int counter) {
-  		MenuBar.counter = counter;
-  	}
+    public static int getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(int counter) {
+        MenuBar.counter = counter;
+    }
 
 }

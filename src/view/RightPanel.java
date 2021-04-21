@@ -47,8 +47,8 @@ public class RightPanel implements java.io.Serializable {
      * @param name - Sets this value as name for the new workspace created
      */
     public void addTab(String name) {
-        RightSpace panel = new RightSpace(rightSpaceWidth,
-                rightSpaceHeight, false);
+        RightSpace panel = new RightSpace(rightSpaceWidth, rightSpaceHeight,
+                false);
         rightPanelTab.addTab(name, panel);
     }
 

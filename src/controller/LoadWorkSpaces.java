@@ -6,7 +6,6 @@ import view.RightSpace;
 import view.MenuBar;
 import view.RightPanel;
 
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,39 +43,37 @@ public class LoadWorkSpaces implements java.io.Serializable {
             try {
                 reader = new BufferedReader(new FileReader(fileContent));
                 String lines = reader.readLine();
-                
+
                 while (lines != null) {
 
                     String[] line = lines.split(";");
 
                     if (line[0].equals("Tab")) {
-                    	
-                    	RightSpace.loadFlag=true;
+
+                        RightSpace.loadFlag = true;
                         RightSpace rightS = new RightSpace(
-                                rightSpace.getWidth()-100,
-                                rightSpace.getHeight()-100, false);
-                        RightSpace.loadFlag=false;
+                                rightSpace.getWidth() - 100,
+                                rightSpace.getHeight() - 100, false);
+                        RightSpace.loadFlag = false;
                         rightSpace.addTab(line[2], rightS);
-                        MenuBar.setCounter(Integer.parseInt(line[1])+1);
+                        MenuBar.setCounter(Integer.parseInt(line[1]) + 1);
                     } else if (line[0].equals("shape")) {
                         String symbolName = line[1];
-                        
-            
-	                        int x = Integer.parseInt(line[2]);
-	                        int y = Integer.parseInt(line[3]);
-	                        String symbolValue = line[4];
-	                        int symbolIndex = Integer.parseInt(line[5]);
-	                        createSymbol(symbolName, x, y, symbolValue,
-	                                symbolIndex);
-	                        rightSpace.repaint();
-                        
-	                    }
-                    else {
-	                        int spaceIndex = Integer.parseInt(line[1]);
-	                        int shapeStartIndex = Integer.parseInt(line[2]);
-	                        int shapeEndIndex = Integer.parseInt(line[3]);
-	                        createLine(spaceIndex, shapeStartIndex,shapeEndIndex);
-	                    }
+
+                        int x = Integer.parseInt(line[2]);
+                        int y = Integer.parseInt(line[3]);
+                        String symbolValue = line[4];
+                        int symbolIndex = Integer.parseInt(line[5]);
+                        createSymbol(symbolName, x, y, symbolValue,
+                                symbolIndex);
+                        rightSpace.repaint();
+
+                    } else {
+                        int spaceIndex = Integer.parseInt(line[1]);
+                        int shapeStartIndex = Integer.parseInt(line[2]);
+                        int shapeEndIndex = Integer.parseInt(line[3]);
+                        createLine(spaceIndex, shapeStartIndex, shapeEndIndex);
+                    }
                     lines = reader.readLine();
                 }
             } catch (Exception e) {
@@ -116,4 +113,3 @@ public class LoadWorkSpaces implements java.io.Serializable {
                 endSymbol);
     }
 }
-

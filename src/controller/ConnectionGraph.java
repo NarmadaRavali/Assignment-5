@@ -21,7 +21,7 @@ public class ConnectionGraph {
 
     public void addEdge(Symbol node1, Symbol node2) {
         ArrayList<Symbol> a = new ArrayList<>();
-        if (node1.getOutputs() > 0 && node2.getInputs()>0) {
+        if (node1.getOutputs() > 0 && node2.getInputs() > 0) {
             if (edges.containsKey(node1) && !edges.get(node1).contains(node2)) {
                 edges.get(node1).add(node2);
             } else if (!edges.containsKey(node1)) {
@@ -48,10 +48,10 @@ public class ConnectionGraph {
                     if (node == input) {
                         inputs.remove();
                         if (input.getInputs() != Integer.MAX_VALUE)
-                            input.setInputs(input.getInputs()+1);
+                            input.setInputs(input.getInputs() + 1);
 
                         if (output.getOutputs() != Integer.MAX_VALUE)
-                            output.setOutputs(output.getOutputs()+1);
+                            output.setOutputs(output.getOutputs() + 1);
                     }
                     if (edges.get(output).isEmpty()) {
                         outputs.remove();

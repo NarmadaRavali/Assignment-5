@@ -31,9 +31,9 @@ public class ConnectionListener extends MouseAdapter {
     }
 
     /**
-     * Removes the connection when right mouse button is clicked
-     * Adds a new connection when left mouse button is clicked
-     * Opens input dialog when double clicked
+     * Removes the connection when right mouse button is clicked Adds a new
+     * connection when left mouse button is clicked Opens input dialog when
+     * double clicked
      */
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -45,8 +45,8 @@ public class ConnectionListener extends MouseAdapter {
             selectedOut = null;
             String prevInput = ((Symbol) e.getComponent()).getUserInput();
             String input = (String) JOptionPane.showInputDialog(null, "Data:",
-                    "Enter User Input", JOptionPane.QUESTION_MESSAGE, null, null,
-                    prevInput);
+                    "Enter User Input", JOptionPane.QUESTION_MESSAGE, null,
+                    null, prevInput);
 
             if (input == null)
                 input = prevInput;
@@ -54,9 +54,9 @@ public class ConnectionListener extends MouseAdapter {
             ((Symbol) e.getComponent()).setUserInput(input);
         }
 
-        else  if (SwingUtilities.isRightMouseButton(e))
-                ConnectionCollection.getInstance()
-                        .removeConnection((Symbol) e.getComponent());
+        else if (SwingUtilities.isRightMouseButton(e))
+            ConnectionCollection.getInstance()
+                    .removeConnection((Symbol) e.getComponent());
 
         else {
             if (selectedOut == null) {
@@ -64,8 +64,7 @@ public class ConnectionListener extends MouseAdapter {
                 selectedOut.setForeground(Color.GREEN);
             } else {
                 Point symbolLocation = panel
-                        .getComponentAt(
-                                e.getX() + e.getComponent().getX(),
+                        .getComponentAt(e.getX() + e.getComponent().getX(),
                                 e.getY() + e.getComponent().getY())
                         .getLocation();
 
@@ -82,7 +81,6 @@ public class ConnectionListener extends MouseAdapter {
             }
         }
         panel.repaint();
-
 
     }
 
@@ -104,7 +102,6 @@ public class ConnectionListener extends MouseAdapter {
         panelTopBoundary = panel.getY() + panel.getParent().getY();
 
     }
-
 
     /**
      * This method sets input given by user to the symbol

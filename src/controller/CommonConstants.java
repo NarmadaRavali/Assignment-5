@@ -16,8 +16,8 @@ public class CommonConstants {
     public static final String LEFT_PANEL_NAME = "Left Panel",
             RIGHT_PANEL_NAME = "Right Panel";
     public static final Color LIGHT_GREY = new Color(235, 235, 235);
-    public static final String[] symbolNames = { "(", ")", "<", ">", "@", "|-","-|",
-            "-" };
+    public static final String[] symbolNames = { "(", ")", "<", ">", "@", "|-",
+            "-|", "-" };
 
     public static final Map<String, Class<?>> symbolClasses;
 
@@ -31,6 +31,6 @@ public class CommonConstants {
         symbolClasses.put("|-", OpenPipeSymbol.class);
         symbolClasses.put("-|", ClosePipeSymbol.class);
         symbolClasses.put("-", MinusSymbol.class);
-        
+
     }
 }
